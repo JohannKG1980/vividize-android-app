@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "699991733742",
+    "project_id": "vividizeauthentication",
+    "storage_bucket": "vividizeauthentication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699991733742:android:bae2ea7fb5e17023554aff",
+        "android_client_info": {
+          "package_name": "com.example.vividize_unleashyourself"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699991733742-9u84fje8n15ns7e9rfveealn8nbj1t4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKQy0cNkHOzJOeeUYiybheRZafvU_SJqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699991733742-9u84fje8n15ns7e9rfveealn8nbj1t4c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

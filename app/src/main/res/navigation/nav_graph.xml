@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.vividize_unleashyourself.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/mentalSectionFragment"
+        android:name="com.example.vividize_unleashyourself.ui.MentalSectionFragment"
+        android:label="fragment_mental_section"
+        tools:layout="@layout/fragment_mental_section" />
+    <fragment
+        android:id="@+id/physicalSectionFragment"
+        android:name="com.example.vividize_unleashyourself.ui.PhysicalSectionFragment"
+        android:label="fragment_physical_section"
+        tools:layout="@layout/fragment_physical_section" />
+</navigation>
