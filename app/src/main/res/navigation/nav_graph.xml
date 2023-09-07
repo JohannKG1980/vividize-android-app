@@ -20,4 +20,19 @@
         android:name="com.example.vividize_unleashyourself.ui.PhysicalSectionFragment"
         android:label="fragment_physical_section"
         tools:layout="@layout/fragment_physical_section" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.vividize_unleashyourself.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.vividize_unleashyourself.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" />
+    <fragment
+        android:id="@+id/forgotPassFragment"
+        android:name="com.example.vividize_unleashyourself.ForgotPassFragment"
+        android:label="fragment_forgot_pass"
+        tools:layout="@layout/fragment_forgot_pass" />
 </navigation>
