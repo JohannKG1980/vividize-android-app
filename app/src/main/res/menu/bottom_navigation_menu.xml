@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/mentalSectionFragment"
+        android:icon="@drawable/baseline_psychology_24"
+        android:title="Mental Section" />
+
+    <item
+        android:id="@+id/pysicalSectionFragment"
+        android:icon="@drawable/outline_fitness_center_24"
+        android:title="Body Section" />
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
+    <item
+        android:id="@+id/knowledgeSectionFragment"
+        android:icon="@drawable/baseline_menu_book_24"
+        android:title="Knowledge Section" />
+    <item
+        android:id="@+id/appSettingsFragment"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="Settings" />
 </menu>
