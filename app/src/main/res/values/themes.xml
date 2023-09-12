@@ -2,7 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.VividizeUnleashYourself" parent="Theme.MaterialComponents">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary_app</item>
+        <item name="colorOnPrimary">@color/on_primary_app</item>
+        <item name="colorPrimaryVariant">@color/primary_variant_app</item>
+
+
     </style>
 
     <style name="Theme.VividizeUnleashYourself" parent="Base.Theme.VividizeUnleashYourself" />

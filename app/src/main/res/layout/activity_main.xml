@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="#3EFFFFFF"
+        app:backgroundTint="#C6040E13"
         app:fabCradleMargin="8dp"
         app:fabCradleRoundedCornerRadius="20dp">
 
@@ -30,6 +30,8 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
+            app:itemIconSize="35dp"
+            app:itemIconTint="@color/icon_color_selector"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_navigation_menu" />
 
@@ -39,8 +41,9 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/secondary_transparent"
         android:src="@drawable/baseline_add_24"
-        app:layout_anchorGravity="right"
-        app:layout_anchor="@id/bottom_app_bar" />
+        app:layout_anchor="@id/bottom_app_bar"
+       />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

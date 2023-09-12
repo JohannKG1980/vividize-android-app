@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Farbe für ausgewählten (aktiven) Zustand -->
+    <item android:color="@color/on_primary_app" android:state_checked="true" />
+    <!-- Standardfarbe (nicht ausgewählt) -->
+    <item android:color="@color/secondary_app" />
+</selector>
