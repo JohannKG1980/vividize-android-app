@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/mentalSectionFragment"
-        android:icon="@drawable/baseline_psychology_24"
-        android:title="Mental Section" />
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/outline_temple_buddhist_24"
+        android:title="Home" />
 
     <item
-        android:id="@+id/pysicalSectionFragment"
-        android:icon="@drawable/outline_fitness_center_24"
-        android:title="Body Section" />
+        android:id="@+id/mentalSectionFragment"
+        android:icon="@drawable/outline_psychology_24"
+        android:title="Mental Section" />
     <item
         android:id="@+id/placeholder"
         android:title="" />
 
     <item
+        android:id="@+id/physicalSectionFragment"
+        android:icon="@drawable/outline_fitness_center_24"
+        android:title="Body Section" />
+    <item
         android:id="@+id/knowledgeSectionFragment"
         android:icon="@drawable/baseline_menu_book_24"
         android:title="Knowledge Section" />
-    <item
-        android:id="@+id/appSettingsFragment"
-        android:icon="@drawable/baseline_settings_24"
-        android:title="Settings" />
 </menu>
