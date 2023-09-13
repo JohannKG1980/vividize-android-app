@@ -11,13 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/coast_bg"
+        android:src="@drawable/taosit_temple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_cv_quote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#72070A0D"
@@ -45,7 +46,76 @@
                 android:layout_height="match_parent"
                 app:blurOverlayColor="#45000000">
 
+                <androidx.constraintlayout.motion.widget.MotionLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutDescription="@xml/fragment_home_xml_constraintlayout2_scene">
 
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_author"
+                        android:layout_width="230dp"
+                        android:layout_height="230dp"
+                        android:layout_marginEnd="-32dp"
+                        android:layout_marginBottom="-32dp"
+                        app:cardCornerRadius="150dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ImageView
+                            android:id="@+id/iv_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/norman_vincent_peale" />
+
+
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.constraintlayout.motion.widget.MotionLayout>
+
+                <androidx.constraintlayout.motion.widget.MotionLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutDescription="@xml/fragment_home_xml_constraintlayout4_scene">
+
+                    <TextView
+                        android:id="@+id/tv_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="32dp"
+                        android:fontFamily="@font/allan"
+                        android:rotation="-15"
+                        android:text="Norman Vincent Peale"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+                </androidx.constraintlayout.motion.widget.MotionLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_quote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:fontFamily="@font/architects_daughter"
+                        android:maxWidth="350dp"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.13999999"
+                        tools:text="Du musst es dir in deinem Herzen und deinem Verstand vorstellen, bevor du es empfangen kannst. Wenn du glaubst, dann sind alle Dinge möglich." />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </eightbitlab.com.blurview.BlurView>
 
         </com.google.android.material.card.MaterialCardView>
