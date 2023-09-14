@@ -8,7 +8,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val BASE_URL = "https://retoolapi.dev/vN1Vov/"
+const val BASE_URL = "https://retoolapi.dev/rL3BT2/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -20,10 +20,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface QuotesApiService {
-    @GET("quotes")
+    @GET("quote/")
     suspend fun getQuote(
-        @Query("id") id: String
-    ): Quote
+//        @Query("") id: String
+    ): List<Quote>
 
 
 }

@@ -18,9 +18,7 @@ class AppRepository(private val api: QuotesApi) {
     suspend fun getQuote(id: String) {
         try {
             _dailyQuote.postValue(
-                api.retrofitService.getQuote(
-                    id
-                )
+                api.retrofitService.getQuote().random()
             )
         } catch (e: Exception) {
             Log.d(TAG, "API Call failed $e")

@@ -2,12 +2,18 @@ package com.example.vividize_unleashyourself.ui
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.transition.TransitionSet
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import coil.load
+import com.example.vividize_unleashyourself.ApiStatus
+import com.example.vividize_unleashyourself.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentHomeBinding
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -16,6 +22,7 @@ import eightbitlab.com.blurview.RenderScriptBlur
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +35,7 @@ class HomeFragment : Fragment() {
         )
         sharedElementEnterTransition = animation
         sharedElementReturnTransition = animation
+
 
     }
 
@@ -53,15 +61,45 @@ class HomeFragment : Fragment() {
             .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
             .setBlurRadius(3f)
 
+        addObserver()
 
 
         binding.cvQuote.setOnClickListener {
-            val extras = FragmentNavigatorExtras(binding.cvQuote to "quote_card_fullscreen")
+            val extras = FragmentNavigatorExtras(binding.cvQuote to "quote_card_fullscreen", binding.ivHomeBg to "bg_img_quote")
             findNavController().navigate(R.id.fullscreenFragment, null,null,extras)
         }
 
 
 
 
+    }
+
+    private fun addObserver() {
+        viewModel.todaysQuote.observe(viewLifecycleOwner) {
+            binding.tvAuthor.text = it.Author
+            binding.tvQuote.text = it.quote_de
+//            val pageBg = it.bg_img_url.toUri().buildUpon().scheme("https").build()
+//            binding.ivHomeBg.load(pageBg) {
+//                error(R.drawable.taosit_temple)
+//                allowHardware(false)
+//            }
+
+            val authorImg = it.aut_img_url.toUri().buildUpon().scheme("https").build()
+            binding.ivAuthor.load(authorImg) {
+                error(R.drawable.taosit_temple)
+                allowHardware(false)
+            }
+
+        }
+        viewModel.loading.observe(viewLifecycleOwner) { loading ->
+            when (loading){
+                ApiStatus.LOADING -> binding.progressBar.visibility = View.VISIBLE
+                ApiStatus.DONE -> binding.progressBar.visibility = View.GONE
+                ApiStatus.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+//                    binding.errorImage.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }

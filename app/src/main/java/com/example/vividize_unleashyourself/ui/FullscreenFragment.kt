@@ -4,13 +4,20 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.transition.TransitionInflater
+import android.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import coil.load
+import coil.size.Scale
+import coil.transform.RoundedCornersTransformation
+import com.example.vividize_unleashyourself.ApiStatus
 import com.example.vividize_unleashyourself.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentFullscreenBinding
@@ -18,8 +25,8 @@ import eightbitlab.com.blurview.RenderScriptBlur
 
 
 class FullscreenFragment : Fragment() {
-  private lateinit var binding: FragmentFullscreenBinding
-  private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var binding: FragmentFullscreenBinding
+    private val viewModel: MainViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,40 +51,18 @@ class FullscreenFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        binding.ivHomeBg.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+//        binding.ivAuthor.setLayerType(View.LAYER_TYPE_HARDWARE, null)
 
 
         binding.blurView1.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
             .setBlurRadius(3f)
 
-
-        view.post {
-            val quote =
-                "Du musst es dir in deinem Herzen und deinem Verstand vorstellen, bevor du es empfangen kannst. Wenn du glaubst, dann sind alle Dinge möglich."
-
-            val stringBuilder = StringBuilder()
-            Thread {
-                for (letter in quote) {
-                    stringBuilder.append(letter)
-                    Thread.sleep(10)
-
-                    activity?.runOnUiThread {
-                        binding.tvQuote.text = stringBuilder.toString()
-                    }
-                }
-            }.start()
-
-            binding.cvQuoteStyle.setOnClickListener {
-                val extras = FragmentNavigatorExtras(binding.cvQuoteStyle to "quote_card_home")
-                findNavController().navigate(R.id.homeFragment, null,null,extras)
-            }
-        }
-
-
-
+        addObserver()
 
         Handler(Looper.getMainLooper()).postDelayed({
             val motionLayout = binding.constraintLayout2
@@ -89,7 +74,58 @@ class FullscreenFragment : Fragment() {
             motionLayout.transitionToEnd()
         }, 3000)
 
+
     }
 
+    private fun addObserver() {
+        viewModel.todaysQuote.observe(viewLifecycleOwner) {
+
+
+            val pageBg = it.bg_img_url.toUri().buildUpon().scheme("https").build()
+            binding.ivHomeBg.load(pageBg) {
+                error(R.drawable.taosit_temple)
+                allowHardware(false)
+            }
+            view?.post {
+                val quote = it.quote_de
+                val stringBuilder = StringBuilder()
+                Thread {
+                    for (letter in quote) {
+                        stringBuilder.append(letter)
+                        Thread.sleep(10)
+
+                        activity?.runOnUiThread {
+                            binding.tvQuote.text = stringBuilder.toString()
+                        }
+                    }
+                }.start()
+
+            }
+
+            val authorImg = it.aut_img_url.toUri().buildUpon().scheme("https").build()
+            binding.ivAuthor.load(authorImg) {
+                error(R.drawable.taosit_temple)
+                allowHardware(false)
+            }
+
+            binding.tvAuthor.text = it.Author
+
+            binding.cvQuoteStyle.setOnClickListener {
+                val extras = FragmentNavigatorExtras(binding.cvQuoteStyle to "quote_card_home", binding.ivHomeBg to "bg_img_home")
+                findNavController().navigate(R.id.homeFragment, null, null, extras)
+            }
+
+        }
+        viewModel.loading.observe(viewLifecycleOwner) { loading ->
+            when (loading){
+                ApiStatus.LOADING -> binding.progressBar.visibility = View.VISIBLE
+                ApiStatus.DONE -> binding.progressBar.visibility = View.GONE
+                ApiStatus.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+//                    binding.errorImage.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
 
 }
