@@ -94,7 +94,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintHorizontal_bias="0.29" />
+            motion:layout_constraintHorizontal_bias="0.23" />
     </ConstraintSet>
 
 
