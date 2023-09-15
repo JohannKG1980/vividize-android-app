@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Vividize - Personal Development Tools</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="no_quote">When nothing works, then do no-thing!</string>
+    <string name="no_author">The Universe</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Eingangshalle</string>
+    <string name="meditations">Meditation</string>
+    <string name="journaling">Journaling</string>
 
 </resources>

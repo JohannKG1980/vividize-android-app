@@ -49,4 +49,14 @@
             android:id="@+id/action_splashScreenFragment_to_fullscreenFragment"
             app:destination="@id/fullscreenFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/meditationsFragment"
+        android:name="com.example.vividize_unleashyourself.ui.MeditationsFragment"
+        android:label="fragment_meditations"
+        tools:layout="@layout/fragment_meditations" />
+    <fragment
+        android:id="@+id/journalsFragment"
+        android:name="com.example.vividize_unleashyourself.ui.JournalsFragment"
+        android:label="fragment_journals"
+        tools:layout="@layout/fragment_journals" />
 </navigation>

@@ -69,7 +69,7 @@
                             android:layout_width="230dp"
                             android:layout_height="230dp"
                             android:scaleType="centerCrop"
-                           app:srcCompat="@drawable/norman_vincent_peale" />
+                          tools:srcCompat="@drawable/norman_vincent_peale" />
 
 
                     </com.google.android.material.card.MaterialCardView>
@@ -90,7 +90,7 @@
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/allan"
                         android:rotation="-9"
-                        android:text="Norman Vincent Peale"
+                       tools:text="Norman Vincent Peale"
                         android:textSize="32sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
