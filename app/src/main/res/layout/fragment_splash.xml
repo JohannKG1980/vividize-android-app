@@ -7,11 +7,11 @@
     android:background="@color/white"
     tools:context=".SplashFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/cl_splash_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        app:layoutDescription="@xml/fragment_splash_xml_cl_splash_bg_scene">
 
 
         <ImageView
@@ -28,17 +28,17 @@
             android:id="@+id/iv_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_bg"
-            app:layout_constraintEnd_toEndOf="@+id/iv_bg"
-            app:layout_constraintStart_toStartOf="@+id/iv_bg"
-            app:layout_constraintTop_toTopOf="@+id/iv_bg"
-            app:layout_constraintVertical_bias="0.65999997"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/vividize_logo_free" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/cl_app_name"
             android:layout_width="150dp"
             android:layout_height="70dp"
+            app:layoutDescription="@xml/fragment_splash_xml_cl_app_name_scene"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.65"
@@ -55,8 +55,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/vividize_caption" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 
 </FrameLayout>
