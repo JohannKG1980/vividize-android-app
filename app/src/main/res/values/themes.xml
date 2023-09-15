@@ -5,13 +5,11 @@
         <item name="colorPrimary">@color/primary_app</item>
         <item name="colorOnPrimary">@color/on_primary_app</item>
         <item name="colorPrimaryVariant">@color/primary_variant_app</item>
-
+        <item name="android:windowDisablePreview">true</item>
 
     </style>
 
-    <style name="Theme.VividizeUnleashYourself" parent="Base.Theme.VividizeUnleashYourself" />
-    <style name="ThemeOverlay.VividizeUnleashYourself.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
-        <item name="fullscreenTextColor">@color/light_blue_A200</item>
-    </style>
+
+
+
 </resources>

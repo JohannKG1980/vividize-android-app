@@ -3,12 +3,14 @@ package com.example.vividize_unleashyourself
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.vividize_unleashyourself.databinding.FragmentSplashBinding
 
@@ -18,6 +20,11 @@ class SplashFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val animation = TransitionInflater.from(requireContext()).inflateTransition(
+            android.R.transition.fade
+        )
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
 
     }
 
@@ -69,8 +76,12 @@ class SplashFragment : Fragment() {
                 // Hier können Sie Code hinzufügen, der ausgeführt werden soll, wenn ein Trigger während der Transition ausgelöst wird
             }
         })
+
+
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashScreenFragment_to_fullscreenFragment)
+            val extras = FragmentNavigatorExtras(binding.ivLogo to "quote_card_fullscreen")
+            findNavController().navigate(R.id.action_splashScreenFragment_to_fullscreenFragment, null, null, extras)
+
         }, 6000)
     }
 
