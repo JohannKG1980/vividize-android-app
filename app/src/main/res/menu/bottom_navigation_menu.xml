@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/outline_temple_buddhist_24"
+        android:icon="@drawable/round_temple_buddhist_24"
         android:title="Home" />
 
     <item
         android:id="@+id/mentalSectionFragment"
-        android:icon="@drawable/outline_psychology_24"
+        android:icon="@drawable/round_self_improvement_24"
         android:title="Mental Section" />
     <item
         android:id="@+id/placeholder"
@@ -16,10 +16,10 @@
 
     <item
         android:id="@+id/physicalSectionFragment"
-        android:icon="@drawable/outline_fitness_center_24"
+        android:icon="@drawable/dumbbell_fill"
         android:title="Body Section" />
     <item
         android:id="@+id/knowledgeSectionFragment"
-        android:icon="@drawable/baseline_menu_book_24"
+        android:icon="@drawable/books_vertical_fill"
         android:title="Knowledge Section" />
 </menu>
