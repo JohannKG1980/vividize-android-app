@@ -4,21 +4,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.transition.TransitionInflater
-import android.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import coil.load
-import coil.size.Scale
-import coil.transform.RoundedCornersTransformation
-import com.example.vividize_unleashyourself.ApiStatus
-import com.example.vividize_unleashyourself.MainViewModel
+import com.example.vividize_unleashyourself.vms.ApiStatus
+import com.example.vividize_unleashyourself.vms.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentFullscreenBinding
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -92,7 +88,7 @@ class FullscreenFragment : Fragment() {
                 Thread {
                     for (letter in quote) {
                         stringBuilder.append(letter)
-                        Thread.sleep(10)
+                        Thread.sleep(70)
 
                         activity?.runOnUiThread {
                             binding.tvQuote.text = stringBuilder.toString()

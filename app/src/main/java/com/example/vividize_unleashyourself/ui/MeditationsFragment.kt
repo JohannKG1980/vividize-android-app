@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.vividize_unleashyourself.MainViewModel
+import com.example.vividize_unleashyourself.vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentMeditationsBinding
-import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
-import eightbitlab.com.blurview.RenderScriptBlur
 
 class MeditationsFragment : Fragment() {
     private lateinit var binding: FragmentMeditationsBinding

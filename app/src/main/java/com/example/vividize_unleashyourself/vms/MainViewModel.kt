@@ -1,4 +1,4 @@
-package com.example.vividize_unleashyourself
+package com.example.vividize_unleashyourself.vms
 
 import android.app.Application
 import android.util.Log
@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.vividize_unleashyourself.data.AppRepository
-import com.example.vividize_unleashyourself.data.model.Quote
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 import kotlinx.coroutines.launch
 

@@ -87,6 +87,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="12"
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/allan"
                         android:rotation="-9"
@@ -108,8 +110,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:fontFamily="@font/architects_daughter"
-                        android:maxWidth="350dp"
+                        android:maxWidth="333dp"
                         android:textSize="33sp"
                         android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +118,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.13999999"
-                        tools:text="Du musst es dir in deinem Herzen und deinem Verstand vorstellen, bevor du es empfangen kannst. Wenn du glaubst, dann sind alle Dinge möglich." />
+                        android:text="@string/no_quote"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </eightbitlab.com.blurview.BlurView>

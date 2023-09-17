@@ -2,7 +2,6 @@ package com.example.vividize_unleashyourself.ui
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.transition.TransitionSet
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.example.vividize_unleashyourself.ApiStatus
-import com.example.vividize_unleashyourself.MainViewModel
+import com.example.vividize_unleashyourself.vms.ApiStatus
+import com.example.vividize_unleashyourself.vms.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentHomeBinding
 import eightbitlab.com.blurview.RenderScriptBlur

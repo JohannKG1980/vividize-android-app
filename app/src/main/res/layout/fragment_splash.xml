@@ -24,16 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icon_bg" />
 
-        <ImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:transitionName="splash_screen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/vividize_logo_free" />
+
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/cl_app_name"
@@ -42,7 +33,6 @@
             app:layoutDescription="@xml/fragment_splash_xml_cl_app_name_scene"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.65"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -57,6 +47,16 @@
                 app:srcCompat="@drawable/vividize_caption" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:transitionName="splash_screen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/vividize_logo_free" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
 

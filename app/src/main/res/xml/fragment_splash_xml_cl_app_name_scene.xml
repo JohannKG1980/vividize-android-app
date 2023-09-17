@@ -12,6 +12,9 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/caption_start">
+        <Constraint
+            android:id="@+id/iv_app_name"
+            android:alpha="0.0"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/caption_end">
