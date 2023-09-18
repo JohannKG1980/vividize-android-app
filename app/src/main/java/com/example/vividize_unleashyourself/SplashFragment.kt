@@ -12,7 +12,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.example.vividize_unleashyourself.vms.MainViewModel
+import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentSplashBinding
 
 

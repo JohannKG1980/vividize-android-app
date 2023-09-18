@@ -13,8 +13,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.example.vividize_unleashyourself.vms.ApiStatus
-import com.example.vividize_unleashyourself.vms.MainViewModel
+import com.example.vividize_unleashyourself.feature_vms.ApiStatus
+import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentFullscreenBinding
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -108,7 +108,7 @@ class FullscreenFragment : Fragment() {
 
             binding.cvQuoteStyle.setOnClickListener {
                 val extras = FragmentNavigatorExtras(binding.cvQuoteStyle to "quote_card_home", binding.ivHomeBg to "bg_img_home")
-                findNavController().navigate(R.id.homeFragment, null, null, extras)
+                findNavController().navigate(R.id.action_fullscreenFragment_to_homeFragment, null, null, extras)
             }
 
         }

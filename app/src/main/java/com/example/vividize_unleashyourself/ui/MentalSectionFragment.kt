@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
-import com.example.vividize_unleashyourself.vms.MainViewModel
+import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.MentalSectionsAdapter
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding

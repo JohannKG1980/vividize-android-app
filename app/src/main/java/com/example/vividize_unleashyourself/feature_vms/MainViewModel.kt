@@ -1,4 +1,4 @@
-package com.example.vividize_unleashyourself.vms
+package com.example.vividize_unleashyourself.feature_vms
 
 import android.app.Application
 import android.util.Log

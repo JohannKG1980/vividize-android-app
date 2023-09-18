@@ -15,6 +15,11 @@
         app:navGraph="@navigation/nav_graph"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
+        <eightbitlab.com.blurview.BlurView
+            android:id="@+id/blur_view1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:blurOverlayColor="#273F3E3E">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -28,8 +33,8 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.appcompat.widget.Toolbar>
+        </eightbitlab.com.blurview.BlurView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"

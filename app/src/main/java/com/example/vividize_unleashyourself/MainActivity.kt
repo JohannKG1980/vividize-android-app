@@ -7,9 +7,10 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.vividize_unleashyourself.vms.MainViewModel
+import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import eightbitlab.com.blurview.RenderScriptBlur
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.blurView1.setupWith(binding.root, RenderScriptBlur(this))
+            .setBlurRadius(3f)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.fullscreenFragment -> {
                     binding.bottomAppBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE
-                    binding.topBar.visibility = View.GONE
+                    binding.blurView1.visibility = View.GONE
 
                 }
                 R.id.logInFragment -> {
@@ -53,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.splashFragment -> {
                     binding.bottomAppBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE
-                    binding.topBar.visibility = View.GONE
+                    binding.blurView1.visibility = View.GONE
                 }
 
                 else -> {

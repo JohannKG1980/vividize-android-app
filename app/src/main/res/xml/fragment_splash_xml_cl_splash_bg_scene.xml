@@ -22,7 +22,7 @@
         motion:autoTransition="animateToEnd"
         motion:constraintSetEnd="@+id/totalEnd"
         motion:constraintSetStart="@id/end"
-        motion:duration="750">
+        motion:duration="650">
         <KeyFrameSet></KeyFrameSet>
     </Transition>
     <Transition
@@ -96,7 +96,7 @@
             android:layout_height="80dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintHorizontal_bias="0.30"
+            motion:layout_constraintHorizontal_bias="0.29"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
