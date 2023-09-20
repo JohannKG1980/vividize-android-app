@@ -62,9 +62,89 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:backgroundTint="@color/secondary_transparent"
         android:src="@drawable/baseline_add_24"
         app:layout_anchor="@id/bottom_app_bar"
        />
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/cl_bottom_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layoutDescription="@xml/activity_main_xml_cl_bottom_dialog_scene">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_fab_dialog"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="80dp"
+            android:transitionName="quote_card_home"
+            app:cardBackgroundColor="#23000000"
+            app:cardCornerRadius="45dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <eightbitlab.com.blurview.BlurView
+                android:id="@+id/blur_view_add_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:blurOverlayColor="#45000000">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:id="@+id/ib_add_medi"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="16dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/outline_self_improvement_24"
+                        app:tint="@color/secondary_app" />
+
+                    <ImageView
+                        android:id="@+id/ib_add_five_step"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ib_add_entry"
+                        app:layout_constraintStart_toEndOf="@+id/ib_add_medi"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/baseline_psychology_24"
+                        app:tint="@color/secondary_app" />
+
+                    <ImageView
+                        android:id="@+id/ib_add_entry"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="16dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/pencil_tip_crop_circle_badge_plus"
+                        app:tint="@color/secondary_app" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </eightbitlab.com.blurview.BlurView>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
