@@ -62,6 +62,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fadingEdgeLength="10dp"
         android:clickable="true"
         android:backgroundTint="@color/secondary_transparent"
         android:src="@drawable/baseline_add_24"
@@ -72,6 +73,7 @@
         android:id="@+id/cl_bottom_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#C6040E13"
         android:visibility="gone"
         app:layoutDescription="@xml/activity_main_xml_cl_bottom_dialog_scene">
 
@@ -83,7 +85,7 @@
             android:transitionName="quote_card_home"
             app:cardBackgroundColor="#23000000"
             app:cardCornerRadius="45dp"
-            app:cardElevation="8dp"
+            app:cardElevation="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

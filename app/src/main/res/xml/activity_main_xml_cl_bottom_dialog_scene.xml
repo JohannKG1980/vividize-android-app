@@ -7,7 +7,10 @@
         motion:constraintSetStart="@id/start"
         motion:duration="300">
 
-
+        <OnSwipe
+            motion:dragDirection="dragDown"
+            motion:touchAnchorId="@id/cv_fab_dialog"
+            motion:touchAnchorSide="top" />
 
         <KeyFrameSet></KeyFrameSet>
     </Transition>
