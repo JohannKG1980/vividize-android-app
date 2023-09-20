@@ -73,10 +73,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-//                if (currentId == R.id.start) {
-//                    rotateCloseAnim.start()
-//                    binding.clBottomDialog.visibility = GONE
-//                }
+                if (currentId == R.id.start) {
+                    rotateCloseAnim.start()
+                    binding.clBottomDialog.visibility = GONE
+                }
             }
 
             override fun onTransitionTrigger(
@@ -94,9 +94,9 @@ class MainActivity : AppCompatActivity() {
                 binding.clBottomDialog.visibility = VISIBLE
                 motionLayout.transitionToEnd()
                 rotateOpenAnim.start()
-            } else {
+            } else if(motionLayout.currentState == R.id.end) {
                 motionLayout.transitionToStart()
-
+//                rotateCloseAnim.start()
                 binding.clBottomDialog.setTransitionListener(object :
                     MotionLayout.TransitionListener {
                     override fun onTransitionStarted(
@@ -104,7 +104,6 @@ class MainActivity : AppCompatActivity() {
                         startId: Int,
                         endId: Int
                     ) {
-
 
                     }
 
@@ -114,7 +113,6 @@ class MainActivity : AppCompatActivity() {
                         endId: Int,
                         progress: Float
                     ) {
-
 
                     }
 
@@ -126,8 +124,7 @@ class MainActivity : AppCompatActivity() {
 
                         if (currentId == R.id.start) {
                             rotateCloseAnim.start()
-
-                            binding.clBottomDialog.visibility = GONE
+                                binding.clBottomDialog.visibility = GONE
                         }
                     }
 

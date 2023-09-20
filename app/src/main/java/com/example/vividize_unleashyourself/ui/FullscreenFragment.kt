@@ -63,12 +63,12 @@ class FullscreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             val motionLayout = binding.constraintLayout2
             motionLayout.transitionToEnd()
-        }, 2000)
+        }, 1000)
 
         Handler(Looper.getMainLooper()).postDelayed({
             val motionLayout = binding.constraintLayout4
             motionLayout.transitionToEnd()
-        }, 3000)
+        }, 2000)
 
 
     }
