@@ -7,4 +7,22 @@
     <string name="meditations">Meditation</string>
     <string name="journaling">Journaling</string>
 
+
+    <!-- Sedona Method Copntent -->
+    <string name="stepOne">Denke an ein Thema, ein Gefühl, dass gerade präsent ist und spühre einmal kurz hinein. Schreibe ein oder zwei Stichworte die dir dazu spontan einfallen.</string>
+    <string name="stepOneRepeat">Denke nochmal an das Thema, ist es noch das gleiche Gefühl oder hat es sich verändert? Halte es kurz fest, und Schreibe ein Stichwort dazu auf.</string>
+    <string name="stepTwoGeneral">Stelle dir nun die Frage:</string>
+    <string name="stepTwo1">Könnte ich dieses Gefühl für einen moment loslassen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
+    <string name="stepTwo2">Könnte ich dieses Gefühlt für nur einen moment da sein lassen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
+    <string name="stepTwo3">Könnte ich dieses Gefühl für einen kurzen moment willkommen heissen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
+    <string name="stepThree1">Wäre ich bereit dazu das Gefühl loszulassen? Für nur einen Moment? (Antworte auch hier spontan ohne nachzudenken.)</string>
+    <string name="stepThree2">Bin ich willens für einen kurzen Augenblick loszulassen?  (Antworte auch hier spontan ohne nachzudenken.)</string>
+    <string name="stepThreeNo">Würde ich lieber dieses Gefühl haben oder wäre ich lieber frei?</string>
+    <string name="stepFour">Wann wäre ich dazu bereit?</string>
+    <string name="stepFive">Wie intensiv ist dieses Gefühl noch gerade, wenn es zu beginn 100% waren?</string>
+    <string name="askForRepeat">Möchstest du fortfahren?</string>
+
+
+
+
 </resources>
