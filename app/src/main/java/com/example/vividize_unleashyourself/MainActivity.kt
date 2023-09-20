@@ -1,14 +1,20 @@
 package com.example.vividize_unleashyourself
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnticipateOvershootInterpolator
+import android.view.animation.BounceInterpolator
 import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.navigation.NavController
@@ -23,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val viewModel: MainViewModel by viewModels()
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -46,10 +53,36 @@ class MainActivity : AppCompatActivity() {
 
         val rotateOpenAnim = ObjectAnimator.ofFloat(binding.fab, "rotation", 0f, 45f)
         val rotateCloseAnim = ObjectAnimator.ofFloat(binding.fab, "rotation", 45f, 0f)
-        rotateOpenAnim.duration = 300 // Dauer der Animation
-        rotateCloseAnim.duration = 300
-        rotateOpenAnim.interpolator = AccelerateDecelerateInterpolator() // Interpolator für die Animation
-        rotateCloseAnim.interpolator = AccelerateDecelerateInterpolator()
+        rotateOpenAnim.duration = 700
+        rotateCloseAnim.duration = 700
+        rotateOpenAnim.interpolator = BounceInterpolator() // Interpolator für die Animation
+        rotateCloseAnim.interpolator = BounceInterpolator()
+
+        val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onSingleTapUp(e: MotionEvent): Boolean {
+                return true
+            }
+
+            override fun onDown(e: MotionEvent): Boolean {
+                return false
+            }
+        })
+
+        binding.clBottomDialog.setOnTouchListener { _, event ->
+            if (gestureDetector.onTouchEvent(event)) {
+                val rect = Rect()
+                binding.cvFabDialog.getGlobalVisibleRect(rect)
+                if (!rect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    if (binding.clBottomDialog.currentState == R.id.end) {
+                        binding.clBottomDialog.transitionToStart()
+                    }
+                }
+            true
+            } else {
+                false
+            }
+        }
+
 
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
@@ -94,9 +127,9 @@ class MainActivity : AppCompatActivity() {
                 binding.clBottomDialog.visibility = VISIBLE
                 motionLayout.transitionToEnd()
                 rotateOpenAnim.start()
-            } else if(motionLayout.currentState == R.id.end) {
+            } else  {
                 motionLayout.transitionToStart()
-//                rotateCloseAnim.start()
+
                 binding.clBottomDialog.setTransitionListener(object :
                     MotionLayout.TransitionListener {
                     override fun onTransitionStarted(
