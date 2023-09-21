@@ -3,6 +3,7 @@ package com.example.vividize_unleashyourself.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.data.model.Quote
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 
@@ -24,4 +25,12 @@ class AppRepository(private val api: QuotesApi) {
             Log.d(TAG, "API Call failed $e")
         }
     }
+
+
+    //Five Step Method Section
+    private val _fiveStepSessions = MutableLiveData<MutableList<FiveStepsSession>>(mutableListOf())
+    val fiveStepsSessions: LiveData<MutableList<FiveStepsSession>>
+        get() = _fiveStepSessions
+
+
 }

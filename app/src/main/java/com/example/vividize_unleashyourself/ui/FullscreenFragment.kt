@@ -1,5 +1,7 @@
 package com.example.vividize_unleashyourself.ui
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat.LAYER_TYPE_SOFTWARE
+import androidx.core.view.ViewCompat.setLayerType
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -55,7 +59,7 @@ class FullscreenFragment : Fragment() {
 
 
         binding.blurView1.setupWith(binding.root, RenderScriptBlur(requireContext()))
-            .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
+           // .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
             .setBlurRadius(3f)
 
         addObserver()
@@ -82,6 +86,11 @@ class FullscreenFragment : Fragment() {
                 error(R.drawable.taosit_temple)
                 allowHardware(false)
             }
+
+
+
+
+
             view?.post {
                 val quote = it.quote_de
                 val stringBuilder = StringBuilder()
@@ -101,7 +110,7 @@ class FullscreenFragment : Fragment() {
             val authorImg = it.aut_img_url.toUri().buildUpon().scheme("https").build()
             binding.ivAuthor.load(authorImg) {
                 error(R.drawable.taosit_temple)
-                allowHardware(false)
+//                allowHardware(false)
             }
 
             binding.tvAuthor.text = it.Author

@@ -5,15 +5,11 @@ import android.annotation.SuppressLint
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AnticipateOvershootInterpolator
 import android.view.animation.BounceInterpolator
 import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -51,12 +47,12 @@ class MainActivity : AppCompatActivity() {
 
         val motionLayout = binding.clBottomDialog
 
-        val rotateOpenAnim = ObjectAnimator.ofFloat(binding.fab, "rotation", 0f, 45f)
-        val rotateCloseAnim = ObjectAnimator.ofFloat(binding.fab, "rotation", 45f, 0f)
-        rotateOpenAnim.duration = 700
-        rotateCloseAnim.duration = 700
-        rotateOpenAnim.interpolator = BounceInterpolator() // Interpolator für die Animation
-        rotateCloseAnim.interpolator = BounceInterpolator()
+        val rotateOpenFab = ObjectAnimator.ofFloat(binding.fab, "rotation", 0f, 45f)
+        val rotateCloseFab = ObjectAnimator.ofFloat(binding.fab, "rotation", 45f, 0f)
+        rotateOpenFab.duration = 700
+        rotateCloseFab.duration = 700
+        rotateOpenFab.interpolator = BounceInterpolator()
+        rotateCloseFab.interpolator = BounceInterpolator()
 
         val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
             override fun onSingleTapUp(e: MotionEvent): Boolean {
@@ -91,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 endId: Int
             ) {
                 if (endId == R.id.start) {
-                    rotateCloseAnim.start()
+                    rotateCloseFab.start()
                     binding.clBottomDialog.visibility = GONE
                 }
             }
@@ -107,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 if (currentId == R.id.start) {
-                    rotateCloseAnim.start()
+                    rotateCloseFab.start()
                     binding.clBottomDialog.visibility = GONE
                 }
             }
@@ -126,7 +122,7 @@ class MainActivity : AppCompatActivity() {
             if (motionLayout.currentState == R.id.start) {
                 binding.clBottomDialog.visibility = VISIBLE
                 motionLayout.transitionToEnd()
-                rotateOpenAnim.start()
+                rotateOpenFab.start()
             } else  {
                 motionLayout.transitionToStart()
 
@@ -156,7 +152,7 @@ class MainActivity : AppCompatActivity() {
                     ) {
 
                         if (currentId == R.id.start) {
-                            rotateCloseAnim.start()
+                            rotateCloseFab.start()
                                 binding.clBottomDialog.visibility = GONE
                         }
                     }

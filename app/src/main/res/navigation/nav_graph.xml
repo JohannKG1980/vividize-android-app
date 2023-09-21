@@ -67,4 +67,9 @@
         android:name="com.example.vividize_unleashyourself.ui.JournalsFragment"
         android:label="fragment_journals"
         tools:layout="@layout/fragment_journals" />
+    <fragment
+        android:id="@+id/fiveStepsFragment"
+        android:name="com.example.vividize_unleashyourself.ui.FiveStepsFragment"
+        android:label="fragment_five_steps"
+        tools:layout="@layout/fragment_five_steps" />
 </navigation>

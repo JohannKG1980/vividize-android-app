@@ -64,8 +64,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/secondary_transparent"
-        android:clickable="true"
-        android:fadingEdgeLength="10dp"
         android:src="@drawable/baseline_add_24"
         app:elevation="5dp"
         app:layout_anchor="@id/bottom_app_bar" />
