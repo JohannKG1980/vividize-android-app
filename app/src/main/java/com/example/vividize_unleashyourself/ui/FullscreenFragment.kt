@@ -59,7 +59,7 @@ class FullscreenFragment : Fragment() {
 
 
         binding.blurView1.setupWith(binding.root, RenderScriptBlur(requireContext()))
-           // .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
+            .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
             .setBlurRadius(3f)
 
         addObserver()
@@ -110,7 +110,7 @@ class FullscreenFragment : Fragment() {
             val authorImg = it.aut_img_url.toUri().buildUpon().scheme("https").build()
             binding.ivAuthor.load(authorImg) {
                 error(R.drawable.taosit_temple)
-//                allowHardware(false)
+                allowHardware(false)
             }
 
             binding.tvAuthor.text = it.Author
