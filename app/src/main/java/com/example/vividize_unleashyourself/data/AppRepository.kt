@@ -32,5 +32,13 @@ class AppRepository(private val api: QuotesApi) {
     val fiveStepsSessions: LiveData<MutableList<FiveStepsSession>>
         get() = _fiveStepSessions
 
+    fun addFiveStepSession(session: FiveStepsSession) {
+        _fiveStepSessions.value?.add(session)
+        _fiveStepSessions.value = _fiveStepSessions.value
+    }
+    fun removeFiveStepSession(session: FiveStepsSession) {
+        _fiveStepSessions.value?.remove(session)
+        _fiveStepSessions.value = _fiveStepSessions.value
+    }
 
 }

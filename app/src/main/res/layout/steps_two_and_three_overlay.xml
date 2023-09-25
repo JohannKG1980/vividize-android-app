@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/overlay_step_two_and_three"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="gone">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_step_2_3"
@@ -41,6 +42,8 @@
                     android:layout_marginEnd="16dp"
                     android:checked="true"
                     android:text="@string/audio"
+                    android:thumbTint="@color/switch_thumb_tint"
+                    android:trackTint="@color/switch_track_tint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -57,7 +60,7 @@
                     app:tint="@color/secondary_app" />
 
                 <TextView
-                    android:id="@+id/tv_step"
+                    android:id="@+id/tv_step2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -73,7 +76,7 @@
 
 
                 <TextView
-                    android:id="@+id/tv_step_text"
+                    android:id="@+id/tv_step_text2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -84,7 +87,7 @@
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_step" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step2" />
 
 
                 <com.google.android.material.button.MaterialButton
@@ -99,7 +102,7 @@
                     app:cornerRadius="15dp"
                     app:layout_constraintEnd_toStartOf="@+id/btn_no"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text2"
                     app:strokeColor="@color/white"
                     app:strokeWidth="2dp" />
 
@@ -115,7 +118,7 @@
                     app:cornerRadius="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_yes"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text2"
                     app:strokeColor="@color/white"
                     app:strokeWidth="2dp" />
 

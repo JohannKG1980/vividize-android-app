@@ -52,6 +52,7 @@ class MentalSectionFragment : Fragment() {
         adapter = MentalSectionsAdapter(childFragmentManager, lifecycle)
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.meditations))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.fiveSteps))
         tabLayout.addTab(tabLayout.newTab().setText(R.string.journaling))
 
         viewPager2.adapter = adapter

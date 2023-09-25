@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Eingangshalle</string>
     <string name="meditations">Meditation</string>
+    <string name="fiveSteps">5 Schritte Methode</string>
     <string name="journaling">Journaling</string>
 
 
@@ -35,6 +36,19 @@
     <string name="audio">Ton an</string>
     <string name="hintStepOne">Dein Thema...</string>
     <string name="hintStepFour">Wann...</string>
+    <string name="fiveStepsDescriptionTitle">Die 5 Schritte Methode</string>
+    <string name="fsm_description">
+    <![CDATA[
+        <b>Die 5-Schritte-Methode</b>, die auf der <i>Sedona-Methode von Hale Dwoskin</i> basiert, ist eine vereinfachte Technik zur emotionalen Selbsthilfe. Sie zielt darauf ab, belastende Gefühle und emotionale Blockaden zu identifizieren und loszulassen, um ein Gefühl von Freiheit und innerem Frieden zu erlangen. Hier sind die fünf Schritte:<br>
+        <b>1. Emotion Fokussieren und Benennen:</b> Spüre in dich hinein und identifiziere das vorherrschende Gefühl. Benenne es und nimm es voll und ganz an.<br>
+        <b>2. Zufällige Frage zum Loslassen:</b> Eine der drei Fragen wird zufällig gestellt: "Könnte ich dieses Gefühl für einen Moment loslassen?", "Könnte ich dieses Gefühl für einen Moment da sein lassen?" oder "Könnte ich dieses Gefühl für einen Moment willkommen heißen?" Antworte intuitiv mit Ja oder Nein.<br>
+        <b>3. Bereitschaft zum Loslassen:</b> Unabhängig von der vorherigen Antwort wird gefragt: "Wäre ich bereit, das Gefühl loszulassen?" oder "Bin ich willens loszulassen?" Bei einem "Nein" wird zusätzlich gefragt: "Würde ich lieber dieses Gefühl haben oder wäre ich lieber frei?"<br>
+        <b>4. Zeitpunkt des Loslassens:</b> Frage dich, wann du bereit wärst, das Gefühl loszulassen und gib eine kurze Antwort.<br>
+        <b>5. Überprüfung und Wiederholung:</b> Bewerte, wie stark das Gefühl noch vorhanden ist und wiederhole bei Bedarf die Schritte, bis das Gefühl nachlässt.<br>
+        Diese Methode fördert die Achtsamkeit und Selbstreflexion und ermöglicht es den Nutzern, sich von negativen Emotionen zu befreien und ihr emotionales Wohlbefinden zu steigern.
+    ]]>
+</string>
+    <string name="start">Starten</string>
 
 
     <!-- Meditiation & Notes -->
@@ -43,11 +57,7 @@
     <!-- Journaling -->
 
 
-
     <!--Settings-->
-
-
-
 
 
 </resources>
