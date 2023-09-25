@@ -9,6 +9,11 @@
 
 
     <!-- Sedona Method Copntent -->
+    <string name="stepOneTitle">Schritt 1</string>
+    <string name="stepTwoTitle">Schritt 2</string>
+    <string name="stepThreeTitle">Schritt 3</string>
+    <string name="stepFourTitle">Schritt 4</string>
+    <string name="stepFiveTitle">Schritt 5</string>
     <string name="stepOne">Denke an ein Thema, ein Gefühl, dass gerade präsent ist und spühre einmal kurz hinein. Schreibe ein oder zwei Stichworte die dir dazu spontan einfallen.</string>
     <string name="stepOneRepeat">Denke nochmal an das Thema, ist es noch das gleiche Gefühl oder hat es sich verändert? Halte es kurz fest, und Schreibe ein Stichwort dazu auf.</string>
     <string name="stepTwoGeneral">Stelle dir nun die Frage:</string>
@@ -21,6 +26,28 @@
     <string name="stepFour">Wann wäre ich dazu bereit?</string>
     <string name="stepFive">Wie intensiv ist dieses Gefühl noch gerade, wenn es zu beginn 100% waren?</string>
     <string name="askForRepeat">Möchstest du fortfahren?</string>
+    <string name="next">weiter</string>
+    <string name="back">zurück</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="repeat">wiederholen</string>
+    <string name="finish">abschließen</string>
+    <string name="audio">Ton an</string>
+    <string name="hintStepOne">Dein Thema...</string>
+    <string name="hintStepFour">Wann...</string>
+
+
+    <!-- Meditiation & Notes -->
+
+
+    <!-- Journaling -->
+
+
+
+    <!--Settings-->
+
+
+
 
 
 </resources>

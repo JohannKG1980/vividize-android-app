@@ -86,7 +86,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_step" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tf_layout"
+                    android:id="@+id/textField"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -98,19 +98,15 @@
                     app:boxCornerRadiusBottomEnd="15dp"
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxStrokeColor="#ffffff"
+                    android:outlineAmbientShadowColor="@color/white"
                     app:boxStrokeWidth="2dp"
-                    app:endIconMode="clear_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_step_text">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/te_when"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:ellipsize="end"
-                        />
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,7 +121,7 @@
                     app:cornerRadius="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tf_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/textField"
                     app:strokeColor="@color/white"
                     app:strokeWidth="2dp" />
 

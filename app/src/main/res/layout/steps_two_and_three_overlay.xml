@@ -40,7 +40,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:checked="true"
-                    android:text="Audio"
+                    android:text="@string/audio"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -55,6 +55,70 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/outline_cancel_24"
                     app:tint="@color/secondary_app" />
+
+                <TextView
+                    android:id="@+id/tv_step"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/stepTwoTitle"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/audio_switch" />
+
+
+                <TextView
+                    android:id="@+id/tv_step_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/stepTwo1"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="68dp"
+                    android:text="@string/yes"
+                    android:textColor="@color/white"
+                    app:backgroundTint="#515E7B75"
+                    app:cornerRadius="15dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_no"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="68dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/no"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/color_no"
+                    app:cornerRadius="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_yes"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </eightbitlab.com.blurview.BlurView>
