@@ -7,6 +7,9 @@
     <string name="meditations">Meditation</string>
     <string name="fiveSteps">5 Schritte Methode</string>
     <string name="journaling">Journaling</string>
+    <string name="mental_section">Mental Lab</string>
+    <string name="physical_section">Body Gym</string>
+    <string name="knowledge_section">Nützliches Wissen</string>
 
 
     <!-- Sedona Method Copntent -->

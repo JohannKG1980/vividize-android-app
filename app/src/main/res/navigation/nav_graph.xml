@@ -8,17 +8,17 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vividize_unleashyourself.ui.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/mentalSectionFragment"
         android:name="com.example.vividize_unleashyourself.ui.MentalSectionFragment"
-        android:label="fragment_mental_section"
+        android:label="@string/mental_section"
         tools:layout="@layout/fragment_mental_section" />
     <fragment
         android:id="@+id/physicalSectionFragment"
         android:name="com.example.vividize_unleashyourself.ui.PhysicalSectionFragment"
-        android:label="fragment_physical_section"
+        android:label="@string/physical_section"
         tools:layout="@layout/fragment_physical_section" />
     <fragment
         android:id="@+id/signUpFragment"
@@ -60,12 +60,12 @@
     <fragment
         android:id="@+id/meditationsFragment"
         android:name="com.example.vividize_unleashyourself.ui.MeditationsFragment"
-        android:label="fragment_meditations"
+        android:label="@string/meditations"
         tools:layout="@layout/fragment_meditations" />
     <fragment
         android:id="@+id/journalsFragment"
         android:name="com.example.vividize_unleashyourself.ui.JournalsFragment"
-        android:label="fragment_journals"
+        android:label="@string/journaling"
         tools:layout="@layout/fragment_journals" />
     <fragment
         android:id="@+id/fiveStepsFragment"
@@ -76,4 +76,9 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.vividize_unleashyourself.ui.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/knowledgeSectionFragment"
+        android:name="com.example.vividize_unleashyourself.ui.KnowledgeSectionFragment"
+        android:label="@string/knowledge_section"
+        tools:layout="@layout/fragment_knowledge_section" />
 </navigation>

@@ -25,6 +25,7 @@
             app:srcCompat="@drawable/outline_info_24"
             app:tint="@color/secondary_transparent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

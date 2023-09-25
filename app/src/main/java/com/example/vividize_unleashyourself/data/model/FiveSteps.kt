@@ -5,7 +5,8 @@ import com.example.vividize_unleashyourself.R
 data class FiveSteps(val cycleId: Int) {
     val stepOne = Question(R.string.stepOne)
     val stepOneRepeat = Question(R.string.stepOneRepeat)
-    val stepOneInput = ""
+    var stepOneInput = ""
+    var intensity = 0
 
 
     val stepTwoInstruct = Question(R.string.stepTwoGeneral)
@@ -34,7 +35,7 @@ data class FiveSteps(val cycleId: Int) {
 
 
     val stepFive = Question(R.string.stepFive)
-    val intensity = 0
+    val intensityLeft = 0
 
 
     val repeatQuestion = Question(R.string.askForRepeat)

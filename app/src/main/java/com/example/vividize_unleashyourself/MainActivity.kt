@@ -201,6 +201,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else -> {
+                    binding.tvPageTitle.text = destination.label
                     binding.bottomAppBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
                     binding.topBar.visibility = View.VISIBLE
