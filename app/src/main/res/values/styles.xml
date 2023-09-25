@@ -4,7 +4,9 @@
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
-
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:layout_marginStart">0dp</item>
+    </style>
     <style name="Widget.Custom.TextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
     <item name="materialThemeOverlay">@style/ThemeOverlay.Design.TextInputEditText</item>
     <item name="enforceMaterialTheme">false</item>

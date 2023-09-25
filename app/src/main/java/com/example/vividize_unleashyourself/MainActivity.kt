@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.blurView1.setupWith(binding.root, RenderScriptBlur(this))
+        binding.blurViewTopBar.setupWith(binding.root, RenderScriptBlur(this))
             .setBlurRadius(3f)
         binding.blurViewAddDialog.setupWith(binding.root, RenderScriptBlur(this))
             .setBlurRadius(3f)
@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.fullscreenFragment -> {
                     binding.bottomAppBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE
-                    binding.blurView1.visibility = View.GONE
+                    binding.topBar.visibility = View.GONE
 
                 }
 
@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.splashFragment -> {
                     binding.bottomAppBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE
-                    binding.blurView1.visibility = View.GONE
+                    binding.topBar.visibility = View.GONE
                 }
 
                 else -> {

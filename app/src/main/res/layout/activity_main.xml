@@ -15,27 +15,35 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:navGraph="@navigation/nav_graph" />
 
-    <eightbitlab.com.blurview.BlurView
-        android:id="@+id/blur_view1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:blurOverlayColor="#273F3E3E">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/top_bar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#C6040E13">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/top_bar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="16dp">
+                android:layout_height="50dp"
+                android:background="#C6040E13"
+                android:layout_marginStart="-16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <eightbitlab.com.blurview.BlurView
+                    android:id="@+id/blur_view_top_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:blurOverlayColor="#273F3E3E">
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
     </eightbitlab.com.blurview.BlurView>
+            </androidx.appcompat.widget.Toolbar>
+
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
