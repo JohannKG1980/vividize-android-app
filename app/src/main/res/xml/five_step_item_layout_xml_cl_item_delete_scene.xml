@@ -10,8 +10,10 @@
 
         <OnSwipe
             motion:dragDirection="dragLeft"
-            motion:touchAnchorId="@id/cl"
-            motion:touchAnchorSide="top" />
+            motion:touchAnchorId="@id/cl_fsm_item_main"
+            motion:touchAnchorSide="end" />
+
+
 
        <KeyFrameSet>
        </KeyFrameSet>

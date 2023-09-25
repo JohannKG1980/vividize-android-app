@@ -72,4 +72,8 @@
         android:name="com.example.vividize_unleashyourself.ui.FiveStepsFragment"
         android:label="fragment_five_steps"
         tools:layout="@layout/fragment_five_steps" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.vividize_unleashyourself.ui.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
