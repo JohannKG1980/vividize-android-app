@@ -2,9 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_five_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.FiveStepsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_fsm_sessions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_fsm_top"
+        tools:listitem="@layout/five_step_item_layout" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_fsm_top"
@@ -25,30 +38,89 @@
             app:srcCompat="@drawable/outline_info_24"
             app:tint="@color/secondary_transparent" />
 
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="0.4"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/iv_add_session"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_add_session"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/plus_circle"
+            app:tint="@color/secondary_app" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_fsm_sessions"
-        android:layout_width="match_parent"
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_overlay"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="92dp"
+        android:transitionName="quote_card_home"
+        app:cardBackgroundColor="#23000000"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_fsm_top"
-        tools:listitem="@layout/five_step_item_layout" />
+        app:layout_constraintTop_toTopOf="parent">
 
 
-    <include layout="@layout/five_steps_description_overlay" />
+        <eightbitlab.com.blurview.BlurView
+            android:id="@+id/blur_view_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:blurOverlayColor="#45000000">
 
-    <include layout="@layout/step_one_overlay" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <include layout="@layout/steps_two_and_three_overlay" />
+                <include
+                    android:id="@+id/overlay_5_steps_description"
+                    layout="@layout/five_steps_description_overlay"
+                    android:visibility="gone" />
 
-    <include layout="@layout/step_four_overlay" />
+                <include
+                    android:id="@+id/overlay_step_one"
+                    layout="@layout/step_one_overlay"
+                    android:visibility="gone" />
 
-    <include layout="@layout/step_five_overlay" />
+                <include
+                    android:id="@+id/overlay_step_two_and_three"
+                    layout="@layout/steps_two_and_three_overlay"
+                    android:visibility="gone" />
 
+                <include
+                    android:id="@+id/overlay_step_four"
+                    layout="@layout/step_four_overlay"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/overlay_step_five"
+                    layout="@layout/step_five_overlay"
+                    android:visibility="gone" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </eightbitlab.com.blurview.BlurView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

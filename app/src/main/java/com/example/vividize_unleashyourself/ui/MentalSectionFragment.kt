@@ -49,7 +49,7 @@ class MentalSectionFragment : Fragment() {
 
         tabLayout = binding.tlSpiritLab
         viewPager2 = binding.vp2Library
-        adapter = MentalSectionsAdapter(childFragmentManager, lifecycle)
+        adapter = MentalSectionsAdapter(childFragmentManager, lifecycle, binding)
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.meditations))
         tabLayout.addTab(tabLayout.newTab().setText(R.string.fiveSteps))

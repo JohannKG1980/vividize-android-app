@@ -18,7 +18,7 @@
     <string name="stepThreeTitle">Schritt 3</string>
     <string name="stepFourTitle">Schritt 4</string>
     <string name="stepFiveTitle">Schritt 5</string>
-    <string name="stepOne">Denke an ein Thema, ein Gefühl, dass gerade präsent ist und spühre einmal kurz hinein. Schreibe ein oder zwei Stichworte die dir dazu spontan einfallen.</string>
+    <string name="stepOne">Denke an ein Thema, ein Gefühl, dass gerade präsent ist und spühre einmal kurz hinein. Schreibe ein oder zwei Stichworte die dir dazu spontan einfallen und gib über den Schieber die Intensiät des Gefühls an.</string>
     <string name="stepOneRepeat">Denke nochmal an das Thema, ist es noch das gleiche Gefühl oder hat es sich verändert? Halte es kurz fest, und Schreibe ein Stichwort dazu auf.</string>
     <string name="stepTwoGeneral">Stelle dir nun die Frage:</string>
     <string name="stepTwo1">Könnte ich dieses Gefühl für einen moment loslassen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
@@ -55,6 +55,7 @@
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
+    <string name="slider_desc">Intensität</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>

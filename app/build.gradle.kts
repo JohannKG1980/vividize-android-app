@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     id("com.android.application")
@@ -6,6 +7,8 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
 }
+
+val apiKey :String = gradleLocalProperties(rootDir).getProperty("apiKey")
 
 android {
     namespace = "com.example.vividize_unleashyourself"
@@ -17,24 +20,29 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
-        renderscriptTargetApi = 19
+        renderscriptTargetApi = 26
         renderscriptSupportModeEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+     buildFeatures {
+         viewBinding = true
+         buildConfig = true
+     }
     buildTypes {
         release {
+            buildConfigField("String","apiKey", apiKey)
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+        debug {
+            buildConfigField("String","apiKey", apiKey)
+        }
     }
-     buildFeatures {
-         viewBinding = true
-     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -79,6 +87,11 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:${roomVersion}")
+
+
+    //Charts
+
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 
 

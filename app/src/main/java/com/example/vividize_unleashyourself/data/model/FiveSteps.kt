@@ -1,8 +1,11 @@
 package com.example.vividize_unleashyourself.data.model
 
 import com.example.vividize_unleashyourself.R
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-data class FiveSteps(val cycleId: Int) {
+data class FiveSteps(val cycleId: Int = 0) {
+
     val stepOne = Question(R.string.stepOne)
     val stepOneRepeat = Question(R.string.stepOneRepeat)
     var stepOneInput = ""
@@ -27,7 +30,7 @@ data class FiveSteps(val cycleId: Int) {
     var stepThreeAnswer = false
 
     val stepThreeFollowUp = Question(R.string.stepThreeNo)
-    var stepThreeFollowAnswer = false
+    var stepThreeBetterBeFree = false
 
 
     val stepFour = Question(R.string.stepFour)
@@ -40,5 +43,15 @@ data class FiveSteps(val cycleId: Int) {
 
     val repeatQuestion = Question(R.string.askForRepeat)
     var repeatAnswer = false
+
+
+    val timestamp: LocalDateTime = LocalDateTime.now()
+
+    val formattedTimestamp: String = formatTimestamp(timestamp)
+
+    private fun formatTimestamp(time: LocalDateTime): String {
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
+        return time.format(formatter)
+    }
 
 }

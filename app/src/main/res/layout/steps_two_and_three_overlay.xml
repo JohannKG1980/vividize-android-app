@@ -5,33 +5,8 @@
     android:id="@+id/overlay_step_two_and_three"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone">
+>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_step_2_3"
-        android:layout_width="300dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="62dp"
-        android:transitionName="quote_card_home"
-        app:cardBackgroundColor="#23000000"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <eightbitlab.com.blurview.BlurView
-            android:id="@+id/blur_view1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:blurOverlayColor="#45000000">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
 
                 <Switch
@@ -123,8 +98,5 @@
                     app:strokeWidth="2dp" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </eightbitlab.com.blurview.BlurView>
-    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

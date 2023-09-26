@@ -5,7 +5,7 @@
     android:id="@+id/overlay_step_five"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="gone">
+>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_step_5"
