@@ -66,7 +66,7 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="Angst vor Gespräch mit dem  Chef"
+            tools:text="Angst vor Gespräch mit dem  Chef"
             android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="@+id/tv_topic"
@@ -101,13 +101,13 @@
             app:layout_constraintTop_toTopOf="@+id/tv_cycles_title" />
 
         <TextView
-            android:id="@+id/tv_intensity_title"
+            android:id="@+id/tv_intensity_start_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="Reduced Intensity by: "
+            android:text="Suffer: "
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_cycles_title"
             app:layout_constraintStart_toEndOf="@+id/tv_cycles"
@@ -115,7 +115,33 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/tv_intensity"
+            android:id="@+id/tv_intensity_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            tools:text="70%"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_cycles_title"
+            app:layout_constraintStart_toEndOf="@+id/tv_intensity_start_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_cycles_title" />
+
+        <TextView
+            android:id="@+id/tv_intensity_end_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Relief: "
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_cycles_title"
+            app:layout_constraintStart_toEndOf="@+id/tv_intensity_start"
+            app:layout_constraintTop_toTopOf="@+id/tv_cycles_title"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tv_intensity_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -123,7 +149,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tv_cycles_title"
-            app:layout_constraintStart_toEndOf="@+id/tv_intensity_title"
+            app:layout_constraintStart_toEndOf="@+id/tv_intensity_end_title"
             app:layout_constraintTop_toTopOf="@+id/tv_cycles_title" />
 
         <androidx.constraintlayout.motion.widget.MotionLayout
