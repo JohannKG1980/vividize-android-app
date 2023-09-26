@@ -4,83 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/overlay_5_steps_description"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
-                <Switch
-                    android:id="@+id/audio_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:checked="true"
-                    android:text="@string/audio"
-                    android:thumbTint="@color/switch_thumb_tint"
-                    android:trackTint="@color/switch_track_tint"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+    <Switch
+        android:id="@+id/audio_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:checked="true"
+        android:text="@string/audio"
+        android:thumbTint="@color/switch_thumb_tint"
+        android:trackTint="@color/switch_track_tint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-                <ImageView
-                    android:id="@+id/iv_cancle_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/outline_cancel_24"
-                    app:tint="@color/secondary_app" />
-
-
-                <TextView
-                    android:id="@+id/tv_step"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/fiveStepsDescriptionTitle"
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:textStyle=""
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/audio_switch" />
+    <ImageView
+        android:id="@+id/iv_cancle_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/outline_cancel_24"
+        app:tint="@color/secondary_app" />
 
 
-                <TextView
-                    android:id="@+id/tv_description_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:scrollbarAlwaysDrawVerticalTrack="true"
-                    android:scrollbarStyle="insideOverlay"
-                    android:text="@string/fsm_description"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_step" />
+    <TextView
+        android:id="@+id/tv_step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/fiveStepsDescriptionTitle"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/audio_switch" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_next1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/start"
-                    android:textColor="@color/white"
-                    app:backgroundTint="#515E7B75"
-                    app:cornerRadius="15dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_description_text"
-                    app:strokeColor="@color/white"
-                    app:strokeWidth="2dp" />
+    <ScrollView
+        android:id="@+id/sv_description"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:layout_marginHorizontal="24dp"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="insideOverlay"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step">
+
+        <TextView
+            android:id="@+id/tv_description_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="@string/fsm_description"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/start"
+        android:textColor="@color/white"
+        app:backgroundTint="#515E7B75"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_description"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

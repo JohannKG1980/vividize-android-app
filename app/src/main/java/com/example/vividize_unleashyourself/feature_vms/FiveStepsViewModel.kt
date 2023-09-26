@@ -34,12 +34,15 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
         get() = _currentSession
 
     fun openSession() {
-        _currentSession.value = FiveStepsSession()
-        if (_currentSession != null) {
-            _currentSession.value!!.stepCycles.add(FiveSteps())
-            _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
-            _currentStep.postValue(CurrentStep.STEP_ONE)
+        if (!_instructionWatched.value!!) {
+            _instructionWatched.value = true
+            _instructionWatched.value = _instructionWatched.value
         }
+        _currentSession.value = FiveStepsSession()
+        _currentSession.value!!.stepCycles.add(FiveSteps())
+        _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
+        _currentStep.value = CurrentStep.STEP_ONE
+        _currentStep.value = _currentStep.value
     }
 
     fun finishStepOne(topic: String, intensity: Int) {
@@ -81,7 +84,7 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun finishStepFive(answer: Boolean) {
         _currentCycle.value!!.repeatAnswer = answer
-        if(!answer) {
+        if (!answer) {
             _currentStep.postValue(CurrentStep.NO_CYCLE_NOW)
         } else {
             _currentSession.value!!.stepCycles.add(FiveSteps())
