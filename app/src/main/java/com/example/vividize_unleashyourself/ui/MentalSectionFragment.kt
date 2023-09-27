@@ -39,27 +39,35 @@ class MentalSectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.blurView1.setupWith(binding.root, RenderScriptBlur(requireContext()))
-          .setFrameClearDrawable(binding.ivBg.drawable) // Optional
+            .setFrameClearDrawable(binding.ivBg.drawable) // Optional
             .setBlurRadius(3f)
 
         binding.blurView2.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.ivBg.drawable) // Optional
             .setBlurRadius(3f)
+        tabInitiator()
+        tabController()
 
+    }
 
+    private fun tabInitiator() {
         tabLayout = binding.tlSpiritLab
         viewPager2 = binding.vp2Library
-        adapter = MentalSectionsAdapter(childFragmentManager, lifecycle, binding)
-
+        adapter = MentalSectionsAdapter(childFragmentManager, lifecycle, binding, viewModel)
         tabLayout.addTab(tabLayout.newTab().setText(R.string.meditations))
         tabLayout.addTab(tabLayout.newTab().setText(R.string.fiveSteps))
         tabLayout.addTab(tabLayout.newTab().setText(R.string.journaling))
-
         viewPager2.adapter = adapter
+    }
+
+    private fun tabController() {
+
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab != null) {
+
                     viewPager2.currentItem = tab.position
+
                 }
             }
 

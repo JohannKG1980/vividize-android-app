@@ -27,7 +27,7 @@ import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import eightbitlab.com.blurview.RenderScriptBlur
 
-class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Fragment() {
+class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding, var quickStart: Boolean = false) : Fragment() {
     private lateinit var binding: FragmentFiveStepsBinding
     private lateinit var stepOneOverlayBinding: StepOneOverlayBinding
     private lateinit var stepTwoAndThreeOverlayBinding: StepsTwoAndThreeOverlayBinding
@@ -60,14 +60,15 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
             .setBlurRadius(3f)
 
 
         addObserver()
+        if(quickStart) {
+            viewModel.openSession()
+        }
         binding.ivAddSession.setOnClickListener {
             viewModel.openSession()
 

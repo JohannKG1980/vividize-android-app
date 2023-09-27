@@ -15,7 +15,7 @@ enum class ApiStatus { LOADING, ERROR, DONE }
 const val TAG = "MainViewModel"
 
 
-class MainViewModel(application: Application): AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val repository = AppRepository(QuotesApi)
 
@@ -24,6 +24,15 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val _loading = MutableLiveData<ApiStatus>()
     val loading: LiveData<ApiStatus>
         get() = _loading
+
+    private val _mentalStartTab = MutableLiveData<Int>(0)
+    val mentalStartTab: LiveData<Int>
+        get() = _mentalStartTab
+
+    private val _quickStart = MutableLiveData<Boolean>(false)
+    val quickStart: LiveData<Boolean>
+        get() = _quickStart
+
 
     init {
         loadQuote()
@@ -46,4 +55,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
 
     }
+    fun setMentalStartTab(input: Int) {
+        _mentalStartTab.value = input
+        _mentalStartTab.value = _mentalStartTab.value
+    }
+
 }

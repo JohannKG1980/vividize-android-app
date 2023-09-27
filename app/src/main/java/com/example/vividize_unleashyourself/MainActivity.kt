@@ -24,7 +24,12 @@ import eightbitlab.com.blurview.RenderScriptBlur
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var motionLayout: MotionLayout
+
+    private lateinit var rotateOpenFab: ObjectAnimator
+    private lateinit var rotateCloseFab: ObjectAnimator
     private val viewModel: MainViewModel by viewModels()
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -44,25 +49,24 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.bottomNavigationView
 
         navView.setupWithNavController(navController)
-
-        val motionLayout = binding.clBottomDialog
-
-        val rotateOpenFab = ObjectAnimator.ofFloat(binding.fab, "rotation", 0f, 45f)
-        val rotateCloseFab = ObjectAnimator.ofFloat(binding.fab, "rotation", 45f, 0f)
+        motionLayout = binding.clBottomDialog
+        rotateOpenFab = ObjectAnimator.ofFloat(binding.fab, "rotation", 0f, 45f)
+        rotateCloseFab = ObjectAnimator.ofFloat(binding.fab, "rotation", 45f, 0f)
         rotateOpenFab.duration = 700
         rotateCloseFab.duration = 700
         rotateOpenFab.interpolator = BounceInterpolator()
         rotateCloseFab.interpolator = BounceInterpolator()
 
-        val gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapUp(e: MotionEvent): Boolean {
-                return true
-            }
+        val gestureDetector =
+            GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+                override fun onSingleTapUp(e: MotionEvent): Boolean {
+                    return true
+                }
 
-            override fun onDown(e: MotionEvent): Boolean {
-                return false
-            }
-        })
+                override fun onDown(e: MotionEvent): Boolean {
+                    return false
+                }
+            })
 
         binding.clBottomDialog.setOnTouchListener { _, event ->
             if (gestureDetector.onTouchEvent(event)) {
@@ -73,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                         binding.clBottomDialog.transitionToStart()
                     }
                 }
-            true
+                true
             } else {
                 false
             }
@@ -118,56 +122,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
         binding.fab.setOnClickListener {
+            motionControl()
 
-            if (motionLayout.currentState == R.id.start) {
-                binding.clBottomDialog.visibility = VISIBLE
-                motionLayout.transitionToEnd()
-                rotateOpenFab.start()
-            } else  {
-                motionLayout.transitionToStart()
+        }
 
-                binding.clBottomDialog.setTransitionListener(object :
-                    MotionLayout.TransitionListener {
-                    override fun onTransitionStarted(
-                        motionLayout: MotionLayout?,
-                        startId: Int,
-                        endId: Int
-                    ) {
-
-                    }
-
-                    override fun onTransitionChange(
-                        motionLayout: MotionLayout?,
-                        startId: Int,
-                        endId: Int,
-                        progress: Float
-                    ) {
-
-                    }
-
-
-                    override fun onTransitionCompleted(
-                        motionLayout: MotionLayout?,
-                        currentId: Int
-                    ) {
-
-                        if (currentId == R.id.start) {
-                            rotateCloseFab.start()
-                                binding.clBottomDialog.visibility = GONE
-                        }
-                    }
-
-                    override fun onTransitionTrigger(
-                        motionLayout: MotionLayout?,
-                        triggerId: Int,
-                        positive: Boolean,
-                        progress: Float
-                    ) {
-
-                    }
-
-                })
-            }
+        binding.ibAddFiveStep.setOnClickListener {
+            motionControl()
+            viewModel.setMentalStartTab(2)
+            navController.navigate(R.id.mentalSectionFragment)
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -211,4 +173,56 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun motionControl() {
+
+        if (motionLayout.currentState == R.id.start) {
+            binding.clBottomDialog.visibility = VISIBLE
+            motionLayout.transitionToEnd()
+            rotateOpenFab.start()
+        } else {
+            motionLayout.transitionToStart()
+
+            binding.clBottomDialog.setTransitionListener(object :
+                MotionLayout.TransitionListener {
+                override fun onTransitionStarted(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int
+                ) {
+
+                }
+
+                override fun onTransitionChange(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int,
+                    progress: Float
+                ) {
+
+                }
+
+
+                override fun onTransitionCompleted(
+                    motionLayout: MotionLayout?,
+                    currentId: Int
+                ) {
+
+                    if (currentId == R.id.start) {
+                        rotateCloseFab.start()
+                        binding.clBottomDialog.visibility = GONE
+                    }
+                }
+
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout?,
+                    triggerId: Int,
+                    positive: Boolean,
+                    progress: Float
+                ) {
+
+                }
+
+            })
+        }
+    }
 }
