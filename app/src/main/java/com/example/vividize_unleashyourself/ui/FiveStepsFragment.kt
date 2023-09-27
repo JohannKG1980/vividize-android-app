@@ -66,24 +66,19 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
 
 
         addObserver()
+        binding.ivAddSession.setOnClickListener {
+            viewModel.openSession()
+
+        }
     }
 
     private fun addObserver() {
 
-        viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
-            if (!instructed) {
-                openInstructions()
-            }
-            viewModel.currentStep.observe(viewLifecycleOwner) { currentStep ->
-                binding.ivAddSession.setOnClickListener {
-                    if (instructed) {
-                        when (currentStep) {
-                            CurrentStep.STEP_ONE -> openStepOne()
-                            else -> binding.cvOverlay.visibility = GONE
-
-
-                        }
-
+        viewModel.currentSession.observe(viewLifecycleOwner) {currentSession ->
+                viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
+                    viewModel.currentStep.observe(viewLifecycleOwner) { currentStep ->
+                        if (currentStep != CurrentStep.NO_CYCLE_NOW) {
+                        showOverlays(currentStep, instructed)
                     }
                 }
             }
@@ -95,6 +90,20 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
         viewModel.allSessions.observe(viewLifecycleOwner) { sessions ->
             binding.rvFsmSessions.adapter = FiveStepsAdapter(sessions, viewModel)
 
+        }
+    }
+
+    private fun showOverlays(currentStep: CurrentStep, instructionsDone: Boolean) {
+
+        if (!instructionsDone && currentStep != CurrentStep.NO_CYCLE_NOW) {
+            openInstructions()
+        } else if (instructionsDone && currentStep != CurrentStep.DESCRIPTION) {
+            when (currentStep) {
+                CurrentStep.STEP_ONE -> openStepOne()
+                else -> binding.cvOverlay.visibility = GONE
+
+
+            }
         }
     }
 
@@ -116,8 +125,8 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
 
         fiveStepsDescriptionOverlayBinding.btnNext1.setOnClickListener {
             fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
-            viewModel.openSession()
-            openStepOne()
+            viewModel.despriptionWatched()
+           openStepOne()
         }
 
     }
@@ -130,4 +139,8 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        addObserver()
+    }
 }

@@ -10,7 +10,7 @@ import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 
 
-enum class CurrentStep { NO_CYCLE_NOW, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
+enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
 
 class FiveStepsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -33,16 +33,22 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
     val currentSession: LiveData<FiveStepsSession>
         get() = _currentSession
 
+    fun despriptionWatched() {
+        _instructionWatched.value = true
+        _instructionWatched.value = _instructionWatched.value
+    }
+
     fun openSession() {
         if (!_instructionWatched.value!!) {
-            _instructionWatched.value = true
-            _instructionWatched.value = _instructionWatched.value
+            _currentStep.value = CurrentStep.DESCRIPTION
+            _currentStep.value = _currentStep.value
+        } else {
+            _currentStep.value = CurrentStep.STEP_ONE
+            _currentStep.value = _currentStep.value
         }
         _currentSession.value = FiveStepsSession()
         _currentSession.value!!.stepCycles.add(FiveSteps())
         _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
-        _currentStep.value = CurrentStep.STEP_ONE
-        _currentStep.value = _currentStep.value
     }
 
     fun finishStepOne(topic: String, intensity: Int) {
