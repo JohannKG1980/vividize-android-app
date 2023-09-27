@@ -7,38 +7,13 @@
     android:layout_height="match_parent">
 
 
-    <Switch
-        android:id="@+id/audio_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:checked="true"
-        android:text="@string/audio"
-        android:thumbTint="@color/switch_thumb_tint"
-        android:trackTint="@color/switch_track_tint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <ImageView
-        android:id="@+id/iv_cancle_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/outline_cancel_24"
-        app:tint="@color/secondary_app" />
-
 
     <TextView
         android:id="@+id/tv_step"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:text="@string/fiveStepsDescriptionTitle"
         android:textAlignment="center"
@@ -47,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/audio_switch" />
+        app:layout_constraintTop_toTopOf="parent"  />
 
     <ScrollView
         android:id="@+id/sv_description"
@@ -72,7 +47,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next1"
+        android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"

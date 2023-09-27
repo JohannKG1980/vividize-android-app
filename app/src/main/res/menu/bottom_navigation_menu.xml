@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/homeFragment"
@@ -12,7 +13,8 @@
         android:title="Mental Section" />
     <item
         android:id="@+id/placeholder"
-        android:title="" />
+        android:title=""
+        android:enabled="false"/>
 
     <item
         android:id="@+id/physicalSectionFragment"

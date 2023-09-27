@@ -94,6 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
+
                 <include
                     android:id="@+id/overlay_5_steps_description"
                     layout="@layout/five_steps_description_overlay"
@@ -118,6 +120,31 @@
                     android:id="@+id/overlay_step_five"
                     layout="@layout/step_five_overlay"
                     android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_cancle_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/outline_cancel_24"
+                    app:tint="@color/secondary_app" />
+
+                <Switch
+                    android:id="@+id/audio_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:checked="true"
+                    android:text="@string/audio"
+                    android:thumbTint="@color/switch_thumb_tint"
+                    android:trackTint="@color/switch_track_tint"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </eightbitlab.com.blurview.BlurView>

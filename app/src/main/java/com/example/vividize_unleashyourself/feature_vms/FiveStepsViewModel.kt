@@ -29,8 +29,8 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
     private val repository = AppRepository(QuotesApi)
     val allSessions = repository.fiveStepsSessions
 
-    private val _currentSession = MutableLiveData<FiveStepsSession>()
-    val currentSession: LiveData<FiveStepsSession>
+    private val _currentSession = MutableLiveData<FiveStepsSession?>()
+    val currentSession: LiveData<FiveStepsSession?>
         get() = _currentSession
 
     fun despriptionWatched() {
@@ -38,7 +38,13 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
         _instructionWatched.value = _instructionWatched.value
     }
 
+    fun closeSession() {
+        _currentStep.value = CurrentStep.NO_CYCLE_NOW
+        _currentStep.value = _currentStep.value
+        _currentSession.value = null
+    }
     fun openSession() {
+        _currentSession.value = FiveStepsSession()
         if (!_instructionWatched.value!!) {
             _currentStep.value = CurrentStep.DESCRIPTION
             _currentStep.value = _currentStep.value
@@ -46,7 +52,6 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
             _currentStep.value = CurrentStep.STEP_ONE
             _currentStep.value = _currentStep.value
         }
-        _currentSession.value = FiveStepsSession()
         _currentSession.value!!.stepCycles.add(FiveSteps())
         _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
     }

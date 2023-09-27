@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
         binding.bottomNavigationView.background = null
-        binding.bottomNavigationView.menu.getItem(2).isEnabled = false
+//        binding.bottomNavigationView.menu.getItem(2).isEnabled = false
 
         val navView: BottomNavigationView = binding.bottomNavigationView
 

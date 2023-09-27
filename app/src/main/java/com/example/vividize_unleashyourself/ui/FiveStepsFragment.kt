@@ -3,6 +3,7 @@ package com.example.vividize_unleashyourself.ui
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.activityViewModels
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.FiveStepsAdapter
+import com.example.vividize_unleashyourself.data.model.FiveSteps
 import com.example.vividize_unleashyourself.databinding.FiveStepsDescriptionOverlayBinding
 import com.example.vividize_unleashyourself.databinding.FragmentFiveStepsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
@@ -70,6 +72,17 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
             viewModel.openSession()
 
         }
+
+        binding.ivCancleButton.setOnClickListener {
+            viewModel.closeSession()
+            binding.cvOverlay.visibility = GONE
+            fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+            stepOneOverlayBinding.overlayStepOne.visibility = GONE
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+            stepFourOverlayBinding.overlayStepFour.visibility = GONE
+            stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+
+        }
     }
 
     private fun addObserver() {
@@ -95,11 +108,12 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
 
     private fun showOverlays(currentStep: CurrentStep, instructionsDone: Boolean) {
 
-        if (!instructionsDone && currentStep != CurrentStep.NO_CYCLE_NOW) {
+        if (!instructionsDone && currentStep == CurrentStep.DESCRIPTION) {
             openInstructions()
         } else if (instructionsDone && currentStep != CurrentStep.DESCRIPTION) {
             when (currentStep) {
                 CurrentStep.STEP_ONE -> openStepOne()
+                CurrentStep.STEP_TWO -> openStepTwo()
                 else -> binding.cvOverlay.visibility = GONE
 
 
@@ -123,7 +137,8 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
             }
         })
 
-        fiveStepsDescriptionOverlayBinding.btnNext1.setOnClickListener {
+
+        fiveStepsDescriptionOverlayBinding.btnNext.setOnClickListener {
             fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
             viewModel.despriptionWatched()
            openStepOne()
@@ -135,12 +150,47 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding) : Frag
         binding.cvOverlay.visibility = VISIBLE
         stepOneOverlayBinding.overlayStepOne.visibility = VISIBLE
 
+        val stepCycles = viewModel.currentSession.value!!.stepCycles
+
+
+        val stepText = if(stepCycles.isNotEmpty()) {
+            if (stepCycles.size <= 1) {
+                getString(stepCycles.last().stepOne.content)
+            } else {
+                stepCycles.add(FiveSteps(stepCycles.last().cycleId + 1))
+                getString(stepCycles.last().stepOneRepeat.content)
+            }
+        }else {
+            stepCycles.add(FiveSteps(1))
+            getString(stepCycles.last().stepOne.content)
+        }
+
+        stepOneOverlayBinding.tvStepText.text = stepText
+
+        stepOneOverlayBinding.btnNext.setOnClickListener {
+
+            val input = stepOneOverlayBinding.teTopic.text.toString()
+            val intensity = stepOneOverlayBinding.slStartIntensity.value.toInt()
+            viewModel.finishStepOne(input, intensity)
+            stepOneOverlayBinding.teTopic.setText("")
+            stepOneOverlayBinding.slStartIntensity.value = 0f
+            stepOneOverlayBinding.overlayStepOne.visibility = GONE
+            Log.e("TestStepOne", "Topic : $input   Intensity: $intensity ")
+            openStepTwo()
+        }
 
     }
 
+    private fun openStepTwo() {
+        stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = VISIBLE
+
+
+        stepTwoAndThreeOverlayBinding.tvStep
+
+    }
 
     override fun onResume() {
         super.onResume()
-        addObserver()
+
     }
 }

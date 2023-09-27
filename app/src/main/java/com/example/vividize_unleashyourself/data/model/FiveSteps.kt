@@ -19,6 +19,7 @@ data class FiveSteps(val cycleId: Int = 0) {
         Question(R.string.stepTwo3)
     )
     val stepTwoQuestion = stepTwo.random()
+    val stepTwoText = stepTwoInstruct.content + stepTwoQuestion.content
     var stepTwoAnswer = false
 
 
@@ -44,6 +45,7 @@ data class FiveSteps(val cycleId: Int = 0) {
     val repeatQuestion = Question(R.string.askForRepeat)
     var repeatAnswer = false
 
+    var cycleFinished = false
 
     val timestamp: LocalDateTime = LocalDateTime.now()
 

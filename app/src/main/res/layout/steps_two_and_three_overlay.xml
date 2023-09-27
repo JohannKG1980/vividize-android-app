@@ -9,37 +9,15 @@
 
 
 
-                <Switch
-                    android:id="@+id/audio_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:checked="true"
-                    android:text="@string/audio"
-                    android:thumbTint="@color/switch_thumb_tint"
-                    android:trackTint="@color/switch_track_tint"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-                <ImageView
-                    android:id="@+id/iv_cancle_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/outline_cancel_24"
-                    app:tint="@color/secondary_app" />
+
 
                 <TextView
-                    android:id="@+id/tv_step2"
+                    android:id="@+id/tv_step"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="64dp"
                     android:layout_marginEnd="24dp"
                     android:text="@string/stepTwoTitle"
                     android:textAlignment="center"
@@ -47,11 +25,11 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/audio_switch" />
+                    app:layout_constraintTop_toTopOf="parent"  />
 
 
                 <TextView
-                    android:id="@+id/tv_step_text2"
+                    android:id="@+id/tv_step_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -62,7 +40,7 @@
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_step2" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step" />
 
 
                 <com.google.android.material.button.MaterialButton
@@ -77,7 +55,7 @@
                     app:cornerRadius="15dp"
                     app:layout_constraintEnd_toStartOf="@+id/btn_no"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text"
                     app:strokeColor="@color/white"
                     app:strokeWidth="2dp" />
 
@@ -93,7 +71,7 @@
                     app:cornerRadius="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_yes"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_step_text"
                     app:strokeColor="@color/white"
                     app:strokeWidth="2dp" />
 
