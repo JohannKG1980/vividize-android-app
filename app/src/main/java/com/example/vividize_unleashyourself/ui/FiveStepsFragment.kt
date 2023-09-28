@@ -276,7 +276,7 @@ class FiveStepsFragment(
     }
 
     private fun openStepFive(currentCycle: FiveSteps, currentStep: CurrentStep) {
-        if (currentStep == CurrentStep.STEP_FIVE)
+
             stepFiveOverlayBinding.overlayStepFive.visibility = VISIBLE
 
         stepFiveOverlayBinding.btnRepeat.setOnClickListener {

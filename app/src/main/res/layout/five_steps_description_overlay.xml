@@ -7,13 +7,12 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
         android:id="@+id/tv_step"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:text="@string/fiveStepsDescriptionTitle"
         android:textAlignment="center"
@@ -22,16 +21,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/sv_description"
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarStyle="insideOverlay"
-        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,16 +42,16 @@
             android:id="@+id/tv_description_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="@string/fsm_description"
             android:textAlignment="center"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="@string/fsm_description" />
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/start"
         android:textColor="@color/white"
         app:backgroundTint="#515E7B75"
@@ -58,7 +59,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_description"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 
