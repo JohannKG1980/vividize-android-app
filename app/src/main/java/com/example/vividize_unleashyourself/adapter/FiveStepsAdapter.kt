@@ -35,10 +35,14 @@ class FiveStepsAdapter(
         if (holder is FiveStepsViewHolder) {
             val session = dataset[position]
             val binding = holder.binding
-            binding.tvTopic.text = session.stepCycles.first().stepOneInput
+            val startIntensity = session.stepCycles.first().intensity
+            val endIntensity = session.stepCycles.last().intensityLeft
+            val relief = startIntensity - endIntensity
+            binding.tvTopic.text  = session.stepCycles.first().stepOneInput
             binding.tvCycles.text = session.stepCycles.size.toString()
-            binding.tvIntensityStart.text = session.stepCycles.first().intensity.toString()
-            binding.tvIntensityEnd.text = session.stepCycles.last().intensityLeft.toString()
+
+            binding.tvIntensityStart.text = session.stepCycles.first().intensity.toString() + " %"
+            binding.tvIntensityEnd.text = relief.toString() + " %"
             if (position == 0) {
                 binding.clTopDate.visibility = VISIBLE
                 binding.tvDate.text = session.formattedDateTimestamp
