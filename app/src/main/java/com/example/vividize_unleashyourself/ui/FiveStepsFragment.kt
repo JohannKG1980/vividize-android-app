@@ -92,17 +92,17 @@ class FiveStepsFragment(
 
     private fun addObserver() {
 
-        viewModel.currentSession.observe(viewLifecycleOwner) { currentSession ->
-            viewModel.currentCycle.observe(viewLifecycleOwner) {currentCycle ->
-                viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
-                    viewModel.currentStep.observe(viewLifecycleOwner) { currentStep ->
-                        if (currentStep != CurrentStep.NO_CYCLE_NOW) {
-                            showOverlays(currentStep, instructed, currentSession, currentCycle)
-                        }
+
+        viewModel.currentCycle.observe(viewLifecycleOwner) { currentCycle ->
+            viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
+                viewModel.currentStep.observe(viewLifecycleOwner) { currentStep ->
+                    if (currentStep != CurrentStep.NO_CYCLE_NOW) {
+                        showOverlays(currentStep, instructed, currentCycle)
                     }
                 }
             }
         }
+
 
 
 
@@ -112,24 +112,26 @@ class FiveStepsFragment(
         }
     }
 
-    private fun showOverlays(currentStep: CurrentStep, instructionsDone: Boolean, currentSession: FiveStepsSession?, currentCycle: FiveSteps) {
+    private fun showOverlays(
+        currentStep: CurrentStep,
+        instructionsDone: Boolean,
+        currentCycle: FiveSteps
+    ) {
 
-        if (!instructionsDone && currentStep == CurrentStep.DESCRIPTION) {
-            openInstructions()
-        } else if (instructionsDone && currentStep != CurrentStep.DESCRIPTION) {
             when (currentStep) {
+                CurrentStep.DESCRIPTION -> openInstructions()
                 CurrentStep.STEP_ONE -> openStepOne(currentCycle)
                 CurrentStep.STEP_TWO -> openStepTwo(currentCycle)
                 CurrentStep.STEP_THREE -> openStepThree(currentCycle)
                 CurrentStep.STEP_THREE_ADD -> openStepThreeAdd(currentCycle)
                 CurrentStep.STEP_FOUR -> openStepFour(currentCycle)
-                CurrentStep.STEP_FIVE -> openStepFive(currentCycle)
+                CurrentStep.STEP_FIVE -> openStepFive(currentCycle, currentStep)
 
                 else -> binding.cvOverlay.visibility = GONE
 
 
             }
-        }
+
     }
 
     private fun openInstructions() {
@@ -150,25 +152,22 @@ class FiveStepsFragment(
 
 
         fiveStepsDescriptionOverlayBinding.btnNext.setOnClickListener {
-            fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
             viewModel.descriptionWatched()
+            fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
 
         }
 
     }
 
-//    private fun getStepCycles(): MutableList<FiveSteps> {
-//
-//        return viewModel.currentSession.value!!.stepCycles
-//    }
 
     private fun openStepOne(currentCycle: FiveSteps) {
+//        stepFiveOverlayBinding.overlayStepFive.visibility =
+//            GONE  //hilfszeile für einen unerklärlichen bug beim cycle repeat
         binding.cvOverlay.visibility = VISIBLE
         stepOneOverlayBinding.overlayStepOne.visibility = VISIBLE
 
 
-
-        val stepText = if(currentCycle.repeatAnswer){
+        val stepText = if (currentCycle.repeatAnswer) {
             getString(currentCycle.stepOneRepeat.content)
         } else {
             getString(currentCycle.stepOne.content)
@@ -198,7 +197,8 @@ class FiveStepsFragment(
         stepTwoAndThreeOverlayBinding.btnNo.text = "Nein"
 
         stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepTwoTitle)
-        stepTwoAndThreeOverlayBinding.tvStepText.text = getString(currentCycle.stepTwoQuestion.content)
+        stepTwoAndThreeOverlayBinding.tvStepText.text =
+            getString(currentCycle.stepTwoQuestion.content)
 
         stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
             currentCycle.stepTwoAnswer = true
@@ -275,26 +275,27 @@ class FiveStepsFragment(
         }
     }
 
-    private fun openStepFive(currentCycle: FiveSteps) {
-
-        stepFiveOverlayBinding.overlayStepFive.visibility = VISIBLE
+    private fun openStepFive(currentCycle: FiveSteps, currentStep: CurrentStep) {
+        if (currentStep == CurrentStep.STEP_FIVE)
+            stepFiveOverlayBinding.overlayStepFive.visibility = VISIBLE
 
         stepFiveOverlayBinding.btnRepeat.setOnClickListener {
-            val intensity =stepFiveOverlayBinding.slEndIntensity.value.toInt()
+            val intensity = stepFiveOverlayBinding.slEndIntensity.value.toInt()
             currentCycle.intensityLeft = intensity
             currentCycle.repeatAnswer = true
+            currentCycle.cycleFinished = true
             stepFiveOverlayBinding.slEndIntensity.value = 0f
-            viewModel.finishStepFive(true , currentCycle)
+            viewModel.finishStepFive(currentCycle)
             stepFiveOverlayBinding.overlayStepFive.visibility = GONE
 
         }
 
         stepFiveOverlayBinding.btnComplete.setOnClickListener {
-            val intensity =stepFiveOverlayBinding.slEndIntensity.value.toInt()
+            val intensity = stepFiveOverlayBinding.slEndIntensity.value.toInt()
             currentCycle.intensityLeft = intensity
             currentCycle.cycleFinished = true
             stepFiveOverlayBinding.slEndIntensity.value = 0f
-            viewModel.finishStepFive(false , currentCycle)
+            viewModel.finishStepFive(currentCycle)
             stepFiveOverlayBinding.overlayStepFive.visibility = GONE
             binding.cvOverlay.visibility = GONE
 
@@ -302,8 +303,5 @@ class FiveStepsFragment(
 
     }
 
-    override fun onResume() {
-        super.onResume()
 
-    }
 }
