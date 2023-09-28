@@ -16,6 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.FiveStepsAdapter
 import com.example.vividize_unleashyourself.data.model.FiveSteps
+import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.databinding.FiveStepsDescriptionOverlayBinding
 import com.example.vividize_unleashyourself.databinding.FragmentFiveStepsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
@@ -27,7 +28,10 @@ import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import eightbitlab.com.blurview.RenderScriptBlur
 
-class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding, var quickStart: Boolean = false) : Fragment() {
+class FiveStepsFragment(
+    private val sectionBinding: FragmentMentalSectionBinding,
+    private var quickStart: Boolean = false
+) : Fragment() {
     private lateinit var binding: FragmentFiveStepsBinding
     private lateinit var stepOneOverlayBinding: StepOneOverlayBinding
     private lateinit var stepTwoAndThreeOverlayBinding: StepsTwoAndThreeOverlayBinding
@@ -66,7 +70,7 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding, var qu
 
 
         addObserver()
-        if(quickStart) {
+        if (quickStart) {
             viewModel.openSession()
         }
         binding.ivAddSession.setOnClickListener {
@@ -88,16 +92,17 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding, var qu
 
     private fun addObserver() {
 
-        viewModel.currentSession.observe(viewLifecycleOwner) {currentSession ->
+        viewModel.currentSession.observe(viewLifecycleOwner) { currentSession ->
+            viewModel.currentCycle.observe(viewLifecycleOwner) {currentCycle ->
                 viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
                     viewModel.currentStep.observe(viewLifecycleOwner) { currentStep ->
                         if (currentStep != CurrentStep.NO_CYCLE_NOW) {
-                        showOverlays(currentStep, instructed)
+                            showOverlays(currentStep, instructed, currentSession, currentCycle)
+                        }
                     }
                 }
             }
         }
-
 
 
 
@@ -107,14 +112,19 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding, var qu
         }
     }
 
-    private fun showOverlays(currentStep: CurrentStep, instructionsDone: Boolean) {
+    private fun showOverlays(currentStep: CurrentStep, instructionsDone: Boolean, currentSession: FiveStepsSession?, currentCycle: FiveSteps) {
 
         if (!instructionsDone && currentStep == CurrentStep.DESCRIPTION) {
             openInstructions()
         } else if (instructionsDone && currentStep != CurrentStep.DESCRIPTION) {
             when (currentStep) {
-                CurrentStep.STEP_ONE -> openStepOne()
-                CurrentStep.STEP_TWO -> openStepTwo()
+                CurrentStep.STEP_ONE -> openStepOne(currentCycle)
+                CurrentStep.STEP_TWO -> openStepTwo(currentCycle)
+                CurrentStep.STEP_THREE -> openStepThree(currentCycle)
+                CurrentStep.STEP_THREE_ADD -> openStepThreeAdd(currentCycle)
+                CurrentStep.STEP_FOUR -> openStepFour(currentCycle)
+                CurrentStep.STEP_FIVE -> openStepFive(currentCycle)
+
                 else -> binding.cvOverlay.visibility = GONE
 
 
@@ -141,29 +151,27 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding, var qu
 
         fiveStepsDescriptionOverlayBinding.btnNext.setOnClickListener {
             fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
-            viewModel.despriptionWatched()
-           openStepOne()
+            viewModel.descriptionWatched()
+
         }
 
     }
 
-    private fun openStepOne() {
+//    private fun getStepCycles(): MutableList<FiveSteps> {
+//
+//        return viewModel.currentSession.value!!.stepCycles
+//    }
+
+    private fun openStepOne(currentCycle: FiveSteps) {
         binding.cvOverlay.visibility = VISIBLE
         stepOneOverlayBinding.overlayStepOne.visibility = VISIBLE
 
-        val stepCycles = viewModel.currentSession.value!!.stepCycles
 
 
-        val stepText = if(stepCycles.isNotEmpty()) {
-            if (stepCycles.size <= 1) {
-                getString(stepCycles.last().stepOne.content)
-            } else {
-                stepCycles.add(FiveSteps(stepCycles.last().cycleId + 1))
-                getString(stepCycles.last().stepOneRepeat.content)
-            }
-        }else {
-            stepCycles.add(FiveSteps(1))
-            getString(stepCycles.last().stepOne.content)
+        val stepText = if(currentCycle.repeatAnswer){
+            getString(currentCycle.stepOneRepeat.content)
+        } else {
+            getString(currentCycle.stepOne.content)
         }
 
         stepOneOverlayBinding.tvStepText.text = stepText
@@ -172,21 +180,125 @@ class FiveStepsFragment(val sectionBinding: FragmentMentalSectionBinding, var qu
 
             val input = stepOneOverlayBinding.teTopic.text.toString()
             val intensity = stepOneOverlayBinding.slStartIntensity.value.toInt()
-            viewModel.finishStepOne(input, intensity)
             stepOneOverlayBinding.teTopic.setText("")
             stepOneOverlayBinding.slStartIntensity.value = 0f
             stepOneOverlayBinding.overlayStepOne.visibility = GONE
             Log.e("TestStepOne", "Topic : $input   Intensity: $intensity ")
-            openStepTwo()
+            viewModel.finishStepOne(input, intensity)
+
         }
 
     }
 
-    private fun openStepTwo() {
+    private fun openStepTwo(currentCycle: FiveSteps) {
+
+
         stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = VISIBLE
+        stepTwoAndThreeOverlayBinding.btnYes.text = "Ja"
+        stepTwoAndThreeOverlayBinding.btnNo.text = "Nein"
+
+        stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepTwoTitle)
+        stepTwoAndThreeOverlayBinding.tvStepText.text = getString(currentCycle.stepTwoQuestion.content)
+
+        stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
+            currentCycle.stepTwoAnswer = true
+            viewModel.finishStepTwo(true)
+
+        }
+        stepTwoAndThreeOverlayBinding.btnNo.setOnClickListener {
+            currentCycle.stepTwoAnswer = false
+            viewModel.finishStepTwo(false)
+
+        }
+    }
+
+    private fun openStepThree(currentCycle: FiveSteps) {
+
+        stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepThreeTitle)
+        stepTwoAndThreeOverlayBinding.tvStepText.text =
+            getString(currentCycle.stepThreeQuestion.content)
+        stepTwoAndThreeOverlayBinding.btnYes.text = "Ja"
+        stepTwoAndThreeOverlayBinding.btnNo.text = "Nein"
+
+        stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
+            currentCycle.stepThreeAnswer = true
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+            viewModel.finishStepThree(true)
+
+        }
+        stepTwoAndThreeOverlayBinding.btnNo.setOnClickListener {
+            currentCycle.stepThreeAnswer = false
+            viewModel.finishStepThree(false)
+
+        }
+    }
+
+    private fun openStepThreeAdd(currentCycle: FiveSteps) {
+
+        stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepThreeTitle)
+        stepTwoAndThreeOverlayBinding.tvStepText.text =
+            getString(currentCycle.stepThreeFollowUp.content)
+        stepTwoAndThreeOverlayBinding.btnYes.text = "Frei"
+        stepTwoAndThreeOverlayBinding.btnNo.text = "Gefühl"
 
 
-        stepTwoAndThreeOverlayBinding.tvStep
+        stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
+            currentCycle.stepThreeBetterBeFree = true
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+            viewModel.finishStepThreeAdd(true)
+
+
+        }
+        stepTwoAndThreeOverlayBinding.btnNo.setOnClickListener {
+            currentCycle.stepThreeBetterBeFree = false
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+            viewModel.finishStepThreeAdd(false)
+
+        }
+    }
+
+    private fun openStepFour(currentCycle: FiveSteps) {
+        stepFourOverlayBinding.overlayStepFour.visibility = VISIBLE
+
+        stepFourOverlayBinding.tvStep.text = getString(R.string.stepFourTitle)
+        stepFourOverlayBinding.tvStepText.text = getString(currentCycle.stepFourQuestion.content)
+
+
+        stepFourOverlayBinding.btnNext.setOnClickListener {
+
+            val input = stepFourOverlayBinding.teWhen.text.toString()
+            currentCycle.stepFourAnswer = input
+            stepFourOverlayBinding.teWhen.setText("")
+            stepFourOverlayBinding.overlayStepFour.visibility = GONE
+            viewModel.finishStepFour(input)
+
+        }
+    }
+
+    private fun openStepFive(currentCycle: FiveSteps) {
+
+        stepFiveOverlayBinding.overlayStepFive.visibility = VISIBLE
+
+        stepFiveOverlayBinding.btnRepeat.setOnClickListener {
+            val intensity =stepFiveOverlayBinding.slEndIntensity.value.toInt()
+            currentCycle.intensityLeft = intensity
+            currentCycle.repeatAnswer = true
+            stepFiveOverlayBinding.slEndIntensity.value = 0f
+            viewModel.finishStepFive(true , currentCycle)
+            stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+
+        }
+
+        stepFiveOverlayBinding.btnComplete.setOnClickListener {
+            val intensity =stepFiveOverlayBinding.slEndIntensity.value.toInt()
+            currentCycle.intensityLeft = intensity
+            currentCycle.cycleFinished = true
+            stepFiveOverlayBinding.slEndIntensity.value = 0f
+            viewModel.finishStepFive(false , currentCycle)
+            stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+            binding.cvOverlay.visibility = GONE
+
+        }
 
     }
 

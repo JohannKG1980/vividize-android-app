@@ -14,6 +14,8 @@ enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, STEP_ONE, STEP_TWO, STEP_THR
 
 class FiveStepsViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val repository = AppRepository(QuotesApi)
+    val allSessions = repository.fiveStepsSessions
     private val _instructionWatched = MutableLiveData<Boolean>(false)
     val instructionWatched: LiveData<Boolean>
         get() = _instructionWatched
@@ -26,16 +28,16 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
     val currentStep: LiveData<CurrentStep>
         get() = _currentStep
 
-    private val repository = AppRepository(QuotesApi)
-    val allSessions = repository.fiveStepsSessions
 
     private val _currentSession = MutableLiveData<FiveStepsSession?>()
     val currentSession: LiveData<FiveStepsSession?>
         get() = _currentSession
 
-    fun despriptionWatched() {
+    fun descriptionWatched() {
         _instructionWatched.value = true
         _instructionWatched.value = _instructionWatched.value
+        _currentStep.value = CurrentStep.STEP_ONE
+        _currentStep.value = _currentStep.value
     }
 
     fun closeSession() {
@@ -43,8 +45,8 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
         _currentStep.value = _currentStep.value
         _currentSession.value = null
     }
+
     fun openSession() {
-        _currentSession.value = FiveStepsSession()
         if (!_instructionWatched.value!!) {
             _currentStep.value = CurrentStep.DESCRIPTION
             _currentStep.value = _currentStep.value
@@ -52,8 +54,20 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
             _currentStep.value = CurrentStep.STEP_ONE
             _currentStep.value = _currentStep.value
         }
-        _currentSession.value!!.stepCycles.add(FiveSteps())
-        _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
+        if(_currentSession.value == null)
+            _currentSession.value = FiveStepsSession(1)
+        if (_currentSession.value != null && _currentSession.value!!.sessionFinished) {
+            if (allSessions.value!!.isNotEmpty()) {
+                _currentSession.value = FiveStepsSession(allSessions.value!!.last().sessionId + 1)
+                _currentSession.value!!.stepCycles.add(FiveSteps())
+            } else if (_currentSession.value == null) {
+                _currentSession.value = FiveStepsSession(1)
+                _currentSession.value!!.stepCycles.add(FiveSteps())
+            }
+        } else {
+            _currentSession.value!!.stepCycles.add(FiveSteps())
+            _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
+        }
     }
 
     fun finishStepOne(topic: String, intensity: Int) {
@@ -93,10 +107,12 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
 
     }
 
-    fun finishStepFive(answer: Boolean) {
-        _currentCycle.value!!.repeatAnswer = answer
+    fun finishStepFive(answer: Boolean, finishedCycle: FiveSteps) {
+        _currentCycle.value = finishedCycle
+        _currentCycle.value =  _currentCycle.value
         if (!answer) {
             _currentStep.postValue(CurrentStep.NO_CYCLE_NOW)
+            saveFinishedSession()
         } else {
             _currentSession.value!!.stepCycles.add(FiveSteps())
             _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
@@ -106,8 +122,7 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
 
-    fun saveFinishedSession() {
-        _currentStep.postValue(CurrentStep.STEP_ONE)
+    private fun saveFinishedSession() {
         if (currentSession.value != null)
             repository.addFiveStepSession(currentSession.value!!)
     }

@@ -10,7 +10,8 @@ data class FiveStepsSession(
     val sessionId: Long = 0,
     val stepCycles: MutableList<FiveSteps> = mutableListOf(),
     val datestamp: LocalDate = LocalDate.now(),
-    val timestamp: LocalTime = LocalTime.now()
+    val timestamp: LocalTime = LocalTime.now(),
+    var sessionFinished: Boolean = false
 ) {
     val formattedDateTimestamp: String = formatDatestamp(datestamp) + "-" + formatTimestamp(timestamp)
 

@@ -19,7 +19,6 @@ data class FiveSteps(val cycleId: Int = 0) {
         Question(R.string.stepTwo3)
     )
     val stepTwoQuestion = stepTwo.random()
-    val stepTwoText = stepTwoInstruct.content + stepTwoQuestion.content
     var stepTwoAnswer = false
 
 
@@ -34,12 +33,12 @@ data class FiveSteps(val cycleId: Int = 0) {
     var stepThreeBetterBeFree = false
 
 
-    val stepFour = Question(R.string.stepFour)
+    val stepFourQuestion = Question(R.string.stepFour)
     var stepFourAnswer = ""
 
 
     val stepFive = Question(R.string.stepFive)
-    val intensityLeft = 0
+    var intensityLeft = 0
 
 
     val repeatQuestion = Question(R.string.askForRepeat)

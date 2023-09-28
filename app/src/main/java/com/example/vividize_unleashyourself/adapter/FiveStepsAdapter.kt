@@ -2,6 +2,8 @@ package com.example.vividize_unleashyourself.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -37,10 +39,17 @@ class FiveStepsAdapter(
             binding.tvCycles.text = session.stepCycles.size.toString()
             binding.tvIntensityStart.text = session.stepCycles.first().intensity.toString()
             binding.tvIntensityEnd.text = session.stepCycles.last().intensityLeft.toString()
-            if (position > 0) {
-                if (session.datestamp != dataset[position - 1].datestamp) {
-                    binding.tvDate.text = session.formattedDateTimestamp
+            if (position == 0) {
+                binding.clTopDate.visibility = VISIBLE
+                binding.tvDate.text = session.formattedDateTimestamp
 
+
+            } else if (position > 0) {
+                if (session.datestamp != dataset[position - 1].datestamp) {
+                    binding.clTopDate.visibility = VISIBLE
+                    binding.tvDate.text = session.formattedDateTimestamp
+                } else {
+                    binding.clTopDate.visibility = GONE
                 }
             }
         }
