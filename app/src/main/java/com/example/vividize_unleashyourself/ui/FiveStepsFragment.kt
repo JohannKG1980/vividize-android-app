@@ -87,6 +87,7 @@ class FiveStepsFragment(
             stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
             stepFourOverlayBinding.overlayStepFour.visibility = GONE
             stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+            quickStart = false
 
         }
     }
@@ -304,5 +305,28 @@ class FiveStepsFragment(
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.closeSession()
+        binding.cvOverlay.visibility = GONE
+        fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+        stepOneOverlayBinding.overlayStepOne.visibility = GONE
+        stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+        stepFourOverlayBinding.overlayStepFour.visibility = GONE
+        stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+        quickStart = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.closeSession()
+        binding.cvOverlay.visibility = GONE
+        fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+        stepOneOverlayBinding.overlayStepOne.visibility = GONE
+        stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+        stepFourOverlayBinding.overlayStepFour.visibility = GONE
+        stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+        quickStart = false
+    }
 
 }

@@ -170,6 +170,7 @@ class MainActivity : AppCompatActivity() {
                     binding.fab.visibility = View.VISIBLE
                     binding.topBar.visibility = View.VISIBLE
 
+
                 }
             }
         }

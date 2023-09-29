@@ -95,12 +95,11 @@ class MentalSectionFragment : Fragment() {
             viewModel.quickStart.observe(viewLifecycleOwner) { isQuickStart ->
 
                 if (startTab != null && isQuickStart) {
-                    isUserInteracted = false // Setzen Sie dies auf false, bevor Sie programmatisch wechseln
+                    isUserInteracted = false
                     viewPager2.post {
                         viewPager2.currentItem = startTab
                     }
-                    isUserInteracted =
-                         true // Setzen Sie dies zurück auf true, nachdem Sie gewechselt haben
+                    isUserInteracted = true
 
                 }
 
@@ -110,8 +109,15 @@ class MentalSectionFragment : Fragment() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        isUserInteracted = true
+        viewModel.controlQuickstart(null, false)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        isUserInteracted = true
         viewModel.controlQuickstart(null, false)
     }
 }
