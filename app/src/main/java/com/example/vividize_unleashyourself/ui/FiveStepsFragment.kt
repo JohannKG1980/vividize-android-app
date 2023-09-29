@@ -1,11 +1,14 @@
 package com.example.vividize_unleashyourself.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -25,6 +28,8 @@ import com.example.vividize_unleashyourself.databinding.StepOneOverlayBinding
 import com.example.vividize_unleashyourself.databinding.StepsTwoAndThreeOverlayBinding
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
+import com.google.android.material.internal.ViewUtils
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import eightbitlab.com.blurview.RenderScriptBlur
 
 class FiveStepsFragment(
@@ -58,6 +63,7 @@ class FiveStepsFragment(
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility", "RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -87,6 +93,14 @@ class FiveStepsFragment(
         }
         binding.ivInfoFsm.setOnClickListener {
            viewModel.openInstructions()
+        }
+
+        binding.clFiveMain.setOnTouchListener { _, _ ->
+            hideKeyboard(binding.root)
+
+            return@setOnTouchListener true
+
+
         }
     }
 
@@ -175,6 +189,7 @@ class FiveStepsFragment(
     }
 
 
+    @SuppressLint("ClickableViewAccessibility", "RestrictedApi")
     private fun openStepOne(currentCycle: FiveSteps) {
 //        stepFiveOverlayBinding.overlayStepFive.visibility =
 //            GONE  //hilfszeile für einen unerklärlichen bug beim cycle repeat
@@ -189,6 +204,9 @@ class FiveStepsFragment(
         }
 
         stepOneOverlayBinding.tvStepText.text = stepText
+
+
+
 
         stepOneOverlayBinding.btnNext.setOnClickListener {
 

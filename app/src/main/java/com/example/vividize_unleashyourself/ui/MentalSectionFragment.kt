@@ -1,7 +1,10 @@
 package com.example.vividize_unleashyourself.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.GestureDetector
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -11,6 +14,7 @@ import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.MentalSectionsAdapter
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
+import com.google.android.material.internal.ViewUtils
 import com.google.android.material.tabs.TabLayout
 import eightbitlab.com.blurview.RenderScriptBlur
 
