@@ -10,7 +10,7 @@ import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 
 
-enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
+enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, DESCRIPTION_FIRST, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
 
 class FiveStepsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -36,6 +36,16 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
     fun descriptionWatched() {
         _instructionWatched.value = true
         _instructionWatched.value = _instructionWatched.value
+
+    }
+
+    fun openInstructions() {
+        _currentStep.value = CurrentStep.DESCRIPTION
+        _currentStep.value = _currentStep.value
+    }
+
+    fun changeToStepOne() {
+
         _currentStep.value = CurrentStep.STEP_ONE
         _currentStep.value = _currentStep.value
     }
@@ -48,7 +58,7 @@ class FiveStepsViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun openSession() {
         if (!_instructionWatched.value!!) {
-            _currentStep.value = CurrentStep.DESCRIPTION
+            _currentStep.value = CurrentStep.DESCRIPTION_FIRST
             _currentStep.value = _currentStep.value
         } else {
             _currentStep.value = CurrentStep.STEP_ONE

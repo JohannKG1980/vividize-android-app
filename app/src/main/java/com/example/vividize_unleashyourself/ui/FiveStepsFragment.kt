@@ -16,7 +16,6 @@ import androidx.fragment.app.activityViewModels
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.FiveStepsAdapter
 import com.example.vividize_unleashyourself.data.model.FiveSteps
-import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.databinding.FiveStepsDescriptionOverlayBinding
 import com.example.vividize_unleashyourself.databinding.FragmentFiveStepsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
@@ -29,8 +28,7 @@ import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import eightbitlab.com.blurview.RenderScriptBlur
 
 class FiveStepsFragment(
-    private val sectionBinding: FragmentMentalSectionBinding,
-    private var quickStart: Boolean = false
+    private val sectionBinding: FragmentMentalSectionBinding
 ) : Fragment() {
     private lateinit var binding: FragmentFiveStepsBinding
     private lateinit var stepOneOverlayBinding: StepOneOverlayBinding
@@ -70,10 +68,7 @@ class FiveStepsFragment(
 
 
         addObserver()
-        if (quickStart) {
-            viewModel.openSession()
-            quickStart = false
-        }
+
         binding.ivAddSession.setOnClickListener {
             viewModel.openSession()
 
@@ -87,8 +82,11 @@ class FiveStepsFragment(
             stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
             stepFourOverlayBinding.overlayStepFour.visibility = GONE
             stepFiveOverlayBinding.overlayStepFive.visibility = GONE
-            quickStart = false
 
+
+        }
+        binding.ivInfoFsm.setOnClickListener {
+           viewModel.openInstructions()
         }
     }
 
@@ -121,13 +119,15 @@ class FiveStepsFragment(
     ) {
 
             when (currentStep) {
-                CurrentStep.DESCRIPTION -> openInstructions()
+                CurrentStep.DESCRIPTION_FIRST -> openInstructions()
+                CurrentStep.DESCRIPTION -> openInstructions(false)
                 CurrentStep.STEP_ONE -> openStepOne(currentCycle)
                 CurrentStep.STEP_TWO -> openStepTwo(currentCycle)
                 CurrentStep.STEP_THREE -> openStepThree(currentCycle)
                 CurrentStep.STEP_THREE_ADD -> openStepThreeAdd(currentCycle)
                 CurrentStep.STEP_FOUR -> openStepFour(currentCycle)
                 CurrentStep.STEP_FIVE -> openStepFive(currentCycle, currentStep)
+                CurrentStep.NO_CYCLE_NOW -> binding.cvOverlay.visibility = GONE
 
                 else -> binding.cvOverlay.visibility = GONE
 
@@ -136,9 +136,14 @@ class FiveStepsFragment(
 
     }
 
-    private fun openInstructions() {
+    private fun openInstructions(firstTime: Boolean = true) {
         binding.cvOverlay.visibility = VISIBLE
         fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = VISIBLE
+        if(!firstTime){
+            fiveStepsDescriptionOverlayBinding.btnNext.visibility = GONE
+        } else {
+            fiveStepsDescriptionOverlayBinding.btnNext.visibility = VISIBLE
+        }
         val descriptionView = fiveStepsDescriptionOverlayBinding.tvDescriptionText
         val text = getString(R.string.fsm_description)
         descriptionView.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
@@ -154,8 +159,16 @@ class FiveStepsFragment(
 
 
         fiveStepsDescriptionOverlayBinding.btnNext.setOnClickListener {
-            viewModel.descriptionWatched()
-            fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+            if(firstTime) {
+                viewModel.descriptionWatched()
+                fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+                viewModel.changeToStepOne()
+            } else {
+                viewModel.descriptionWatched()
+                fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+                binding.cvOverlay.visibility = GONE
+
+            }
 
         }
 
@@ -314,7 +327,7 @@ class FiveStepsFragment(
         stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
         stepFourOverlayBinding.overlayStepFour.visibility = GONE
         stepFiveOverlayBinding.overlayStepFive.visibility = GONE
-        quickStart = false
+
     }
 
     override fun onDestroy() {
@@ -326,7 +339,7 @@ class FiveStepsFragment(
         stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
         stepFourOverlayBinding.overlayStepFour.visibility = GONE
         stepFiveOverlayBinding.overlayStepFive.visibility = GONE
-        quickStart = false
+
     }
 
 }

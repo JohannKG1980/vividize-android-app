@@ -27,15 +27,13 @@ class MentalSectionsAdapter(
     @SuppressLint("SuspiciousIndentation")
     override fun createFragment(position: Int): Fragment {
         lateinit var currentTab: Fragment
-        var quickStart = false
-        viewModel.quickStart.observeForever {
-            quickStart = it
-        }
+
+
 
 
             when (position) {
                 0 -> currentTab = MeditationsFragment()
-                1 -> currentTab = FiveStepsFragment(blurViewRoot, quickStart)
+                1 -> currentTab = FiveStepsFragment(blurViewRoot)
                 2 -> currentTab = JournalsFragment()
 
 

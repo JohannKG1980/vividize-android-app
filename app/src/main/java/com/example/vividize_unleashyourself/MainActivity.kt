@@ -18,6 +18,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.ActivityMainBinding
+import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import eightbitlab.com.blurview.RenderScriptBlur
 
@@ -28,7 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var rotateOpenFab: ObjectAnimator
     private lateinit var rotateCloseFab: ObjectAnimator
-    private val viewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+    private val fiveStepsViewModel: FiveStepsViewModel by viewModels()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,11 +130,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.ibAddFiveStep.setOnClickListener {
-            motionControl()
-            viewModel.controlQuickstart(1, true)
-            navController.navigate(R.id.mentalSectionFragment)
-        }
+
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -164,12 +162,38 @@ class MainActivity : AppCompatActivity() {
                     binding.topBar.visibility = View.GONE
                 }
 
+                R.id.mentalSectionFragment -> {
+                    binding.tvPageTitle.text = destination.label
+                    binding.bottomAppBar.visibility = View.VISIBLE
+                    binding.fab.visibility = View.VISIBLE
+                    binding.topBar.visibility = View.VISIBLE
+                    binding.ibAddFiveStep.setOnClickListener {
+                        motionControl()
+
+                        mainViewModel.controlQuickstart(1)
+                        fiveStepsViewModel.openSession()
+
+
+                    }
+
+
+                }
+
                 else -> {
                     binding.tvPageTitle.text = destination.label
                     binding.bottomAppBar.visibility = View.VISIBLE
                     binding.fab.visibility = View.VISIBLE
                     binding.topBar.visibility = View.VISIBLE
+                    binding.ibAddFiveStep.setOnClickListener {
+                        motionControl()
 
+
+                        navController.navigate(R.id.mentalSectionFragment)
+                        mainViewModel.controlQuickstart(1)
+                        fiveStepsViewModel.openSession()
+
+
+                    }
 
                 }
             }
