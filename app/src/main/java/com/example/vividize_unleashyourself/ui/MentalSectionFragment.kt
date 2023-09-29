@@ -20,7 +20,7 @@ class MentalSectionFragment : Fragment() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager2: ViewPager2
     private lateinit var adapter: MentalSectionsAdapter
-
+    private var isUserInteracted = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +47,7 @@ class MentalSectionFragment : Fragment() {
             .setBlurRadius(3f)
         tabInitiator()
         tabController()
+        quickstartHelper()
 
     }
 
@@ -82,10 +83,35 @@ class MentalSectionFragment : Fragment() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                tabLayout.selectTab(tabLayout.getTabAt(position))
+                if (isUserInteracted)
+                    tabLayout.selectTab(tabLayout.getTabAt(position))
             }
         })
 
     }
 
+    private fun quickstartHelper() {
+        viewModel.mentalStartTab.observe(viewLifecycleOwner) { startTab ->
+            viewModel.quickStart.observe(viewLifecycleOwner) { isQuickStart ->
+
+                if (startTab != null && isQuickStart) {
+                    isUserInteracted = false // Setzen Sie dies auf false, bevor Sie programmatisch wechseln
+                    viewPager2.post {
+                        viewPager2.currentItem = startTab
+                    }
+                    isUserInteracted =
+                         true // Setzen Sie dies zurück auf true, nachdem Sie gewechselt haben
+
+                }
+
+            }
+        }
+
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.controlQuickstart(null, false)
+    }
 }

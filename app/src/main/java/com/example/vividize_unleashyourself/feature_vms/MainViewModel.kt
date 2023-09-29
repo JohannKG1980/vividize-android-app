@@ -25,8 +25,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val loading: LiveData<ApiStatus>
         get() = _loading
 
-    private val _mentalStartTab = MutableLiveData<Int>(0)
-    val mentalStartTab: LiveData<Int>
+    private val _mentalStartTab = MutableLiveData<Int?>(null)
+    val mentalStartTab: LiveData<Int?>
         get() = _mentalStartTab
 
     private val _quickStart = MutableLiveData<Boolean>(false)
@@ -55,9 +55,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
 
     }
-    fun setMentalStartTab(input: Int) {
+    fun controlQuickstart(input: Int?, isQuickStart: Boolean) {
+        _quickStart.value = isQuickStart
+        _quickStart.value = _quickStart.value
         _mentalStartTab.value = input
         _mentalStartTab.value = _mentalStartTab.value
+
     }
 
 }

@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                 if (endId == R.id.start) {
                     rotateCloseFab.start()
                     binding.clBottomDialog.visibility = GONE
+
                 }
             }
 
@@ -109,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                 if (currentId == R.id.start) {
                     rotateCloseFab.start()
                     binding.clBottomDialog.visibility = GONE
+
                 }
             }
 
@@ -128,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.ibAddFiveStep.setOnClickListener {
             motionControl()
-            viewModel.setMentalStartTab(2)
+            viewModel.controlQuickstart(1, true)
             navController.navigate(R.id.mentalSectionFragment)
         }
 

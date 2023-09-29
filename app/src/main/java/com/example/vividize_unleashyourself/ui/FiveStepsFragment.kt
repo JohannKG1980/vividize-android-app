@@ -72,6 +72,7 @@ class FiveStepsFragment(
         addObserver()
         if (quickStart) {
             viewModel.openSession()
+            quickStart = false
         }
         binding.ivAddSession.setOnClickListener {
             viewModel.openSession()

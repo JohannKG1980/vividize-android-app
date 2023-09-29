@@ -1,6 +1,8 @@
 package com.example.vividize_unleashyourself.adapter
 
 import android.annotation.SuppressLint
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -24,18 +26,21 @@ class MentalSectionsAdapter(
 
     @SuppressLint("SuspiciousIndentation")
     override fun createFragment(position: Int): Fragment {
-       lateinit var currentTab :  Fragment
+        lateinit var currentTab: Fragment
+        var quickStart = false
+        viewModel.quickStart.observeForever {
+            quickStart = it
+        }
 
 
             when (position) {
                 0 -> currentTab = MeditationsFragment()
-                1 -> currentTab = FiveStepsFragment(blurViewRoot)
+                1 -> currentTab = FiveStepsFragment(blurViewRoot, quickStart)
                 2 -> currentTab = JournalsFragment()
 
 
-
-
             }
+
 
         return currentTab
     }
