@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentMeditationsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
@@ -19,16 +18,10 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
     private val viewModel: MainViewModel by activityViewModels()
 
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 
         binding = FragmentMeditationsBinding.inflate(layoutInflater)
@@ -48,7 +41,6 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
-
             .setBlurAutoUpdate(true)
             .setBlurRadius(3f)
 
