@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentMeditationsBinding
+import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
+import com.example.vividize_unleashyourself.databinding.OverlayMeditationIntentionMoodBinding
+import eightbitlab.com.blurview.RenderScriptBlur
 
-class MeditationsFragment : Fragment() {
+class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBinding) : Fragment() {
     private lateinit var binding: FragmentMeditationsBinding
+    private lateinit var initOverlayBinding: OverlayMeditationIntentionMoodBinding
     private val viewModel: MainViewModel by activityViewModels()
 
 
@@ -25,7 +30,9 @@ class MeditationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         binding = FragmentMeditationsBinding.inflate(layoutInflater)
+        initOverlayBinding = binding.overlayMeditationInit
         return binding.root
 
 
@@ -38,6 +45,12 @@ class MeditationsFragment : Fragment() {
 //                .setBlurAutoUpdate(true)
 //                .setBlurRadius(3f)
 //                //.setFrameClearDrawable(tabHostBinding.ivBg.drawable) // Optional
+
+        binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
+            .setFrameClearDrawable(sectionBinding.ivBg.drawable)
+
+            .setBlurAutoUpdate(true)
+            .setBlurRadius(3f)
 
     }
 

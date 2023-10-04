@@ -96,6 +96,7 @@
         app:layout_constraintTop_toTopOf="@+id/sl_start_mood">
 
         <ImageView
+            android:id="@+id/iv_mood_set"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0.6"
@@ -151,10 +152,11 @@
         app:layout_constraintTop_toTopOf="@+id/sl_timer_setter">
 
         <ImageView
+            android:id="@+id/iv_time_set"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0.6"
-            app:srcCompat="@drawable/mood_gradient" />
+            app:srcCompat="@drawable/timer_gradient" />
 
     </com.google.android.material.card.MaterialCardView>
 

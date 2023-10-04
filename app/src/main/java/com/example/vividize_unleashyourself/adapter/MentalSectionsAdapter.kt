@@ -16,7 +16,7 @@ import com.example.vividize_unleashyourself.ui.MeditationsFragment
 class MentalSectionsAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
-    val blurViewRoot: FragmentMentalSectionBinding,
+    private val blurViewRoot: FragmentMentalSectionBinding,
     val viewModel: MainViewModel
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
@@ -32,7 +32,7 @@ class MentalSectionsAdapter(
 
 
             when (position) {
-                0 -> currentTab = MeditationsFragment()
+                0 -> currentTab = MeditationsFragment(blurViewRoot)
                 1 -> currentTab = FiveStepsFragment(blurViewRoot)
                 2 -> currentTab = JournalsFragment()
 

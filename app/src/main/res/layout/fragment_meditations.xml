@@ -78,7 +78,7 @@
             app:cardBackgroundColor="#23000000"
             app:cardCornerRadius="25dp"
             app:cardElevation="8dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,8 +99,8 @@
 
                     <include
                         android:id="@+id/overlay_meditation_init"
-                        layout="@layout/meditation_intention_mood_layout"
-                        android:visibility="gone" />
+                        layout="@layout/overlay_meditation_intention_mood"
+                        android:visibility="visible" />
 
                     <include
                         android:id="@+id/overlay_step_one"
