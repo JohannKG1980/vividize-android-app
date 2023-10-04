@@ -94,5 +94,17 @@ dependencies {
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 
+    // Rich Text editor
+
+    implementation ("org.wordpress:aztec:v1.6.2")
+   // implementation ("com.github.wordpress-mobile.WordPress-Aztec-Android:aztec-toolbar:v1.6.2")
+
+
+    //glide
+
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
+    // Skip this if you don't want to use integration libraries or configure Glide.
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
+
 
 }

@@ -81,4 +81,9 @@
         android:name="com.example.vividize_unleashyourself.ui.KnowledgeSectionFragment"
         android:label="@string/knowledge_section"
         tools:layout="@layout/fragment_knowledge_section" />
+    <fragment
+        android:id="@+id/journalEntryFragment"
+        android:name="com.example.vividize_unleashyourself.ui.JournalEntryFragment"
+        android:label="fragment_journal_entry"
+        tools:layout="@layout/fragment_journal_entry" />
 </navigation>

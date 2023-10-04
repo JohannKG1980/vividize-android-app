@@ -178,6 +178,10 @@ class MainActivity : AppCompatActivity() {
 
 
                 }
+                R.id.journalEntryFragment -> {
+                    binding.bottomAppBar.visibility = View.GONE
+                    binding.fab.visibility = View.GONE
+                }
 
                 else -> {
                     binding.tvPageTitle.text = destination.label
