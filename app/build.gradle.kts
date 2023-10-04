@@ -107,4 +107,8 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
 
 
+    //circular Progress bar
+
+    implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
+
 }

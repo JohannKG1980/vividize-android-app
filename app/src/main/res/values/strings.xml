@@ -20,7 +20,7 @@
     <string name="stepFiveTitle">Schritt 5</string>
     <string name="stepOne">Denke an ein Thema, ein Gefühl, dass gerade präsent ist und spühre einmal kurz hinein. Schreibe ein oder zwei Stichworte die dir dazu spontan einfallen und gib über den Schieber die Intensiät des Gefühls an.</string>
     <string name="stepOneRepeat">Denke nochmal an das Thema, ist es noch das gleiche Gefühl oder hat es sich verändert? Halte es kurz fest, und Schreibe ein Stichwort dazu auf.</string>
-    <string name="stepTwoGeneral">Stelle dir nun die Frage: \n</string>
+    <string name="stepTwoGeneral">Stelle dir nun die Frage: \n∫</string>
     <string name="stepTwo1">Könnte ich dieses Gefühl für einen moment loslassen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
     <string name="stepTwo2">Könnte ich dieses Gefühl für nur einen moment da sein lassen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
     <string name="stepTwo3">Könnte ich dieses Gefühl für einen kurzen moment willkommen heissen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
@@ -52,26 +52,16 @@
     ]]>
 </string>
     <string name="start">Starten</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
     <string name="intensityStart">Stärke der Emotion</string>
     <string name="slider_desc">Intensität</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-
 
     <!-- Meditiation & Notes -->
-
+    <string name="mood_start">Wie fühlst du dich gerade?</string>
+    <string name="mood_end">Wie fühlst du dich jetzt?</string>
+    <string name="set_intention">Notiere eine absicht, eine Intention für die Meditation.</string>
+    <string name="set_time">Stelle die Dauer ein.</string>
+    <string name="your_intention">Deine Intention...</string>
 
     <!-- Journaling -->
 
