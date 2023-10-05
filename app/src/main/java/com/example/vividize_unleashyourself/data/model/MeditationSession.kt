@@ -10,7 +10,11 @@ data class MeditationSession(
 ) {
     val formattedTimestamp: String = formatTimestamp(timestamp)
     var note: String = ""
-    var feeling: Int = 0
+    var moodStart: Int = 0
+    var moodEnd: Int = 0
+    var duration: Long = 0
+    var meditationId : Long = 0
+
 
 
     private fun formatTimestamp(time: LocalDateTime): String {

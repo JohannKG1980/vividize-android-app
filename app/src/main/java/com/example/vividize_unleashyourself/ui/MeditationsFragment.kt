@@ -44,6 +44,19 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
             .setBlurAutoUpdate(true)
             .setBlurRadius(3f)
 
+
+        initOverlayBinding.slStartMood.setLabelFormatter { value ->
+            return@setLabelFormatter when {
+                value <= 20.0 -> "☹️"
+                value <= 40.0 -> "\uD83D\uDE14"
+                value <= 60.0 -> "😐"
+                value <= 80.0 -> "☺️"
+                else -> "\uD83D\uDE0A"
+            }
+        }
+        initOverlayBinding.slTimerSetter.setLabelFormatter { value ->
+            return@setLabelFormatter "${value.toInt()} Min."
+        }
     }
 
 }
