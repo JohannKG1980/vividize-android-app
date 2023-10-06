@@ -10,8 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentJournalsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class JournalsFragment : Fragment() {
     private lateinit var binding: FragmentJournalsBinding
     private val viewModel: MainViewModel by activityViewModels()

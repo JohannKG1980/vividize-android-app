@@ -30,8 +30,9 @@ import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.google.android.material.internal.ViewUtils
 import com.google.android.material.internal.ViewUtils.hideKeyboard
+import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
-
+@AndroidEntryPoint
 class FiveStepsFragment(
     private val sectionBinding: FragmentMentalSectionBinding
 ) : Fragment() {

@@ -6,10 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.data.model.Quote
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
+import com.example.vividize_unleashyourself.data.remote.QuotesApiService
+import javax.inject.Inject
 
 const val TAG = "AppRepository"
 
-class AppRepository(private val api: QuotesApi) {
+class AppRepository @Inject constructor(private val apiService: QuotesApiService) {
 
     private val _dailyQuote = MutableLiveData<Quote>()
 
@@ -19,7 +21,7 @@ class AppRepository(private val api: QuotesApi) {
     suspend fun getQuote(id: String) {
         try {
             _dailyQuote.postValue(
-                api.retrofitService.getQuote().random()
+                apiService.getQuote().random()
             )
         } catch (e: Exception) {
             Log.d(TAG, "API Call failed $e")

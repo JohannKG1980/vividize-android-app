@@ -8,13 +8,14 @@ import com.example.vividize_unleashyourself.data.AppRepository
 import com.example.vividize_unleashyourself.data.model.FiveSteps
 import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 
 enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, DESCRIPTION_FIRST, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
+@HiltViewModel
+class FiveStepsViewModel  @Inject constructor(private val repository: AppRepository, application: Application) : AndroidViewModel(application) {
 
-class FiveStepsViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = AppRepository(QuotesApi)
     val allSessions = repository.fiveStepsSessions
     private val _instructionWatched = MutableLiveData<Boolean>(false)
     val instructionWatched: LiveData<Boolean>

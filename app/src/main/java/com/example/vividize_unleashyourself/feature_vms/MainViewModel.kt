@@ -8,16 +8,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.vividize_unleashyourself.data.AppRepository
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
 const val TAG = "MainViewModel"
 
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: AppRepository, application: Application) : AndroidViewModel(application) {
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = AppRepository(QuotesApi)
 
     val todaysQuote = repository.dailyQuote
 

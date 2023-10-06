@@ -21,9 +21,10 @@ import com.example.vividize_unleashyourself.feature_vms.ApiStatus
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentFullscreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
 
-
+@AndroidEntryPoint
 class FullscreenFragment : Fragment() {
     private lateinit var binding: FragmentFullscreenBinding
     private val viewModel: MainViewModel by activityViewModels()

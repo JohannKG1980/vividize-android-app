@@ -20,8 +20,10 @@ import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.ActivityMainBinding
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -178,6 +180,7 @@ class MainActivity : AppCompatActivity() {
 
 
                 }
+
                 R.id.journalEntryFragment -> {
                     binding.bottomAppBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE

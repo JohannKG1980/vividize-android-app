@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentJournalEntryBinding
+import dagger.hilt.android.AndroidEntryPoint
 import org.wordpress.aztec.Aztec
 import org.wordpress.aztec.AztecTextFormat
 import org.wordpress.aztec.ITextFormat
@@ -18,7 +19,8 @@ import org.wordpress.aztec.toolbar.ToolbarItems
 
 private lateinit var binding: FragmentJournalEntryBinding
 
-class JournalEntryFragment<ITextFormat : Any> : Fragment() {
+@AndroidEntryPoint
+class JournalEntryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -10,8 +10,10 @@ import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentMeditationsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
 import com.example.vividize_unleashyourself.databinding.OverlayMeditationIntentionMoodBinding
+import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
 
+@AndroidEntryPoint
 class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBinding) : Fragment() {
     private lateinit var binding: FragmentMeditationsBinding
     private lateinit var initOverlayBinding: OverlayMeditationIntentionMoodBinding

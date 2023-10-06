@@ -16,8 +16,10 @@ import com.example.vividize_unleashyourself.adapter.MentalSectionsAdapter
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
 import com.google.android.material.internal.ViewUtils
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
 
+@AndroidEntryPoint
 class MentalSectionFragment : Fragment() {
     private lateinit var binding: FragmentMentalSectionBinding
     private val viewModel: MainViewModel by activityViewModels()
