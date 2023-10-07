@@ -1,5 +1,6 @@
 package com.example.vividize_unleashyourself.di
 
+import android.media.MediaPlayer
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 import com.example.vividize_unleashyourself.data.AppRepository
 import com.example.vividize_unleashyourself.data.remote.QuotesApiService
@@ -21,4 +22,10 @@ object AppModule {
     @Singleton
     fun provideAppRepository(apiService: QuotesApiService): AppRepository = AppRepository(apiService)
 
+
+    @Provides
+    @Singleton
+    fun provideMediaPlayer(): MediaPlayer {
+        return MediaPlayer()
+    }
 }

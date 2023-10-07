@@ -1,6 +1,7 @@
 package com.example.vividize_unleashyourself.feature_vms
 
 import android.app.Application
+import android.media.MediaPlayer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, DESCRIPTION_FIRST, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
 @HiltViewModel
-class FiveStepsViewModel  @Inject constructor(private val repository: AppRepository, application: Application) : AndroidViewModel(application) {
+class FiveStepsViewModel  @Inject constructor(private val repository: AppRepository, private val mediaPlayer: MediaPlayer, application: Application) : AndroidViewModel(application) {
 
     val allSessions = repository.fiveStepsSessions
     private val _instructionWatched = MutableLiveData<Boolean>(false)

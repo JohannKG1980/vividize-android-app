@@ -4,9 +4,9 @@ import java.time.Duration
 
 data class Meditation (
     val id: Long,
-    val name: String,
-    val title: String,
-    val videoPath: String,
-    val audioPath: String,
-    val duration: Long
-)
+    val name: String ) {
+    val title: String = ""
+    val videoPath: String =  ""
+    val audioPath: String = ""
+    val duration: Long = 0
+}
