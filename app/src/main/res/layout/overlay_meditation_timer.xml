@@ -10,8 +10,8 @@
         android:id="@+id/circularProgressBar"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
         app:cpb_background_progressbar_color="#b6bbd8"
         app:cpb_background_progressbar_width="15dp"
         app:cpb_progress_direction="to_right"
@@ -45,7 +45,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
-                android:src="@drawable/round_play_arrow_24"
+                android:src="@drawable/round_pause_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +116,9 @@
         android:layout_height="60dp"
         android:layout_margin="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_cancle"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_ten_rev"
         app:srcCompat="@drawable/baseline_replay_24"
         app:tint="@color/secondary_transparent" />
 
@@ -127,19 +129,64 @@
         android:layout_margin="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_replay"
+        app:layout_constraintTop_toBottomOf="@+id/iv_ten_ff"
         app:srcCompat="@drawable/outline_cancel_24"
         app:tint="@color/secondary_transparent" />
 
+
+    <ImageView
+        android:id="@+id/iv_ten_rev"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_replay"
+        app:layout_constraintEnd_toEndOf="@+id/iv_replay"
+        app:layout_constraintStart_toStartOf="@+id/iv_replay"
+        app:layout_constraintTop_toBottomOf="@id/circularProgressBar"
+        app:srcCompat="@drawable/baseline_replay_10_24"
+        app:tint="@color/secondary_transparent" />
+
+    <ImageView
+        android:id="@+id/iv_ten_ff"
+        android:layout_width="48dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_cancle"
+        app:layout_constraintEnd_toEndOf="@+id/iv_cancle"
+        app:layout_constraintStart_toStartOf="@+id/iv_cancle"
+        app:layout_constraintTop_toBottomOf="@id/circularProgressBar"
+        app:srcCompat="@drawable/baseline_forward_10_24"
+        app:tint="@color/secondary_transparent" />
+
+
     <SeekBar
+        android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="32dp"
-        android:thumbTint="@color/secondary_transparent"
-        android:progressTint="@color/secondary_app"
         android:fadingEdgeLength="4dp"
         android:outlineSpotShadowColor="@color/white"
+        android:progressTint="@color/secondary_app"
         android:thumb="@drawable/swirl_circle_righthalf_filled"
+        android:thumbTint="@color/secondary_transparent"
         app:layout_constraintBottom_toTopOf="@+id/circularProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_meditype" />
+
+    <TextView
+        android:id="@+id/tv_meditype"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textSize="38sp"
+        android:layout_marginHorizontal="64dp"
+        android:singleLine="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
