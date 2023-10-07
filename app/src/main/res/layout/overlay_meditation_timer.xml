@@ -56,50 +56,52 @@
                 android:id="@+id/ll_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginHorizontal="24dp"
-                app:layout_constraintVertical_bias="0.6"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/iv_play_pause_stop_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6">
 
                 <TextView
                     android:id="@+id/tv_min_tens"
-                    android:textSize="44sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
+                    android:textSize="44sp"
                     tools:text="0" />
 
                 <TextView
                     android:id="@+id/tv_min_ones"
-                    android:textSize="44sp"
-                    android:layout_margin="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:textSize="44sp"
                     tools:text="1" />
 
                 <TextView
                     android:id="@+id/tv_colon"
-                    android:textSize="44sp"
-                    android:layout_margin="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:textSize="44sp"
                     tools:text=":" />
+
                 <TextView
                     android:id="@+id/tv_sec_tens"
-                    android:textSize="44sp"
-                    android:layout_margin="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:textSize="44sp"
                     tools:text="1" />
+
                 <TextView
                     android:id="@+id/tv_sec_ones"
-                    android:textSize="44sp"
-                    android:layout_margin="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:textSize="44sp"
                     tools:text="1" />
 
 
@@ -107,5 +109,39 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/iv_replay"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_replay_24"
+        app:tint="@color/secondary_transparent" />
+
+    <ImageView
+        android:id="@+id/iv_cancle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/outline_cancel_24"
+        app:tint="@color/secondary_transparent" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="32dp"
+        android:thumbTint="@color/secondary_transparent"
+        android:progressTint="@color/secondary_app"
+        android:fadingEdgeLength="4dp"
+        android:outlineSpotShadowColor="@color/white"
+        android:thumb="@drawable/swirl_circle_righthalf_filled"
+        app:layout_constraintBottom_toTopOf="@+id/circularProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

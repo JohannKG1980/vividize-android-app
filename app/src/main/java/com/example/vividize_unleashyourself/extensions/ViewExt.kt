@@ -11,5 +11,5 @@ fun View.slideUp(animTime: Long, startOffset: Long) {
         interpolator = FastOutSlowInInterpolator()
         this.startOffset = startOffset
     }
-
+    startAnimation(slideUp)
 }

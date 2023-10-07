@@ -21,6 +21,7 @@ import com.example.vividize_unleashyourself.feature_vms.ApiStatus
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.databinding.FragmentFullscreenBinding
+import com.example.vividize_unleashyourself.extensions.slideUp
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
 
@@ -92,21 +93,28 @@ class FullscreenFragment : Fragment() {
 
 
 
-            view?.post {
-                val quote = it.quote_de
-                val stringBuilder = StringBuilder()
-                Thread {
-                    for (letter in quote) {
-                        stringBuilder.append(letter)
-                        Thread.sleep(70)
+//            view?.post {
+//                val quote = it.quote_de
+//                val stringBuilder = StringBuilder()
+//                Thread {
+//                    for (letter in quote) {
+//                        stringBuilder.append(letter)
+//                        Thread.sleep(70)
+//
+//                        activity?.runOnUiThread {
+//                            binding.tvQuote.text = stringBuilder.toString()
+//                        }
+//                    }
+//                }.start()
+//
+//            }
+                binding.tvQuote.text = it.quote_de
+            binding.tvQuote.visibility = View.INVISIBLE
 
-                        activity?.runOnUiThread {
-                            binding.tvQuote.text = stringBuilder.toString()
-                        }
-                    }
-                }.start()
-
-            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.tvQuote.visibility = View.VISIBLE
+                binding.tvQuote.slideUp(1600L, 0L)
+            },600)
 
             val authorImg = it.aut_img_url.toUri().buildUpon().scheme("https").build()
             binding.ivAuthor.load(authorImg) {
