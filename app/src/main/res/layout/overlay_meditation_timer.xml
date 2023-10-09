@@ -24,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_play_pause_btn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="24dp"
@@ -41,7 +42,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_play_pause_stop_btn"
+                android:id="@+id/iv_play_pause_btn_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
@@ -58,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/iv_play_pause_stop_btn"
+                app:layout_constraintBottom_toTopOf="@+id/iv_play_pause_btn_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -161,7 +162,7 @@
 
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/sb_audio_progress"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="32dp"
@@ -179,14 +180,14 @@
         android:id="@+id/tv_meditype"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        tools:text="Meditation Title"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
         android:textSize="38sp"
         android:layout_marginHorizontal="64dp"
         android:singleLine="true"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintBottom_toTopOf="@+id/sb_audio_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

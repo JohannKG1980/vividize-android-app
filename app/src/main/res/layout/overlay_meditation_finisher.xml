@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/overlay_meditation_finisher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_meditation_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        tools:text="@string/title_med_fin"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle=""
+        app:layout_constraintBottom_toTopOf="@+id/tv_step_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_step_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/meditation_end"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tf_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_meditation_title" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tf_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:hint="@string/end_note"
+        app:boxBackgroundColor="#00FFFFFF"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomStart="15dp"
+        app:boxStrokeColor="#ffffff"
+        app:boxStrokeWidth="2dp"
+        app:endIconMode="clear_text"
+        app:layout_constraintBottom_toTopOf="@+id/tv_mood"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/te_end_note"
+            android:layout_width="match_parent"
+            android:gravity="top"
+            android:layout_height="130dp"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/tv_mood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingEnd="17dp"
+        android:text="@string/mood_start"
+        android:textAlignment="viewEnd"
+        android:textSize="16sp"
+        android:textStyle=""
+        app:layout_constraintBottom_toTopOf="@+id/sl_start_mood"
+        app:layout_constraintEnd_toEndOf="@id/sl_start_mood"
+        app:layout_constraintStart_toStartOf="@id/sl_start_mood" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:layout_marginHorizontal="14dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sl_start_mood"
+        app:layout_constraintEnd_toEndOf="@+id/sl_start_mood"
+        app:layout_constraintStart_toStartOf="@+id/sl_start_mood"
+        app:layout_constraintTop_toTopOf="@+id/sl_start_mood">
+
+        <ImageView
+            android:id="@+id/iv_mood_set"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.6"
+            app:srcCompat="@drawable/mood_gradient" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sl_start_mood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/slider_desc"
+        android:stepSize="10"
+        android:valueFrom="0.0"
+        android:valueTo="100.0"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tf_layout"
+        app:thumbColor="@color/secondary_app"
+        app:tickColorActive="#39000000"
+        app:tickColorInactive="#4FFFFFFF"
+        app:trackColorActive="@color/secondary_transparent"
+        app:trackColorInactive="#384845"
+        app:trackHeight="6dp" />
+
+
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        app:backgroundTint="#515E7B75"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sl_start_mood"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
