@@ -1,6 +1,5 @@
 package com.example.vividize_unleashyourself.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE

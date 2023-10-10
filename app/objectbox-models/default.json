@@ -1,0 +1,129 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5736604712224506443",
+      "lastPropertyId": "8:6701539158915582364",
+      "name": "Meditation",
+      "properties": [
+        {
+          "id": "1:949971117414526378",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:5020016397712189658",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7713070953768142491",
+          "name": "guided",
+          "type": 1
+        },
+        {
+          "id": "4:3208510649565287990",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "5:4268966578715623804",
+          "name": "videoPath",
+          "type": 9
+        },
+        {
+          "id": "6:4293103176537997618",
+          "name": "audioPath",
+          "type": 9
+        },
+        {
+          "id": "7:310762806299378789",
+          "name": "duration",
+          "type": 6
+        },
+        {
+          "id": "8:6701539158915582364",
+          "name": "sessionLenght",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4919755954802371768",
+      "lastPropertyId": "10:8347783622801789196",
+      "name": "MeditationSession",
+      "properties": [
+        {
+          "id": "1:727453976840070081",
+          "name": "sessionId",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8817093179218521339",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "3:7690548111310649886",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "4:1495996509140986650",
+          "name": "setLenght",
+          "type": 6
+        },
+        {
+          "id": "5:1231058489604644727",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        },
+        {
+          "id": "6:3907815100472048741",
+          "name": "intention",
+          "type": 9
+        },
+        {
+          "id": "7:6333735035994585560",
+          "name": "note",
+          "type": 9
+        },
+        {
+          "id": "8:6618555486214999984",
+          "name": "moodStart",
+          "type": 5
+        },
+        {
+          "id": "9:5870590283069266754",
+          "name": "moodEnd",
+          "type": 5
+        },
+        {
+          "id": "10:8347783622801789196",
+          "name": "meditationId",
+          "indexId": "1:4737797641779719543",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Meditation"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:4919755954802371768",
+  "lastIndexId": "1:4737797641779719543",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

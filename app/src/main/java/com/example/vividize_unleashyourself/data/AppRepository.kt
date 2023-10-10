@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.vividize_unleashyourself.data.model.FiveStepsSession
+import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.data.model.Quote
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 import com.example.vividize_unleashyourself.data.remote.QuotesApiService
@@ -13,10 +14,16 @@ const val TAG = "AppRepository"
 
 class AppRepository @Inject constructor(private val apiService: QuotesApiService) {
 
+
+
+
+    //DailyQuote
+
     private val _dailyQuote = MutableLiveData<Quote>()
 
     val dailyQuote: LiveData<Quote>
         get() = _dailyQuote
+
 
     suspend fun getQuote(id: String) {
         try {
@@ -43,4 +50,24 @@ class AppRepository @Inject constructor(private val apiService: QuotesApiService
         _fiveStepSessions.value = _fiveStepSessions.value
     }
 
+
+
+    //Medidations section
+
+    private val _meditationSessions = MutableLiveData<MutableList<MeditationSession>>(mutableListOf())
+
+    val meditationSession: LiveData<MutableList<MeditationSession>>
+        get() = _meditationSessions
+
+    fun addMeditationSession(session: MeditationSession) {
+        _meditationSessions.value?.add(session)
+        _meditationSessions.value = _meditationSessions.value
+    }
+    fun removeMeditationSession(session: MeditationSession) {
+        _meditationSessions.value?.remove(session)
+        _meditationSessions.value = _meditationSessions.value
+    }
+
+
+    //Journaling Section
 }

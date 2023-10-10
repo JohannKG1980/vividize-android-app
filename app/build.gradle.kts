@@ -7,6 +7,8 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+    id("io.objectbox")
+
 }
 
 val apiKey :String = gradleLocalProperties(rootDir).getProperty("apiKey")
@@ -55,7 +57,7 @@ android {
 
 
 dependencies {
-    implementation("androidx.preference:preference:1.2.0")
+    implementation("androidx.preference:preference-ktx:1.2.1")
     val roomVersion = "2.5.2"
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -85,9 +87,9 @@ dependencies {
     implementation("io.coil-kt:coil:2.4.0")
 
     // Room Dependencies
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:${roomVersion}")
+//    implementation("androidx.room:room-runtime:$roomVersion")
+//    implementation("androidx.room:room-ktx:$roomVersion")
+//    kapt("androidx.room:room-compiler:${roomVersion}")
 
 
     //Charts
@@ -122,6 +124,10 @@ dependencies {
     // For local unit tests
     testImplementation ("com.google.dagger:hilt-android-testing:2.48.1")
     kaptTest ("com.google.dagger:hilt-compiler:2.48.1")
+
+
+    //ObjectBox
+    implementation ("io.objectbox:objectbox-android:3.7.0")
 }
 kapt {
     correctErrorTypes = true

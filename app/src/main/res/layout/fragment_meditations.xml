@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_meditation_top"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             app:layout_constraintBottom_toTopOf="@+id/rv_meditation_sessions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +34,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/outline_info_24"
@@ -78,7 +79,7 @@
             app:cardBackgroundColor="#23000000"
             app:cardCornerRadius="25dp"
             app:cardElevation="8dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,21 +97,29 @@
                     android:layout_height="match_parent">
 
 
+                    <include
+                        android:id="@+id/overlay_meditation_types"
+                        layout="@layout/overlay_meditation_types"
+                        android:visibility="gone" />
 
                     <include
                         android:id="@+id/overlay_meditation_init"
                         layout="@layout/overlay_meditation_intention_mood"
-                        android:visibility="visible" />
-
-                    <include
-                        android:id="@+id/overlay_step_one"
-                        layout="@layout/step_one_overlay"
                         android:visibility="gone" />
 
                     <include
-                        android:id="@+id/overlay_step_two_and_three"
-                        layout="@layout/steps_two_and_three_overlay"
+                        android:id="@+id/overlay_meditation_timer"
+                        layout="@layout/overlay_meditation_timer"
                         android:visibility="gone" />
+
+                    <include
+                        android:id="@+id/overlay_meditation_finisher"
+                        layout="@layout/overlay_meditation_finisher"
+                        android:visibility="gone" />
+
+
+
+
 
 
                     <ImageView
