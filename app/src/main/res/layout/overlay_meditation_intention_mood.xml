@@ -86,6 +86,7 @@
         app:layout_constraintStart_toStartOf="@id/sl_start_mood" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_mood_bg"
         android:layout_width="0dp"
         android:layout_height="4dp"
         android:layout_marginHorizontal="14dp"
@@ -142,6 +143,7 @@
         app:layout_constraintStart_toStartOf="@id/sl_timer_setter" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_time_bg"
         android:layout_width="0dp"
         android:layout_height="4dp"
         android:layout_marginHorizontal="14dp"

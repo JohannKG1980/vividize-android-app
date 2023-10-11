@@ -16,6 +16,7 @@ import javax.inject.Inject
 
 
 enum class currentState { SELECTING_SESSION, GUIDED_INIT, UNGUIDED_INIT, SESSION_RUNNING, SESSION_END, NO_SESSION }
+enum class timerState { STOPPED, RUNNING, PAUSED, COMPLETED }
 
 @HiltViewModel
 class MeditationsViewModel @Inject constructor(
@@ -26,8 +27,21 @@ class MeditationsViewModel @Inject constructor(
 
 
     val meditations = listOf(
-        Meditation(1, "Priming", true, "Morning mental priming Session", duration = 900000L, cardBg= R.drawable.priming_item),
-        Meditation(2, "I am the Field", true, duration = 1800000L, cardBg = R.drawable.guided_session),
+        Meditation(
+            1,
+            "Priming",
+            true,
+            "Morning mental priming Session",
+            duration = 900000L,
+            cardBg = R.drawable.priming_item
+        ),
+        Meditation(
+            2,
+            "I am the Field",
+            true,
+            duration = 1800000L,
+            cardBg = R.drawable.guided_session
+        ),
         Meditation(3, "Open Session", false, cardBg = R.drawable.free_field_session)
     )
 
@@ -39,12 +53,18 @@ class MeditationsViewModel @Inject constructor(
     private val _currentViewState = MutableStateFlow(currentState.NO_SESSION)
     val currentViewState = _currentViewState.asStateFlow()
 
+    private val _currentTimerState = MutableStateFlow(timerState.STOPPED)
+    val currentTimerState = _currentTimerState.asStateFlow()
+
     private var timer: CountDownTimer? = null
     private val _remainingTime = MutableStateFlow(0L)
     val remainingTime = _remainingTime.asStateFlow()
 
     fun cancelSession() {
         _currentViewState.value = currentState.NO_SESSION
+        timer?.cancel()
+        _currentTimerState.value = timerState.STOPPED
+        _remainingTime.value = 0L
         _currentSession.value = null
     }
 
@@ -57,7 +77,7 @@ class MeditationsViewModel @Inject constructor(
         if (_currentSession.value != null) {
             _currentSession.value!!.meditation.target = meditation
         }
-        if(meditation.guided) {
+        if (meditation.guided) {
             _currentViewState.value = currentState.GUIDED_INIT
         } else {
             _currentViewState.value = currentState.UNGUIDED_INIT
@@ -77,13 +97,15 @@ class MeditationsViewModel @Inject constructor(
     }
 
     fun startTimer(duration: Long) {
+        _currentTimerState.value = timerState.RUNNING
         timer = object : CountDownTimer(duration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 _remainingTime.value = millisUntilFinished
             }
 
             override fun onFinish() {
-                // Handle timer finish logic
+                _currentTimerState.value = timerState.COMPLETED
+                timer?.cancel()
             }
         }.start()
 
@@ -91,8 +113,15 @@ class MeditationsViewModel @Inject constructor(
 //        mediaPlayer.start()
     }
 
-    fun pauseTimer() {
-        timer?.cancel()
+    fun pauseRestartTimer() {
+        if (_currentTimerState.value == timerState.RUNNING) {
+            timer?.cancel()
+            _currentTimerState.value = timerState.PAUSED
+        } else if (_currentTimerState.value == timerState.PAUSED) {
+            startTimer(_remainingTime.value)
+            _currentTimerState.value = timerState.RUNNING
+        }
+
 //        mediaPlayer.pause()
     }
 
@@ -112,7 +141,6 @@ class MeditationsViewModel @Inject constructor(
         timer?.cancel()
 //        mediaPlayer.release()
     }
-
 
 
 }
