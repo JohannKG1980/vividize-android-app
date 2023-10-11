@@ -90,24 +90,6 @@ class FullscreenFragment : Fragment() {
             }
 
 
-
-
-
-//            view?.post {
-//                val quote = it.quote_de
-//                val stringBuilder = StringBuilder()
-//                Thread {
-//                    for (letter in quote) {
-//                        stringBuilder.append(letter)
-//                        Thread.sleep(70)
-//
-//                        activity?.runOnUiThread {
-//                            binding.tvQuote.text = stringBuilder.toString()
-//                        }
-//                    }
-//                }.start()
-//
-//            }
                 binding.tvQuote.text = it.quote_de
             binding.tvQuote.visibility = View.INVISIBLE
 

@@ -69,6 +69,10 @@
     <string name="title_medi_types">Meditationen</string>
     <string name="med_duration">Dauer: %1$s</string>
     <string name="med_type">Typ: %1$s</string>
+    <string name="item_duration">%1$s Min.</string>
+    <string name="item_type_guided">geführt</string>
+    <string name="item_type_unguided">nicht geführt</string>
+    <string name="item_custom_duration">bis zu 60 min.</string>
 
 
     <!-- Journaling -->

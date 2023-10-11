@@ -13,25 +13,25 @@ data class MeditationSession(
     @Id var sessionId: Long = 0,
     val datestamp: String = getCurrentDate(),
     val timestamp: String = getCurrentTime(),
-    val setLenght: Long? = null
+    var setLenght: Long? = null
 ) {
 
 
     lateinit var meditation: ToOne<Meditation>
 
-    val guided: Boolean
+    var guided: Boolean = true
         get() = meditation.target?.guided ?: false
 
-    val duration: Long
-        get() = if (guided) meditation.target?.duration ?: 0 else setLenght!!
+    var duration: Long = 0
+        get() = if (guided) meditation.target?.duration ?: 0 else setLenght?: 0
 
 
 
     val formattedDateTimestamp: String = "$datestamp - $timestamp"
     var intention: String = ""
     var note: String = ""
-    var moodStart: Int = 0
-    var moodEnd: Int = 0
+    var moodStart: Double = 0.0
+    var moodEnd: Double = 0.0
 
 
 

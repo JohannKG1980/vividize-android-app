@@ -7,8 +7,10 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.vividize_unleashyourself.adapter.MeditationTypeAdapter
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentMeditationsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
@@ -16,6 +18,7 @@ import com.example.vividize_unleashyourself.databinding.OverlayMeditationFinishe
 import com.example.vividize_unleashyourself.databinding.OverlayMeditationIntentionMoodBinding
 import com.example.vividize_unleashyourself.databinding.OverlayMeditationTimerBinding
 import com.example.vividize_unleashyourself.databinding.OverlayMeditationTypesBinding
+import com.example.vividize_unleashyourself.extensions.slideUp
 import com.example.vividize_unleashyourself.feature_vms.MeditationsViewModel
 import com.example.vividize_unleashyourself.feature_vms.currentState
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +37,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
 
@@ -50,11 +53,6 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val tabHostBinding = FragmentMentalSectionBinding.inflate(layoutInflater)
-//            binding.blurView1.setupWith(binding.root, RenderScriptBlur(requireContext()))
-//                .setBlurAutoUpdate(true)
-//                .setBlurRadius(3f)
-//                //.setFrameClearDrawable(tabHostBinding.ivBg.drawable) // Optional
 
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
@@ -72,6 +70,74 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
             binding.cvOverlay.visibility = GONE
         }
 
+
+    }
+
+    private fun addObservers() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.currentSession.collectLatest {
+                viewModel.currentViewState.collectLatest { overlayState ->
+
+                    when (overlayState) {
+                        currentState.SELECTING_SESSION -> openSessionSelector(overlayState)
+
+                        currentState.GUIDED_INIT -> {
+                            selectorBinding.overlayMeditationTypes.visibility = GONE
+                            openInitSession(overlayState)
+                        }
+
+                        currentState.UNGUIDED_INIT -> {
+                            selectorBinding.overlayMeditationTypes.visibility = GONE
+                            openInitSession(overlayState)
+                        }
+
+                        currentState.SESSION_RUNNING -> {
+                            initSessionBinding.overlayMeditationInit.visibility = GONE
+                            openTimer(overlayState)
+                        }
+
+                        else -> binding.cvOverlay.visibility = GONE
+
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    private fun openSessionSelector(viewState: currentState) {
+        if (viewState == currentState.SELECTING_SESSION) {
+            binding.cvOverlay.visibility = VISIBLE
+            selectorBinding.overlayMeditationTypes.visibility = VISIBLE
+        } else if (viewState == currentState.NO_SESSION) {
+            binding.cvOverlay.visibility = GONE
+            selectorBinding.overlayMeditationTypes.visibility = GONE
+        } else {
+            selectorBinding.overlayMeditationTypes.visibility = GONE
+        }
+        selectorBinding.rvMeditationSessions.adapter =
+            MeditationTypeAdapter(requireContext(), viewModel.meditations, viewModel)
+
+
+    }
+
+    private fun openInitSession(viewState: currentState) {
+        if (viewState == currentState.UNGUIDED_INIT) {
+            binding.cvOverlay.visibility = VISIBLE
+            initSessionBinding.overlayMeditationInit.visibility = VISIBLE
+            initSessionBinding.slTimerSetter.visibility = VISIBLE
+
+        } else if (viewState == currentState.GUIDED_INIT) {
+            binding.cvOverlay.visibility = VISIBLE
+            initSessionBinding.overlayMeditationInit.visibility = VISIBLE
+            initSessionBinding.slTimerSetter.visibility = GONE
+        } else if (viewState == currentState.NO_SESSION) {
+            binding.cvOverlay.visibility = GONE
+            initSessionBinding.overlayMeditationInit.visibility = GONE
+        } else {
+            initSessionBinding.overlayMeditationInit.visibility = GONE
+        }
         initSessionBinding.slStartMood.setLabelFormatter { value ->
             return@setLabelFormatter when {
                 value <= 20.0 -> "☹️"
@@ -84,34 +150,56 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         initSessionBinding.slTimerSetter.setLabelFormatter { value ->
             return@setLabelFormatter "${value.toInt()} Min."
         }
+        initSessionBinding.btnNext.setOnClickListener {
+            val initMood = initSessionBinding.slStartMood.value.toDouble()
+            val intention = initSessionBinding.teIntention.text.toString()
+            if (viewState == currentState.UNGUIDED_INIT) {
+                val customDuration = initSessionBinding.slTimerSetter.value.toLong() * 1000 * 60
+                viewModel.initSession(customDuration, initMood, intention)
+            } else {
+                viewModel.initSession(0, initMood, intention)
+            }
+            initSessionBinding.overlayMeditationInit.visibility = GONE
+
+        }
+
     }
 
-    private fun addObservers() {
+    private fun openTimer(viewState: currentState) {
+        if (viewState == currentState.SESSION_RUNNING) {
+            binding.cvOverlay.visibility = VISIBLE
+            timerBinding.overlayMeditationTimer.visibility = VISIBLE
+        } else if (viewState == currentState.NO_SESSION) {
+            binding.cvOverlay.visibility = GONE
+            timerBinding.overlayMeditationTimer.visibility = GONE
+        } else {
+            timerBinding.overlayMeditationTimer.visibility = GONE
+        }
+
+        val sessionDuration = viewModel.currentSession.value!!.duration
+        viewModel.startTimer(sessionDuration)
         lifecycleScope.launchWhenStarted {
-            viewModel.currentViewState.collectLatest { overlayState ->
+            viewModel.remainingTime.collectLatest { remainingTime ->
+                val minutes = (remainingTime / (1000 * 60)).toInt()
+                val seconds = (remainingTime / 1000).toInt() % 60
 
-                when (overlayState) {
-                    currentState.SELECTING_SESSION -> openSessionSelector(overlayState)
+                updateDigit(timerBinding.tvMinTens, (minutes / 10).toString())
+                updateDigit(timerBinding.tvMinOnes, (minutes % 10).toString())
+                updateDigit(timerBinding.tvSecTens, (seconds / 10).toString())
+                updateDigit(timerBinding.tvSecOnes, (seconds % 10).toString())
 
-                    else -> binding.cvOverlay.visibility = GONE
-
-                }
-
+                val progressPercentage =
+                    (remainingTime.toFloat() / sessionDuration) * 100
+                timerBinding.circularProgressBar.progress = progressPercentage
             }
         }
 
     }
 
-    private fun openSessionSelector(viewState: currentState) {
-        if(viewState == currentState.SELECTING_SESSION) {
-            binding.cvOverlay.visibility = VISIBLE
-            selectorBinding.overlayMeditationTypes.visibility = VISIBLE
-        } else if(viewState == currentState.NO_SESSION) {
-            binding.cvOverlay.visibility = GONE
-            selectorBinding.overlayMeditationTypes.visibility = GONE
+    private fun updateDigit(textView: TextView, newValue: String) {
+        if (textView.text != newValue) {
+            textView.text = newValue
+            textView.slideUp(1000L, 0L)
         }
-
-
-
     }
 }

@@ -2,13 +2,16 @@ package com.example.vividize_unleashyourself.feature_vms
 
 import android.app.Application
 import android.media.MediaPlayer
+import android.os.CountDownTimer
 import androidx.lifecycle.AndroidViewModel
+import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.data.AppRepository
 import com.example.vividize_unleashyourself.data.model.Meditation
 import com.example.vividize_unleashyourself.data.model.MeditationSession
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.time.Duration
 import javax.inject.Inject
 
 
@@ -23,10 +26,9 @@ class MeditationsViewModel @Inject constructor(
 
 
     val meditations = listOf(
-        Meditation(1, "Priming", true, "Morning mental priming Session", duration = 15000L),
-        Meditation(2, "I am the Field", true, duration = 30000L),
-        Meditation(3, "Open Session", false)
-
+        Meditation(1, "Priming", true, "Morning mental priming Session", duration = 900000L, cardBg= R.drawable.priming_item),
+        Meditation(2, "I am the Field", true, duration = 1800000L, cardBg = R.drawable.guided_session),
+        Meditation(3, "Open Session", false, cardBg = R.drawable.free_field_session)
     )
 
     val allSessions = repository.meditationSession
@@ -37,6 +39,9 @@ class MeditationsViewModel @Inject constructor(
     private val _currentViewState = MutableStateFlow(currentState.NO_SESSION)
     val currentViewState = _currentViewState.asStateFlow()
 
+    private var timer: CountDownTimer? = null
+    private val _remainingTime = MutableStateFlow(0L)
+    val remainingTime = _remainingTime.asStateFlow()
 
     fun cancelSession() {
         _currentViewState.value = currentState.NO_SESSION
@@ -59,7 +64,54 @@ class MeditationsViewModel @Inject constructor(
         }
     }
 
+    fun initSession(customDuration: Long = 0, initMood: Double, intention: String) {
+        _currentSession.value?.let { session ->
+            if (!session.guided) {
+                session.setLenght = customDuration
+            }
+            session.intention = intention
+            session.moodStart = initMood
 
+            _currentViewState.value = currentState.SESSION_RUNNING
+        }
+    }
+
+    fun startTimer(duration: Long) {
+        timer = object : CountDownTimer(duration, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                _remainingTime.value = millisUntilFinished
+            }
+
+            override fun onFinish() {
+                // Handle timer finish logic
+            }
+        }.start()
+
+//        // Start the MediaPlayer
+//        mediaPlayer.start()
+    }
+
+    fun pauseTimer() {
+        timer?.cancel()
+//        mediaPlayer.pause()
+    }
+
+    fun resetTimer() {
+        timer?.cancel()
+        _remainingTime.value = 0
+//        mediaPlayer.reset()
+    }
+
+    fun setMediaPlayerDataSource(source: String) {
+        mediaPlayer.setDataSource(source)
+        mediaPlayer.prepare()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        timer?.cancel()
+//        mediaPlayer.release()
+    }
 
 
 

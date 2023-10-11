@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:5736604712224506443",
-      "lastPropertyId": "8:6701539158915582364",
+      "lastPropertyId": "9:2702804416627302643",
       "name": "Meditation",
       "properties": [
         {
@@ -48,13 +48,18 @@
           "id": "8:6701539158915582364",
           "name": "sessionLenght",
           "type": 9
+        },
+        {
+          "id": "9:2702804416627302643",
+          "name": "cardBg",
+          "type": 5
         }
       ],
       "relations": []
     },
     {
       "id": "2:4919755954802371768",
-      "lastPropertyId": "10:8347783622801789196",
+      "lastPropertyId": "12:5286039265511242432",
       "name": "MeditationSession",
       "properties": [
         {
@@ -96,12 +101,12 @@
         {
           "id": "8:6618555486214999984",
           "name": "moodStart",
-          "type": 5
+          "type": 8
         },
         {
           "id": "9:5870590283069266754",
           "name": "moodEnd",
-          "type": 5
+          "type": 8
         },
         {
           "id": "10:8347783622801789196",
@@ -110,6 +115,16 @@
           "type": 11,
           "flags": 520,
           "relationTarget": "Meditation"
+        },
+        {
+          "id": "11:4378853015103004233",
+          "name": "guided",
+          "type": 1
+        },
+        {
+          "id": "12:5286039265511242432",
+          "name": "duration",
+          "type": 6
         }
       ],
       "relations": []

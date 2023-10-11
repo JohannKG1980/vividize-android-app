@@ -1,5 +1,6 @@
 package com.example.vividize_unleashyourself.data.model
 
+import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.utils.formatedDuration
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
@@ -14,6 +15,7 @@ data class Meditation(
     var videoPath: String = "",
     var audioPath: String = "",
     var duration: Long = 0L,
+    val cardBg: Int = 0
 ) {
     var sessionLenght = formatedDuration(duration)
 }
