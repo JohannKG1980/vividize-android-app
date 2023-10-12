@@ -27,6 +27,7 @@ import com.example.vividize_unleashyourself.databinding.OverlayMeditationTimerBi
 import com.example.vividize_unleashyourself.databinding.OverlayMeditationTypesBinding
 import com.example.vividize_unleashyourself.extensions.fadeIn
 import com.example.vividize_unleashyourself.extensions.fadeOut
+import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.extensions.slideOutDown
 import com.example.vividize_unleashyourself.extensions.slideOutUp
 import com.example.vividize_unleashyourself.extensions.slideUp
@@ -79,19 +80,20 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         addObservers()
 
         binding.ivAddSession.setOnClickListener {
-//            if (isFragVisible) {
-                binding.ivCancleButton.isEnabled = false
-                viewModel.openSessionSelector()
-                binding.ivCancleButton.isEnabled = true
-//            }
+            it.setButtonEffect()
+            binding.ivCancleButton.isEnabled = false
+            viewModel.openSessionSelector()
+            binding.ivCancleButton.isEnabled = true
+
         }
 
         binding.ivCancleButton.setOnClickListener {
+               it.setButtonEffect()
             binding.ivAddSession.isEnabled = false
             viewModel.cancelSession()
             lifecycleScope.launch(Dispatchers.Main) {
                 binding.cvOverlay.fadeOut()
-                    binding.ivAddSession.isEnabled = true
+                binding.ivAddSession.isEnabled = true
 
 
             }
@@ -179,15 +181,18 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
                 initSessionBinding.cvTimeBg.visibility = VISIBLE
                 initSessionBinding.tvTimerSet.visibility = VISIBLE
             }
+
             currentState.GUIDED_INIT -> {
                 initSessionBinding.overlayMeditationInit.fadeIn()
                 initSessionBinding.slTimerSetter.visibility = GONE
                 initSessionBinding.cvTimeBg.visibility = GONE
                 initSessionBinding.tvTimerSet.visibility = GONE
             }
+
             currentState.NO_SESSION -> {
                 initSessionBinding.overlayMeditationInit.fadeOut(200)
             }
+
             else -> {
                 initSessionBinding.overlayMeditationInit.fadeOut(200)
             }
@@ -227,9 +232,11 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
             currentState.SESSION_RUNNING -> {
                 timerBinding.overlayMeditationTimer.fadeIn(200)
             }
+
             currentState.NO_SESSION -> {
                 timerBinding.overlayMeditationTimer.fadeOut(200)
             }
+
             else -> {
                 timerBinding.overlayMeditationTimer.fadeOut(200)
             }
@@ -273,10 +280,12 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
             currentState.SESSION_END -> {
                 finisherBinding.overlayMeditationFinisher.fadeIn()
             }
+
             currentState.NO_SESSION -> {
-                binding.cvOverlay.visibility  = GONE
+                binding.cvOverlay.visibility = GONE
                 finisherBinding.overlayMeditationFinisher.fadeOut(200)
             }
+
             else -> {
                 finisherBinding.overlayMeditationFinisher.fadeOut(200)
             }

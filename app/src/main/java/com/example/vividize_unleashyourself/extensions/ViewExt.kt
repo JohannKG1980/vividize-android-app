@@ -161,4 +161,23 @@ fun View.setFadeEnabled(enabled: Boolean) {
     this.isEnabled = enabled
 }
 
+fun View.setButtonEffect(scaleFactor: Float = 0.9f, duration: Long = 100) {
+
+      val bouncer =  this.animate()
+            .scaleX(scaleFactor)
+            .scaleY(scaleFactor)
+            .setDuration(duration)
+            .withEndAction {
+                this.animate()
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(duration)
+                    .start()
+            }
+    postDelayed({
+           bouncer.start()
+    }, 100)
+}
+
+
 
