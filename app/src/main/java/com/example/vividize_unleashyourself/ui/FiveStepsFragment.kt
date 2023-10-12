@@ -28,6 +28,7 @@ import com.example.vividize_unleashyourself.databinding.StepOneOverlayBinding
 import com.example.vividize_unleashyourself.databinding.StepsTwoAndThreeOverlayBinding
 import com.example.vividize_unleashyourself.extensions.fadeIn
 import com.example.vividize_unleashyourself.extensions.fadeOut
+import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.google.android.material.internal.ViewUtils
@@ -79,11 +80,13 @@ class FiveStepsFragment(
         addObserver()
 
         binding.ivAddSession.setOnClickListener {
+            it.setButtonEffect()
             viewModel.openSession()
 
         }
 
         binding.ivCancleButton.setOnClickListener {
+            it.setButtonEffect()
             viewModel.closeSession()
             binding.cvOverlay.fadeOut()
             fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeOut()
@@ -92,9 +95,9 @@ class FiveStepsFragment(
             stepFourOverlayBinding.overlayStepFour.fadeOut()
             stepFiveOverlayBinding.overlayStepFive.fadeOut()
 
-
         }
         binding.ivInfoFsm.setOnClickListener {
+            it.setButtonEffect()
            viewModel.openInstructions()
         }
 
@@ -103,12 +106,10 @@ class FiveStepsFragment(
 
             return@setOnTouchListener true
 
-
         }
     }
 
     private fun addObserver() {
-
 
         viewModel.currentCycle.observe(viewLifecycleOwner) { currentCycle ->
             viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
@@ -119,9 +120,6 @@ class FiveStepsFragment(
                 }
             }
         }
-
-
-
 
         viewModel.allSessions.observe(viewLifecycleOwner) { sessions ->
             binding.rvFsmSessions.adapter = FiveStepsAdapter(sessions, viewModel)
@@ -224,8 +222,8 @@ class FiveStepsFragment(
 
 
         stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeIn(300)
-        stepTwoAndThreeOverlayBinding.btnYes.text = "Ja"
-        stepTwoAndThreeOverlayBinding.btnNo.text = "Nein"
+        stepTwoAndThreeOverlayBinding.btnYes.text = getString(R.string.btn_yes)
+        stepTwoAndThreeOverlayBinding.btnNo.text = getString(R.string.btn_no)
 
         stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepTwoTitle)
         stepTwoAndThreeOverlayBinding.tvStepText.text =
@@ -248,8 +246,8 @@ class FiveStepsFragment(
         stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepThreeTitle)
         stepTwoAndThreeOverlayBinding.tvStepText.text =
             getString(currentCycle.stepThreeQuestion.content)
-        stepTwoAndThreeOverlayBinding.btnYes.text = "Ja"
-        stepTwoAndThreeOverlayBinding.btnNo.text = "Nein"
+        stepTwoAndThreeOverlayBinding.btnYes.text = getString(R.string.btn_yes)
+        stepTwoAndThreeOverlayBinding.btnNo.text = getString(R.string.btn_no)
 
         stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
             currentCycle.stepThreeAnswer = true
@@ -269,8 +267,8 @@ class FiveStepsFragment(
         stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepThreeTitle)
         stepTwoAndThreeOverlayBinding.tvStepText.text =
             getString(currentCycle.stepThreeFollowUp.content)
-        stepTwoAndThreeOverlayBinding.btnYes.text = "Frei"
-        stepTwoAndThreeOverlayBinding.btnNo.text = "Gefühl"
+        stepTwoAndThreeOverlayBinding.btnYes.text = getString(R.string.btn_free)
+        stepTwoAndThreeOverlayBinding.btnNo.text = getString(R.string.btn_emotion)
 
 
         stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {

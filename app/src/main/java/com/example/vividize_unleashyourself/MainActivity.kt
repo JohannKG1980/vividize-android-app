@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -20,6 +22,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.ActivityMainBinding
+import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.extensions.setFadeEnabled
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
@@ -136,6 +139,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         binding.fab.setOnClickListener {
+            it.setButtonEffect()
             motionControl()
 
         }
@@ -177,18 +181,21 @@ class MainActivity : AppCompatActivity() {
                     binding.fab.visibility = View.VISIBLE
                     binding.topBar.visibility = View.VISIBLE
                     binding.ibAddFiveStep.setOnClickListener {
-                        motionControl()
-
-                        mainViewModel.controlQuickstart(1)
-                        fiveStepsViewModel.openSession()
-
+                        it.setButtonEffect()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            motionControl()
+                            mainViewModel.controlQuickstart(1)
+                            fiveStepsViewModel.openSession()
+                        },300)
 
                     }
                     binding.ibAddMedi.setOnClickListener {
-                        motionControl()
-                        mainViewModel.controlQuickstart(0)
-                        meditationsViewModel.openSessionSelector()
-
+                        it.setButtonEffect()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            motionControl()
+                            mainViewModel.controlQuickstart(0)
+                            meditationsViewModel.openSessionSelector()
+                        },300)
                     }
 
 
@@ -205,21 +212,23 @@ class MainActivity : AppCompatActivity() {
                     binding.fab.visibility = View.VISIBLE
                     binding.topBar.visibility = View.VISIBLE
                     binding.ibAddFiveStep.setOnClickListener {
-                        motionControl()
-
-
-                        navController.navigate(R.id.mentalSectionFragment)
-                        mainViewModel.controlQuickstart(1)
-                        fiveStepsViewModel.openSession()
-
+                        it.setButtonEffect()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            motionControl()
+                            navController.navigate(R.id.mentalSectionFragment)
+                            mainViewModel.controlQuickstart(1)
+                            fiveStepsViewModel.openSession()
+                        },300)
 
                     }
                     binding.ibAddMedi.setOnClickListener {
-                        motionControl()
-                        navController.navigate(R.id.mentalSectionFragment)
-                        mainViewModel.controlQuickstart(0)
-                        meditationsViewModel.openSessionSelector()
-
+                        it.setButtonEffect()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            motionControl()
+                            navController.navigate(R.id.mentalSectionFragment)
+                            mainViewModel.controlQuickstart(0)
+                            meditationsViewModel.openSessionSelector()
+                        },200)
                     }
 
                 }

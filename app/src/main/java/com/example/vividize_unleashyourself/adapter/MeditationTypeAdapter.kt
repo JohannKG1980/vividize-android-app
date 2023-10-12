@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.data.model.Meditation
 import com.example.vividize_unleashyourself.databinding.MeditationTypeItemBinding
+import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.feature_vms.MeditationsViewModel
 
 class MeditationTypeAdapter(
@@ -45,6 +46,7 @@ class MeditationTypeAdapter(
             }
 
             binding.cvMediType.setOnClickListener {
+                it.setButtonEffect()
                 viewModel.openSession(meditationType)
             }
 

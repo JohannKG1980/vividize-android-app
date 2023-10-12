@@ -270,7 +270,8 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
             }
 
         }
-        timerBinding.ivPlayPauseBtnIcon.setOnClickListener {
+        timerBinding.cvPlayPauseBtn.setOnClickListener {
+            it.setButtonEffect()
             viewModel.pauseRestartTimer()
         }
     }

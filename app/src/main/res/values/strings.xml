@@ -37,8 +37,8 @@
     <string name="repeat">wiederholen</string>
     <string name="finish">abschließen</string>
     <string name="audio">Ton an</string>
-    <string name="hintStepOne">Dein Thema...</string>
-    <string name="hintStepFour">Wann...</string>
+    <string name="hintStepOne">Dein Thema…</string>
+    <string name="hintStepFour">Wann…</string>
     <string name="fiveStepsDescriptionTitle">Die 5 Schritte Methode</string>
     <string name="fsm_description">
     <![CDATA[
@@ -54,6 +54,10 @@
     <string name="start">Starten</string>
     <string name="intensityStart">Stärke der Emotion</string>
     <string name="slider_desc">Intensität</string>
+    <string name="btn_yes">Ja</string>
+    <string name="btn_no">Nein</string>
+    <string name="btn_free">Frei</string>
+    <string name="btn_emotion">Gefühl</string>
 
 
     <!-- Meditiation & Notes -->
