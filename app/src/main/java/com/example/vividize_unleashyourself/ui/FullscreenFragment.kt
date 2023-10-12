@@ -90,12 +90,12 @@ class FullscreenFragment : Fragment() {
             }
 
 
-                binding.tvQuote.text = it.quote_de
             binding.tvQuote.visibility = View.INVISIBLE
+            binding.tvQuote.text = it.quote_de
 
             Handler(Looper.getMainLooper()).postDelayed({
-                binding.tvQuote.visibility = View.VISIBLE
                 binding.tvQuote.slideUp(1600L, 0L)
+
             },600)
 
             val authorImg = it.aut_img_url.toUri().buildUpon().scheme("https").build()

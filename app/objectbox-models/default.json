@@ -128,9 +128,48 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:4783073096224099395",
+      "lastPropertyId": "6:2615541080333623211",
+      "name": "Quote",
+      "properties": [
+        {
+          "id": "1:1094295268772738267",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:6798834150084831534",
+          "name": "Author",
+          "type": 9
+        },
+        {
+          "id": "3:8648147686491839782",
+          "name": "Quote_en",
+          "type": 9
+        },
+        {
+          "id": "4:7147960884244057052",
+          "name": "quote_de",
+          "type": 9
+        },
+        {
+          "id": "5:151092497393824705",
+          "name": "bg_img_url",
+          "type": 9
+        },
+        {
+          "id": "6:2615541080333623211",
+          "name": "aut_img_url",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:4919755954802371768",
+  "lastEntityId": "3:4783073096224099395",
   "lastIndexId": "1:4737797641779719543",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

@@ -62,10 +62,12 @@ class MeditationsViewModel @Inject constructor(
 
     fun cancelSession() {
         _currentViewState.value = currentState.NO_SESSION
-        timer?.cancel()
-        _currentTimerState.value = timerState.STOPPED
-        _remainingTime.value = 0L
         _currentSession.value = null
+        if (_currentTimerState.value != timerState.STOPPED) {
+            timer?.cancel()
+            _currentTimerState.value = timerState.STOPPED
+            _remainingTime.value = 0L
+        }
     }
 
     fun openSessionSelector() {
@@ -105,6 +107,7 @@ class MeditationsViewModel @Inject constructor(
 
             override fun onFinish() {
                 _currentTimerState.value = timerState.COMPLETED
+                _currentViewState.value = currentState.SESSION_END
                 timer?.cancel()
             }
         }.start()
