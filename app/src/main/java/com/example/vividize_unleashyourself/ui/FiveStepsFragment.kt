@@ -26,6 +26,8 @@ import com.example.vividize_unleashyourself.databinding.StepFiveOverlayBinding
 import com.example.vividize_unleashyourself.databinding.StepFourOverlayBinding
 import com.example.vividize_unleashyourself.databinding.StepOneOverlayBinding
 import com.example.vividize_unleashyourself.databinding.StepsTwoAndThreeOverlayBinding
+import com.example.vividize_unleashyourself.extensions.fadeIn
+import com.example.vividize_unleashyourself.extensions.fadeOut
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.google.android.material.internal.ViewUtils
@@ -83,12 +85,12 @@ class FiveStepsFragment(
 
         binding.ivCancleButton.setOnClickListener {
             viewModel.closeSession()
-            binding.cvOverlay.visibility = GONE
-            fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
-            stepOneOverlayBinding.overlayStepOne.visibility = GONE
-            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
-            stepFourOverlayBinding.overlayStepFour.visibility = GONE
-            stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+            binding.cvOverlay.fadeOut()
+            fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeOut()
+            stepOneOverlayBinding.overlayStepOne.fadeOut()
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut()
+            stepFourOverlayBinding.overlayStepFour.fadeOut()
+            stepFiveOverlayBinding.overlayStepFive.fadeOut()
 
 
         }
@@ -142,18 +144,15 @@ class FiveStepsFragment(
                 CurrentStep.STEP_THREE_ADD -> openStepThreeAdd(currentCycle)
                 CurrentStep.STEP_FOUR -> openStepFour(currentCycle)
                 CurrentStep.STEP_FIVE -> openStepFive(currentCycle, currentStep)
-                CurrentStep.NO_CYCLE_NOW -> binding.cvOverlay.visibility = GONE
-
-                else -> binding.cvOverlay.visibility = GONE
-
+                CurrentStep.NO_CYCLE_NOW -> binding.cvOverlay.fadeOut()
 
             }
 
     }
 
     private fun openInstructions(firstTime: Boolean = true) {
-        binding.cvOverlay.visibility = VISIBLE
-        fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = VISIBLE
+        binding.cvOverlay.fadeIn(300)
+        fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeIn(300)
         if(!firstTime){
             fiveStepsDescriptionOverlayBinding.btnNext.visibility = GONE
         } else {
@@ -176,7 +175,7 @@ class FiveStepsFragment(
         fiveStepsDescriptionOverlayBinding.btnNext.setOnClickListener {
             if(firstTime) {
                 viewModel.descriptionWatched()
-                fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+                fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeOut(200)
                 viewModel.changeToStepOne()
             } else {
                 viewModel.descriptionWatched()
@@ -192,10 +191,8 @@ class FiveStepsFragment(
 
     @SuppressLint("ClickableViewAccessibility", "RestrictedApi")
     private fun openStepOne(currentCycle: FiveSteps) {
-//        stepFiveOverlayBinding.overlayStepFive.visibility =
-//            GONE  //hilfszeile für einen unerklärlichen bug beim cycle repeat
-        binding.cvOverlay.visibility = VISIBLE
-        stepOneOverlayBinding.overlayStepOne.visibility = VISIBLE
+        binding.cvOverlay.fadeIn(200)
+        stepOneOverlayBinding.overlayStepOne.fadeIn(300)
 
 
         val stepText = if (currentCycle.repeatAnswer) {
@@ -215,7 +212,7 @@ class FiveStepsFragment(
             val intensity = stepOneOverlayBinding.slStartIntensity.value.toInt()
             stepOneOverlayBinding.teTopic.setText("")
             stepOneOverlayBinding.slStartIntensity.value = 0f
-            stepOneOverlayBinding.overlayStepOne.visibility = GONE
+            stepOneOverlayBinding.overlayStepOne.fadeOut(200)
             Log.e("TestStepOne", "Topic : $input   Intensity: $intensity ")
             viewModel.finishStepOne(input, intensity)
 
@@ -226,7 +223,7 @@ class FiveStepsFragment(
     private fun openStepTwo(currentCycle: FiveSteps) {
 
 
-        stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = VISIBLE
+        stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeIn(300)
         stepTwoAndThreeOverlayBinding.btnYes.text = "Ja"
         stepTwoAndThreeOverlayBinding.btnNo.text = "Nein"
 
@@ -256,7 +253,7 @@ class FiveStepsFragment(
 
         stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
             currentCycle.stepThreeAnswer = true
-            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut(200)
             viewModel.finishStepThree(true)
 
         }
@@ -278,21 +275,21 @@ class FiveStepsFragment(
 
         stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
             currentCycle.stepThreeBetterBeFree = true
-            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut(200)
             viewModel.finishStepThreeAdd(true)
 
 
         }
         stepTwoAndThreeOverlayBinding.btnNo.setOnClickListener {
             currentCycle.stepThreeBetterBeFree = false
-            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut(200)
             viewModel.finishStepThreeAdd(false)
 
         }
     }
 
     private fun openStepFour(currentCycle: FiveSteps) {
-        stepFourOverlayBinding.overlayStepFour.visibility = VISIBLE
+        stepFourOverlayBinding.overlayStepFour.fadeIn(300)
 
         stepFourOverlayBinding.tvStep.text = getString(R.string.stepFourTitle)
         stepFourOverlayBinding.tvStepText.text = getString(currentCycle.stepFourQuestion.content)
@@ -303,7 +300,7 @@ class FiveStepsFragment(
             val input = stepFourOverlayBinding.teWhen.text.toString()
             currentCycle.stepFourAnswer = input
             stepFourOverlayBinding.teWhen.setText("")
-            stepFourOverlayBinding.overlayStepFour.visibility = GONE
+            stepFourOverlayBinding.overlayStepFour.fadeOut(200)
             viewModel.finishStepFour(input)
 
         }
@@ -311,7 +308,7 @@ class FiveStepsFragment(
 
     private fun openStepFive(currentCycle: FiveSteps, currentStep: CurrentStep) {
 
-            stepFiveOverlayBinding.overlayStepFive.visibility = VISIBLE
+            stepFiveOverlayBinding.overlayStepFive.fadeIn(300)
 
         stepFiveOverlayBinding.btnRepeat.setOnClickListener {
             val intensity = stepFiveOverlayBinding.slEndIntensity.value.toInt()
@@ -320,7 +317,7 @@ class FiveStepsFragment(
             currentCycle.cycleFinished = true
             stepFiveOverlayBinding.slEndIntensity.value = 0f
             viewModel.finishStepFive(currentCycle)
-            stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+            stepFiveOverlayBinding.overlayStepFive.fadeOut(200)
 
         }
 
@@ -330,8 +327,8 @@ class FiveStepsFragment(
             currentCycle.cycleFinished = true
             stepFiveOverlayBinding.slEndIntensity.value = 0f
             viewModel.finishStepFive(currentCycle)
-            stepFiveOverlayBinding.overlayStepFive.visibility = GONE
-            binding.cvOverlay.visibility = GONE
+            stepFiveOverlayBinding.overlayStepFive.fadeOut(200)
+            binding.cvOverlay.fadeOut(200)
 
         }
 
