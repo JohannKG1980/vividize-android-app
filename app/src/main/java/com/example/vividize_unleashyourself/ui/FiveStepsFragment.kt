@@ -336,13 +336,13 @@ class FiveStepsFragment(
 
     override fun onPause() {
         super.onPause()
-        viewModel.closeSession()
-        binding.cvOverlay.visibility = GONE
-        fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
-        stepOneOverlayBinding.overlayStepOne.visibility = GONE
-        stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
-        stepFourOverlayBinding.overlayStepFour.visibility = GONE
-        stepFiveOverlayBinding.overlayStepFive.visibility = GONE
+//        viewModel.closeSession()
+//        binding.cvOverlay.visibility = GONE
+//        fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.visibility = GONE
+//        stepOneOverlayBinding.overlayStepOne.visibility = GONE
+//        stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.visibility = GONE
+//        stepFourOverlayBinding.overlayStepFour.visibility = GONE
+//        stepFiveOverlayBinding.overlayStepFive.visibility = GONE
 
     }
 

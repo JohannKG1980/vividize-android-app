@@ -28,6 +28,7 @@ import com.example.vividize_unleashyourself.databinding.OverlayMeditationTypesBi
 import com.example.vividize_unleashyourself.extensions.fadeIn
 import com.example.vividize_unleashyourself.extensions.fadeOut
 import com.example.vividize_unleashyourself.extensions.slideOutDown
+import com.example.vividize_unleashyourself.extensions.slideOutUp
 import com.example.vividize_unleashyourself.extensions.slideUp
 import com.example.vividize_unleashyourself.feature_vms.MeditationsViewModel
 import com.example.vividize_unleashyourself.feature_vms.currentState
@@ -49,7 +50,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
     private lateinit var timerBinding: OverlayMeditationTimerBinding
     private lateinit var finisherBinding: OverlayMeditationFinisherBinding
     private val viewModel: MeditationsViewModel by activityViewModels()
-    private var isFragVisible = false
+//    private var isFragVisible = false
 
 
     override fun onCreateView(
@@ -78,7 +79,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         addObservers()
 
         binding.ivAddSession.setOnClickListener {
-            if (isFragVisible) {
+//            if (isFragVisible) {
                 binding.ivCancleButton.isEnabled = false
                 viewModel.openSessionSelector()
 
@@ -87,7 +88,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
 
                 binding.ivCancleButton.isEnabled = true
-            }
+//            }
         }
 
         binding.ivCancleButton.setOnClickListener {
@@ -287,32 +288,28 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         }
 
     private fun updateDigit(textView: TextView, newValue: String) {
+
         if (textView.text != newValue) {
-            textView.text = newValue
-            textView.slideUp(1000L, 0L)
+
+            textView.fadeOut(300, false)
+
+
+            textView.postDelayed({
+                textView.text = newValue
+
+                textView.fadeIn(300)
+            }, 300)
         }
     }
 
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    private fun onFragmentResumed() {
-        isFragVisible = true
-    }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    private fun onFragmentPaused() {
-        isFragVisible = false
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        onFragmentResumed()
+//    }
+//
 
-    override fun onResume() {
-        super.onResume()
-        onFragmentResumed()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        onFragmentPaused()
-    }
 
 
 }

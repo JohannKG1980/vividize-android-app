@@ -13,15 +13,22 @@ import android.view.View.VISIBLE
 import android.view.animation.BounceInterpolator
 import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.view.forEach
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.ActivityMainBinding
+import com.example.vividize_unleashyourself.extensions.setFadeEnabled
+import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
+import com.example.vividize_unleashyourself.feature_vms.MeditationsViewModel
+import com.example.vividize_unleashyourself.feature_vms.currentState
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -33,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rotateCloseFab: ObjectAnimator
     private val mainViewModel: MainViewModel by viewModels()
     private val fiveStepsViewModel: FiveStepsViewModel by viewModels()
+    private val meditationsViewModel: MeditationsViewModel by viewModels()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
-                endId: Int
+                endId: Int,
             ) {
                 if (endId == R.id.start) {
                     rotateCloseFab.start()
@@ -105,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int,
-                progress: Float
+                progress: Float,
             ) {
 
             }
@@ -122,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 motionLayout: MotionLayout?,
                 triggerId: Int,
                 positive: Boolean,
-                progress: Float
+                progress: Float,
             ) {
 
             }
@@ -131,8 +139,7 @@ class MainActivity : AppCompatActivity() {
             motionControl()
 
         }
-
-
+        navBarController()
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -221,7 +228,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onTransitionStarted(
                     motionLayout: MotionLayout?,
                     startId: Int,
-                    endId: Int
+                    endId: Int,
                 ) {
 
                 }
@@ -230,7 +237,7 @@ class MainActivity : AppCompatActivity() {
                     motionLayout: MotionLayout?,
                     startId: Int,
                     endId: Int,
-                    progress: Float
+                    progress: Float,
                 ) {
 
                 }
@@ -238,7 +245,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onTransitionCompleted(
                     motionLayout: MotionLayout?,
-                    currentId: Int
+                    currentId: Int,
                 ) {
 
                     if (currentId == R.id.start) {
@@ -251,12 +258,39 @@ class MainActivity : AppCompatActivity() {
                     motionLayout: MotionLayout?,
                     triggerId: Int,
                     positive: Boolean,
-                    progress: Float
+                    progress: Float,
                 ) {
 
                 }
 
             })
+        }
+    }
+
+    private fun navBarController() {
+
+        fiveStepsViewModel.currentStep.observe(this) { fiveStepsSession ->
+            lifecycleScope.launchWhenStarted {
+                meditationsViewModel.currentViewState.collectLatest { meditationSession ->
+
+                    if (fiveStepsSession != CurrentStep.NO_CYCLE_NOW || meditationSession != currentState.NO_SESSION) {
+                        binding.bottomNavigationView.setFadeEnabled(false)
+                        binding.bottomNavigationView.menu.forEach {
+                            it.isEnabled = false
+                        }
+                         binding.fab.setFadeEnabled(false)
+                    } else {
+                        binding.bottomNavigationView.setFadeEnabled(true)
+                        binding.bottomNavigationView.menu.forEach {
+                            it.isEnabled = true
+                        }
+
+                        binding.bottomNavigationView.menu.getItem(2).isEnabled = false
+                        binding.fab.setFadeEnabled(true)
+
+                    }
+                }
+            }
         }
     }
 }
