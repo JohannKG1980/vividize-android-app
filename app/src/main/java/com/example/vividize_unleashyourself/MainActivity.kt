@@ -184,6 +184,12 @@ class MainActivity : AppCompatActivity() {
 
 
                     }
+                    binding.ibAddMedi.setOnClickListener {
+                        motionControl()
+                        mainViewModel.controlQuickstart(0)
+                        meditationsViewModel.openSessionSelector()
+
+                    }
 
 
                 }
@@ -206,6 +212,13 @@ class MainActivity : AppCompatActivity() {
                         mainViewModel.controlQuickstart(1)
                         fiveStepsViewModel.openSession()
 
+
+                    }
+                    binding.ibAddMedi.setOnClickListener {
+                        motionControl()
+                        navController.navigate(R.id.mentalSectionFragment)
+                        mainViewModel.controlQuickstart(0)
+                        meditationsViewModel.openSessionSelector()
 
                     }
 

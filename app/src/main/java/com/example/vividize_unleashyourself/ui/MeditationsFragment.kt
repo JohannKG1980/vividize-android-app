@@ -82,11 +82,6 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 //            if (isFragVisible) {
                 binding.ivCancleButton.isEnabled = false
                 viewModel.openSessionSelector()
-
-
-                binding.cvOverlay.fadeIn()
-
-
                 binding.ivCancleButton.isEnabled = true
 //            }
         }
@@ -115,7 +110,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
                     when (overlayState) {
                         currentState.SELECTING_SESSION -> {
-
+                            binding.cvOverlay.fadeIn()
                             openSessionSelector(overlayState)
 
                         }
@@ -302,14 +297,9 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         }
     }
 
-
-
-//    override fun onResume() {
-//        super.onResume()
-//        onFragmentResumed()
-//    }
-//
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cancelSession()
+    }
 
 }

@@ -63,8 +63,8 @@
     <string name="meditation_end">Du hast deine Session abgeschlossen. Wenn du möchstest, kannst du eine Notiz zu der Session schreiben.</string>
     <string name="choose_medi_type">Wähle eine Session aus um die Meditation zu starten.</string>
     <string name="set_time">Stelle die Dauer ein.</string>
-    <string name="your_intention">Deine Intention...</string>
-    <string name="end_note">Deine Notiz...</string>
+    <string name="your_intention">Deine Intention…</string>
+    <string name="end_note">Deine Notiz…</string>
     <string name="title_med_fin">Großartig</string>
     <string name="title_medi_types">Meditationen</string>
     <string name="med_duration">Dauer: %1$s</string>

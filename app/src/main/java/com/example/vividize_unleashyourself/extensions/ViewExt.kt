@@ -148,7 +148,7 @@ fun View.fadeOut(duration: Long = 500, makeItGone: Boolean = true) {
 
 fun BottomNavigationView.setFadeEnabled(enabled: Boolean) {
     val alphaValue = if (enabled) 1f else 0.5f
-    this.animate().alpha(alphaValue).setDuration(700).start()
+    this.animate().alpha(alphaValue).setDuration(900).start()
 
     this.isEnabled = enabled
 }
@@ -156,7 +156,7 @@ fun BottomNavigationView.setFadeEnabled(enabled: Boolean) {
 
 fun View.setFadeEnabled(enabled: Boolean) {
     val alphaValue = if (enabled) 1f else 0.5f
-    this.animate().alpha(alphaValue).setDuration(700).start()
+    this.animate().alpha(alphaValue).setDuration(900).start()
 
     this.isEnabled = enabled
 }

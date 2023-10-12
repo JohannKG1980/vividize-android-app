@@ -191,8 +191,8 @@ class FiveStepsFragment(
 
     @SuppressLint("ClickableViewAccessibility", "RestrictedApi")
     private fun openStepOne(currentCycle: FiveSteps) {
-        binding.cvOverlay.fadeIn(200)
-        stepOneOverlayBinding.overlayStepOne.fadeIn(300)
+        binding.cvOverlay.fadeIn(500)
+        stepOneOverlayBinding.overlayStepOne.fadeIn(500)
 
 
         val stepText = if (currentCycle.repeatAnswer) {
