@@ -82,19 +82,19 @@
         android:textAlignment="viewEnd"
         android:textSize="16sp"
         android:textStyle=""
-        app:layout_constraintBottom_toTopOf="@+id/sl_start_mood"
-        app:layout_constraintEnd_toEndOf="@id/sl_start_mood"
-        app:layout_constraintStart_toStartOf="@id/sl_start_mood" />
+        app:layout_constraintBottom_toTopOf="@+id/sl_end_mood"
+        app:layout_constraintEnd_toEndOf="@id/sl_end_mood"
+        app:layout_constraintStart_toStartOf="@id/sl_end_mood" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="4dp"
         android:layout_marginHorizontal="14dp"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sl_start_mood"
-        app:layout_constraintEnd_toEndOf="@+id/sl_start_mood"
-        app:layout_constraintStart_toStartOf="@+id/sl_start_mood"
-        app:layout_constraintTop_toTopOf="@+id/sl_start_mood">
+        app:layout_constraintBottom_toBottomOf="@+id/sl_end_mood"
+        app:layout_constraintEnd_toEndOf="@+id/sl_end_mood"
+        app:layout_constraintStart_toStartOf="@+id/sl_end_mood"
+        app:layout_constraintTop_toTopOf="@+id/sl_end_mood">
 
         <ImageView
             android:id="@+id/iv_mood_set"
@@ -106,7 +106,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/sl_start_mood"
+        android:id="@+id/sl_end_mood"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -115,7 +115,7 @@
         android:stepSize="10"
         android:valueFrom="0.0"
         android:valueTo="100.0"
-        app:layout_constraintBottom_toTopOf="@+id/btn_next"
+        app:layout_constraintBottom_toTopOf="@+id/btn_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tf_layout"
@@ -131,7 +131,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -142,7 +142,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sl_start_mood"
+        app:layout_constraintTop_toBottomOf="@+id/sl_end_mood"
         app:strokeColor="@color/white"
         app:strokeWidth="2dp" />
 

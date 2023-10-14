@@ -64,9 +64,7 @@ class MeditationsViewModel @Inject constructor(
         _currentViewState.value = currentState.NO_SESSION
         _currentSession.value = null
         if (_currentTimerState.value != timerState.STOPPED) {
-            timer?.cancel()
-            _currentTimerState.value = timerState.STOPPED
-            _remainingTime.value = 0L
+            resetTimer()
         }
     }
 
@@ -98,6 +96,16 @@ class MeditationsViewModel @Inject constructor(
         }
     }
 
+    fun finishSession(endMood : Double, finalNote: String) {
+        _currentSession.value!!.moodEnd = endMood
+        _currentSession.value!!.note = finalNote
+        repository.addMeditationSession(_currentSession.value!!)
+        _currentSession.value = null
+        _currentViewState.value = currentState.NO_SESSION
+        _currentTimerState.value =timerState.STOPPED
+
+    }
+
     fun startTimer(duration: Long) {
         _currentTimerState.value = timerState.RUNNING
         timer = object : CountDownTimer(duration, 1000) {
@@ -107,13 +115,18 @@ class MeditationsViewModel @Inject constructor(
 
             override fun onFinish() {
                 _currentTimerState.value = timerState.COMPLETED
-                _currentViewState.value = currentState.SESSION_END
                 timer?.cancel()
+                sessionCloser()
             }
         }.start()
 
 //        // Start the MediaPlayer
 //        mediaPlayer.start()
+    }
+
+    fun sessionCloser() {
+        _currentViewState.value = currentState.SESSION_END
+
     }
 
     fun pauseRestartTimer() {
@@ -130,6 +143,7 @@ class MeditationsViewModel @Inject constructor(
 
     fun resetTimer() {
         timer?.cancel()
+        _currentTimerState.value = timerState.STOPPED
         _remainingTime.value = 0
 //        mediaPlayer.reset()
     }
@@ -143,6 +157,7 @@ class MeditationsViewModel @Inject constructor(
         super.onCleared()
         timer?.cancel()
 //        mediaPlayer.release()
+
     }
 
 

@@ -34,8 +34,8 @@
     <string name="back">zurück</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
-    <string name="repeat">wiederholen</string>
-    <string name="finish">abschließen</string>
+    <string name="repeat">Wiederholen</string>
+    <string name="finish">Abschließen</string>
     <string name="audio">Ton an</string>
     <string name="hintStepOne">Dein Thema…</string>
     <string name="hintStepFour">Wann…</string>

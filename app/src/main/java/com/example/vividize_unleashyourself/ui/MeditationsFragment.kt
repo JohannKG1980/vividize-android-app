@@ -88,7 +88,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         }
 
         binding.ivCancleButton.setOnClickListener {
-               it.setButtonEffect()
+            it.setButtonEffect()
             binding.ivAddSession.isEnabled = false
             viewModel.cancelSession()
             lifecycleScope.launch(Dispatchers.Main) {
@@ -276,7 +276,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         }
     }
 
-    private fun openSessionFinisher(viewState: currentState) =
+    private fun openSessionFinisher(viewState: currentState) {
         when (viewState) {
             currentState.SESSION_END -> {
                 finisherBinding.overlayMeditationFinisher.fadeIn()
@@ -291,25 +291,34 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
                 finisherBinding.overlayMeditationFinisher.fadeOut(200)
             }
         }
-
-    private fun updateDigit(textView: TextView, newValue: String) {
-
-        if (textView.text != newValue) {
-
-            textView.fadeOut(300, false)
-
-
-            textView.postDelayed({
-                textView.text = newValue
-
-                textView.fadeIn(300)
-            }, 300)
-        }
+    finisherBinding.btnEnd.setOnClickListener {
+        val endmood = finisherBinding.slEndMood.value.toDouble()
+        val endNote = finisherBinding.teEndNote.text.toString()
+        viewModel.finishSession(endmood, endNote)
+        finisherBinding.slEndMood.value = 0F
+        finisherBinding.teEndNote.setText("")
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.cancelSession()
+}
+
+private fun updateDigit(textView: TextView, newValue: String) {
+
+    if (textView.text != newValue) {
+
+        textView.fadeOut(300, false)
+
+
+        textView.postDelayed({
+            textView.text = newValue
+
+            textView.fadeIn(300)
+        }, 300)
     }
+}
+
+override fun onDestroy() {
+    super.onDestroy()
+    viewModel.cancelSession()
+}
 
 }
