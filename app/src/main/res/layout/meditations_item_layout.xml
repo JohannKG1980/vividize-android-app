@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_top_date"
@@ -52,30 +52,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Intention: "
+            android:ellipsize="end"
+            android:singleLine="true"
+            tools:text="Intention: "
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_intention"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            tools:text="Angst vor Gespräch mit dem  Chef"
-            android:textSize="16sp"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_intention_title"
-            app:layout_constraintEnd_toStartOf="@+id/cl_item_delete"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@id/tv_intention_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_intention_title"
-            app:layout_constraintVertical_bias="1.0" />
-
 
         <TextView
             android:id="@+id/tv_mood_start_title"
@@ -83,24 +66,12 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="Mood at Start: "
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent            "
             app:layout_constraintStart_toStartOf="@+id/tv_intention_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_intention_title"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/tv_mood_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            tools:text="70%"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_mood_start_title"
-            app:layout_constraintStart_toEndOf="@+id/tv_mood_start_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_mood_start_title" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Mood at Start: " />
 
         <TextView
             android:id="@+id/tv_mood_end_title"
@@ -109,24 +80,13 @@
             android:layout_marginStart="16dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="Mood at End: "
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_mood_start_title"
-            app:layout_constraintStart_toEndOf="@+id/tv_mood_start"
+            app:layout_constraintStart_toEndOf="@+id/tv_mood_start_title"
             app:layout_constraintTop_toTopOf="@+id/tv_mood_start_title"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Mood at End: " />
 
-        <TextView
-            android:id="@+id/tv_mood_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="70%"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_mood_start_title"
-            app:layout_constraintStart_toEndOf="@+id/tv_mood_end_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_mood_start_title" />
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/cl_item_delete"
@@ -161,8 +121,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
-        android:backgroundTint="@color/white"
         android:alpha="0.4"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

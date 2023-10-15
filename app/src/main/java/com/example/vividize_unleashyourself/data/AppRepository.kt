@@ -8,6 +8,8 @@ import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.data.model.Quote
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 import com.example.vividize_unleashyourself.data.remote.QuotesApiService
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 const val TAG = "AppRepository"
@@ -54,10 +56,9 @@ class AppRepository @Inject constructor(private val apiService: QuotesApiService
 
     //Medidations section
 
-    private val _meditationSessions = MutableLiveData<MutableList<MeditationSession>>(mutableListOf())
+    private val _meditationSessions = MutableStateFlow<MutableList<MeditationSession>>(mutableListOf())
 
-    val meditationSession: LiveData<MutableList<MeditationSession>>
-        get() = _meditationSessions
+    val meditationSession= _meditationSessions.asStateFlow()
 
     fun addMeditationSession(session: MeditationSession) {
         _meditationSessions.value?.add(session)

@@ -18,6 +18,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.lifecycleScope
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.MeditationTypeAdapter
+import com.example.vividize_unleashyourself.adapter.MeditationsAdapter
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.databinding.FragmentMeditationsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
@@ -72,7 +73,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycle.addObserver(this)
+//        lifecycle.addObserver(this)
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
             .setBlurAutoUpdate(true)
@@ -148,8 +149,14 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
                     }
 
                 }
-
         }
+            lifecycleScope.launchWhenStarted {
+                viewModel.allSessions.collectLatest {
+                    binding.rvMeditationSessions.adapter = MeditationsAdapter(requireContext(), it, viewModel)
+                }
+
+            }
+
 
     }
 
@@ -291,34 +298,44 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
                 finisherBinding.overlayMeditationFinisher.fadeOut(200)
             }
         }
-    finisherBinding.btnEnd.setOnClickListener {
-        val endmood = finisherBinding.slEndMood.value.toDouble()
-        val endNote = finisherBinding.teEndNote.text.toString()
-        viewModel.finishSession(endmood, endNote)
-        finisherBinding.slEndMood.value = 0F
-        finisherBinding.teEndNote.setText("")
+
+        finisherBinding.slEndMood.setLabelFormatter { value ->
+            return@setLabelFormatter when {
+                value <= 20.0 -> "☹️"
+                value <= 40.0 -> "\uD83D\uDE14"
+                value <= 60.0 -> "😐"
+                value <= 80.0 -> "☺️"
+                else -> "\uD83D\uDE0A"
+            }
+
+        }
+        finisherBinding.btnEnd.setOnClickListener {
+            val endmood = finisherBinding.slEndMood.value.toDouble()
+            val endNote = finisherBinding.teEndNote.text.toString()
+            viewModel.finishSession(endmood, endNote)
+            finisherBinding.slEndMood.value = 0F
+            finisherBinding.teEndNote.setText("")
+        }
     }
 
-}
+    private fun updateDigit(textView: TextView, newValue: String) {
 
-private fun updateDigit(textView: TextView, newValue: String) {
+        if (textView.text != newValue) {
 
-    if (textView.text != newValue) {
-
-        textView.fadeOut(300, false)
+            textView.fadeOut(300, false)
 
 
-        textView.postDelayed({
-            textView.text = newValue
+            textView.postDelayed({
+                textView.text = newValue
 
-            textView.fadeIn(300)
-        }, 300)
+                textView.fadeIn(300)
+            }, 300)
+        }
     }
-}
 
-override fun onDestroy() {
-    super.onDestroy()
-    viewModel.cancelSession()
-}
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cancelSession()
+    }
 
 }

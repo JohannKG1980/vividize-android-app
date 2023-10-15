@@ -77,6 +77,9 @@
     <string name="item_type_guided">geführt</string>
     <string name="item_type_unguided">nicht geführt</string>
     <string name="item_custom_duration">bis zu 60 min.</string>
+    <string name="mood_before">Vor Session: %1s</string>
+    <string name="mood_after">Nach Session %1s</string>
+
 
 
     <!-- Journaling -->
