@@ -27,7 +27,7 @@ import com.example.vividize_unleashyourself.extensions.setFadeEnabled
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.example.vividize_unleashyourself.feature_vms.MeditationsViewModel
-import com.example.vividize_unleashyourself.feature_vms.currentState
+import com.example.vividize_unleashyourself.feature_vms.CurrentState
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -295,7 +295,7 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launchWhenStarted {
                 meditationsViewModel.currentViewState.collectLatest { meditationSession ->
 
-                    if (fiveStepsSession != CurrentStep.NO_CYCLE_NOW || meditationSession != currentState.NO_SESSION) {
+                    if (fiveStepsSession != CurrentStep.NO_CYCLE_NOW || meditationSession != CurrentState.NO_SESSION) {
                         binding.bottomNavigationView.setFadeEnabled(false)
                         binding.bottomNavigationView.menu.forEach {
                             it.isEnabled = false

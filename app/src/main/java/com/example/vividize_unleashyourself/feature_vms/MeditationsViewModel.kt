@@ -11,12 +11,11 @@ import com.example.vividize_unleashyourself.data.model.MeditationSession
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import java.time.Duration
 import javax.inject.Inject
 
 
-enum class currentState { SELECTING_SESSION, GUIDED_INIT, UNGUIDED_INIT, SESSION_RUNNING, SESSION_END, NO_SESSION }
-enum class timerState { STOPPED, RUNNING, PAUSED, COMPLETED }
+enum class CurrentState { SELECTING_SESSION, GUIDED_INIT, UNGUIDED_INIT, SESSION_RUNNING, SESSION_END, NO_SESSION }
+enum class TimerState { STOPPED, RUNNING, PAUSED, COMPLETED }
 
 @HiltViewModel
 class MeditationsViewModel @Inject constructor(
@@ -50,10 +49,10 @@ class MeditationsViewModel @Inject constructor(
     val currentSession = _currentSession.asStateFlow()
 
 
-    private val _currentViewState = MutableStateFlow(currentState.NO_SESSION)
+    private val _currentViewState = MutableStateFlow(CurrentState.NO_SESSION)
     val currentViewState = _currentViewState.asStateFlow()
 
-    private val _currentTimerState = MutableStateFlow(timerState.STOPPED)
+    private val _currentTimerState = MutableStateFlow(TimerState.STOPPED)
     val currentTimerState = _currentTimerState.asStateFlow()
 
     private var timer: CountDownTimer? = null
@@ -61,15 +60,15 @@ class MeditationsViewModel @Inject constructor(
     val remainingTime = _remainingTime.asStateFlow()
 
     fun cancelSession() {
-        _currentViewState.value = currentState.NO_SESSION
+        _currentViewState.value = CurrentState.NO_SESSION
         _currentSession.value = null
-        if (_currentTimerState.value != timerState.STOPPED) {
+        if (_currentTimerState.value != TimerState.STOPPED) {
             resetTimer()
         }
     }
 
     fun openSessionSelector() {
-        _currentViewState.value = currentState.SELECTING_SESSION
+        _currentViewState.value = CurrentState.SELECTING_SESSION
     }
 
     fun openSession(meditation: Meditation) {
@@ -78,9 +77,9 @@ class MeditationsViewModel @Inject constructor(
             _currentSession.value!!.meditation.target = meditation
         }
         if (meditation.guided) {
-            _currentViewState.value = currentState.GUIDED_INIT
+            _currentViewState.value = CurrentState.GUIDED_INIT
         } else {
-            _currentViewState.value = currentState.UNGUIDED_INIT
+            _currentViewState.value = CurrentState.UNGUIDED_INIT
         }
     }
 
@@ -92,7 +91,7 @@ class MeditationsViewModel @Inject constructor(
             session.intention = intention
             session.moodStart = initMood
 
-            _currentViewState.value = currentState.SESSION_RUNNING
+            _currentViewState.value = CurrentState.SESSION_RUNNING
         }
     }
 
@@ -101,49 +100,49 @@ class MeditationsViewModel @Inject constructor(
         _currentSession.value!!.note = finalNote
         repository.addMeditationSession(_currentSession.value!!)
         _currentSession.value = null
-        _currentViewState.value = currentState.NO_SESSION
-        _currentTimerState.value =timerState.STOPPED
+        _currentViewState.value = CurrentState.NO_SESSION
+        _currentTimerState.value =TimerState.STOPPED
 
     }
 
     fun startTimer(duration: Long) {
-        _currentTimerState.value = timerState.RUNNING
+        _currentTimerState.value = TimerState.RUNNING
         timer = object : CountDownTimer(duration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 _remainingTime.value = millisUntilFinished
             }
 
             override fun onFinish() {
-                _currentTimerState.value = timerState.COMPLETED
+                _currentTimerState.value = TimerState.COMPLETED
                 timer?.cancel()
                 sessionCloser()
             }
         }.start()
 
-//        // Start the MediaPlayer
+
 //        mediaPlayer.start()
     }
 
     fun sessionCloser() {
-        _currentViewState.value = currentState.SESSION_END
+        _currentViewState.value = CurrentState.SESSION_END
 
     }
 
     fun pauseRestartTimer() {
-        if (_currentTimerState.value == timerState.RUNNING) {
+        if (_currentTimerState.value == TimerState.RUNNING) {
             timer?.cancel()
-            _currentTimerState.value = timerState.PAUSED
-        } else if (_currentTimerState.value == timerState.PAUSED) {
+            _currentTimerState.value = TimerState.PAUSED
+        } else if (_currentTimerState.value == TimerState.PAUSED) {
             startTimer(_remainingTime.value)
-            _currentTimerState.value = timerState.RUNNING
+            _currentTimerState.value = TimerState.RUNNING
         }
 
 //        mediaPlayer.pause()
     }
 
-    fun resetTimer() {
+    private fun resetTimer() {
         timer?.cancel()
-        _currentTimerState.value = timerState.STOPPED
+        _currentTimerState.value = TimerState.STOPPED
         _remainingTime.value = 0
 //        mediaPlayer.reset()
     }
