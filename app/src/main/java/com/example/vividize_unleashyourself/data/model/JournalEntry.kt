@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter
 @Entity
 data class JournalEntry(
     @Id var id: Long = 0,
-    var topic: String = "",
     var content: String = "",
     val datestamp: String = getCurrentDate(),
     val timestamp: String = getCurrentTime()

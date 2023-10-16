@@ -81,20 +81,20 @@ class JournalEntryFragment : Fragment() {
         toolbar.enableTaskList()
         toolbar.setToolbarItems(
             ToolbarItems.BasicLayout(
+                ToolbarAction.HEADING,
                 ToolbarAction.BOLD,
                 ToolbarAction.ITALIC,
                 ToolbarAction.UNDERLINE,
                 ToolbarAction.STRIKETHROUGH,
                 ToolbarAction.LIST,
-                ToolbarAction.ORDERED_LIST,
-                ToolbarAction.TASK_LIST,
                 ToolbarAction.LINK,
                 ToolbarAction.ALIGN_LEFT,
                 ToolbarAction.ALIGN_CENTER,
                 ToolbarAction.ALIGN_RIGHT
             )
         )
-        toolbar.findViewById<View>(org.wordpress.aztec.R.id.media_button_container).visibility = GONE
+        toolbar.findViewById<View>(org.wordpress.aztec.R.id.media_button_container).visibility =
+            GONE
 
 
         val toolbarClickListener = object : IAztecToolbarClickListener {

@@ -170,7 +170,7 @@
     },
     {
       "id": "4:2182385196827196590",
-      "lastPropertyId": "14:8137768771046957121",
+      "lastPropertyId": "15:7350852168915072478",
       "name": "FiveSteps",
       "properties": [
         {
@@ -240,9 +240,9 @@
           "type": 9
         },
         {
-          "id": "14:8137768771046957121",
-          "name": "fiveStepsSessionId",
-          "indexId": "2:9207195099272916588",
+          "id": "15:7350852168915072478",
+          "name": "parentSessionId",
+          "indexId": "3:7610308691444806446",
           "type": 11,
           "flags": 520,
           "relationTarget": "FiveStepsSession"
@@ -355,14 +355,18 @@
     }
   ],
   "lastEntityId": "7:8430207112602473645",
-  "lastIndexId": "2:9207195099272916588",
+  "lastIndexId": "3:7610308691444806446",
   "lastRelationId": "1:614419691163509419",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
-  "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredIndexUids": [
+    9207195099272916588
+  ],
+  "retiredPropertyUids": [
+    8137768771046957121
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

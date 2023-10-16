@@ -45,14 +45,14 @@ class FiveStepsViewModel @Inject constructor(
     val stepOne = Question(R.string.stepOne)
     val stepOneRepeat = Question(R.string.stepOneRepeat)
     val stepTwoInstruct = Question(R.string.stepTwoGeneral)
-    val stepTwo = listOf(
+    private val stepTwo = listOf(
         Question(R.string.stepTwo1),
         Question(R.string.stepTwo2),
         Question(R.string.stepTwo3)
     )
     var stepTwoQuestion = stepTwo.random()
 
-    val stepThree = listOf(
+    private val stepThree = listOf(
         Question(R.string.stepThree1),
         Question(R.string.stepThree2)
     )
@@ -173,14 +173,14 @@ class FiveStepsViewModel @Inject constructor(
 
 
     private fun saveFinishedSession() {
-        if (currentSession.value != null)
-            repository.addFiveStepSession(currentSession.value!!)
+        if (_currentSession.value != null)
+            repository.addFiveStepSession(_currentSession.value!!)
         _currentSession.value = null
     }
 
     fun removeSession() {
-        if (currentSession.value != null)
-            repository.removeFiveStepSession(currentSession.value!!)
+        if (_currentSession.value != null)
+            repository.removeFiveStepSession(_currentSession.value!!)
     }
 
 }

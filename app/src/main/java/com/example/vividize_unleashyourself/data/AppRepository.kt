@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.vividize_unleashyourself.data.model.FiveStepsSession
+import com.example.vividize_unleashyourself.data.model.JournalEntry
 import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.data.model.Quote
 import com.example.vividize_unleashyourself.data.remote.QuotesApiService
@@ -55,14 +56,6 @@ class AppRepository @Inject constructor(
             _fiveStepSessions.postValue(updatedItems)
         }
 
-    //    fun addFiveStepSession(session: FiveStepsSession) {
-//        _fiveStepSessions.value?.add(session)
-//        _fiveStepSessions.value = _fiveStepSessions.value
-//    }
-//    fun removeFiveStepSession(session: FiveStepsSession) {
-//        _fiveStepSessions.value?.remove(session)
-//        _fiveStepSessions.value = _fiveStepSessions.value
-//    }
     fun addFiveStepSession(session: FiveStepsSession) {
         fiveStepsSessionBox.put(session)
     }
@@ -84,15 +77,6 @@ class AppRepository @Inject constructor(
             _meditationSessions.value = updatedItems
         }
 
-    //    fun addMeditationSession(session: MeditationSession) {
-//        _meditationSessions.value?.add(session)
-//        _meditationSessions.value = _meditationSessions.value
-//    }
-//
-//    fun removeMeditationSession(session: MeditationSession) {
-//        _meditationSessions.value?.remove(session)
-//        _meditationSessions.value = _meditationSessions.value
-//    }
     fun addMeditationSession(session: MeditationSession) {
         meditationSessionBox.put(session)
     }
@@ -102,8 +86,18 @@ class AppRepository @Inject constructor(
     }
 
     //Journaling Section
+    private val _journalEntries =
+        MutableStateFlow<MutableList<MeditationSession>>(mutableListOf())
 
+    val journalEntries = _journalEntries.asStateFlow()
 
+    fun addJournalEntry(entry: JournalEntry) {
+       // JournalEntriesBox.put(entry)
+    }
+
+    fun removeJournalEntry(entry: JournalEntry) {
+        // JournalEntriesBox.remove(entry)
+    }
 
 
 
