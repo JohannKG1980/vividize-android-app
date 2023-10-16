@@ -5,17 +5,24 @@ import android.media.MediaPlayer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.data.AppRepository
 import com.example.vividize_unleashyourself.data.model.FiveSteps
 import com.example.vividize_unleashyourself.data.model.FiveStepsSession
+import com.example.vividize_unleashyourself.data.model.Question
 import com.example.vividize_unleashyourself.data.remote.QuotesApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, DESCRIPTION_FIRST, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
+
 @HiltViewModel
-class FiveStepsViewModel  @Inject constructor(private val repository: AppRepository, private val mediaPlayer: MediaPlayer, application: Application) : AndroidViewModel(application) {
+class FiveStepsViewModel @Inject constructor(
+    private val repository: AppRepository,
+    private val mediaPlayer: MediaPlayer,
+    application: Application,
+) : AndroidViewModel(application) {
 
     val allSessions = repository.fiveStepsSessions
     private val _instructionWatched = MutableLiveData<Boolean>(false)
@@ -34,6 +41,36 @@ class FiveStepsViewModel  @Inject constructor(private val repository: AppReposit
     private val _currentSession = MutableLiveData<FiveStepsSession?>()
     val currentSession: LiveData<FiveStepsSession?>
         get() = _currentSession
+
+    val stepOne = Question(R.string.stepOne)
+    val stepOneRepeat = Question(R.string.stepOneRepeat)
+    val stepTwoInstruct = Question(R.string.stepTwoGeneral)
+    val stepTwo = listOf(
+        Question(R.string.stepTwo1),
+        Question(R.string.stepTwo2),
+        Question(R.string.stepTwo3)
+    )
+    var stepTwoQuestion = stepTwo.random()
+
+    val stepThree = listOf(
+        Question(R.string.stepThree1),
+        Question(R.string.stepThree2)
+    )
+    var stepThreeQuestion = stepThree.random()
+
+    val stepThreeFollowUp = Question(R.string.stepThreeNo)
+    val stepFourQuestion = Question(R.string.stepFour)
+    val stepFive = Question(R.string.stepFive)
+    val repeatQuestion = Question(R.string.askForRepeat)
+
+    fun getStepTwoQuest() {
+        stepTwoQuestion = stepTwo.random()
+    }
+
+    fun getStepThreeQuest() {
+
+        stepThreeQuestion = stepThree.random()
+    }
 
     fun descriptionWatched() {
         _instructionWatched.value = true
@@ -67,17 +104,17 @@ class FiveStepsViewModel  @Inject constructor(private val repository: AppReposit
             _currentStep.value = _currentStep.value
         }
         if (_currentSession.value == null)
-            _currentSession.value = FiveStepsSession(1)
+            _currentSession.value = FiveStepsSession()
         if (_currentSession.value != null && _currentSession.value!!.sessionFinished) {
-            if (allSessions.value!!.isNotEmpty()) {
-                _currentSession.value = FiveStepsSession(allSessions.value!!.last().sessionId + 1)
+                _currentSession.value = FiveStepsSession()
+
                 _currentSession.value!!.stepCycles.add(FiveSteps())
-            } else if (_currentSession.value == null) {
-                _currentSession.value = FiveStepsSession(1)
-                _currentSession.value!!.stepCycles.add(FiveSteps())
-            }
+
         } else {
+
             _currentSession.value!!.stepCycles.add(FiveSteps())
+
+
             _currentCycle.postValue(_currentSession.value!!.stepCycles.last())
         }
     }

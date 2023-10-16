@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
@@ -44,7 +45,8 @@ class JournalEntryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentJournalEntryBinding.inflate(layoutInflater)
-        inputMethManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethManager =
+            context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         return binding.root
     }
 
@@ -54,16 +56,17 @@ class JournalEntryFragment : Fragment() {
         val visualEditor = binding.textField
         val toolbar = binding.formattingToolbar
 
-        val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-                if (isKeyboardOpen()) {
-                    hideKeyboard()
-                } else {
-                    showKeyboard()
+        val gestureDetector =
+            GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+                override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+                    if (isKeyboardOpen()) {
+                        hideKeyboard()
+                    } else {
+                        showKeyboard()
+                    }
+                    return super.onSingleTapUp(e)
                 }
-                return super.onSingleTapUp(e)
-            }
-        })
+            })
 
         binding.textField.setOnClickListener {
             if (isKeyboardOpen()) {
@@ -75,6 +78,7 @@ class JournalEntryFragment : Fragment() {
 
 
 
+        toolbar.enableTaskList()
         toolbar.setToolbarItems(
             ToolbarItems.BasicLayout(
                 ToolbarAction.BOLD,
@@ -83,13 +87,15 @@ class JournalEntryFragment : Fragment() {
                 ToolbarAction.STRIKETHROUGH,
                 ToolbarAction.LIST,
                 ToolbarAction.ORDERED_LIST,
+                ToolbarAction.TASK_LIST,
                 ToolbarAction.LINK,
                 ToolbarAction.ALIGN_LEFT,
                 ToolbarAction.ALIGN_CENTER,
                 ToolbarAction.ALIGN_RIGHT
             )
         )
-//        toolbar.enableTaskList()
+        toolbar.findViewById<View>(org.wordpress.aztec.R.id.media_button_container).visibility = GONE
+
 
         val toolbarClickListener = object : IAztecToolbarClickListener {
 
@@ -109,16 +115,6 @@ class JournalEntryFragment : Fragment() {
                 isKeyboardShortcut: Boolean,
             ) {
 
-                when (format) {
-                    AztecTextFormat.FORMAT_BOLD -> {
-                        Toast.makeText(context, "Fett formatiert", Toast.LENGTH_SHORT).show()
-                    }
-
-                    AztecTextFormat.FORMAT_ITALIC -> {
-                        Toast.makeText(context, "Kursiv formatiert", Toast.LENGTH_SHORT).show()
-                    }
-                    // ... andere Formate hier
-                }
 
             }
 
@@ -129,20 +125,17 @@ class JournalEntryFragment : Fragment() {
             }
 
             override fun onToolbarHtmlButtonClicked() {
-                // Code für den "HTML"-Button
             }
 
             override fun onToolbarListButtonClicked() {
-                // Code für den "Liste"-Button
             }
 
             override fun onToolbarMediaButtonClicked(): Boolean {
-                // Code für den "Medien"-Button
                 return false
             }
 
         }
-        val aztec = Aztec.with(visualEditor, toolbar, toolbarClickListener)
+        Aztec.with(visualEditor, toolbar, toolbarClickListener)
 
 
     }

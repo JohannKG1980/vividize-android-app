@@ -138,7 +138,7 @@
           "id": "1:1094295268772738267",
           "name": "id",
           "type": 6,
-          "flags": 1
+          "flags": 129
         },
         {
           "id": "2:6798834150084831534",
@@ -167,11 +167,196 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:2182385196827196590",
+      "lastPropertyId": "14:8137768771046957121",
+      "name": "FiveSteps",
+      "properties": [
+        {
+          "id": "1:5683219461012220538",
+          "name": "cycleId",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5289191103895327226",
+          "name": "stepOneInput",
+          "type": 9
+        },
+        {
+          "id": "3:1016061340996705286",
+          "name": "intensity",
+          "type": 5
+        },
+        {
+          "id": "4:9036881949369141377",
+          "name": "stepTwoAnswer",
+          "type": 1
+        },
+        {
+          "id": "5:7175001190239174661",
+          "name": "stepThreeAnswer",
+          "type": 1
+        },
+        {
+          "id": "6:5413257739207364155",
+          "name": "stepThreeBetterBeFree",
+          "type": 1
+        },
+        {
+          "id": "7:7849563039837115788",
+          "name": "stepFourAnswer",
+          "type": 9
+        },
+        {
+          "id": "8:1601150875902862702",
+          "name": "intensityLeft",
+          "type": 5
+        },
+        {
+          "id": "9:814332138980371066",
+          "name": "repeatAnswer",
+          "type": 1
+        },
+        {
+          "id": "10:8926678049606033693",
+          "name": "cycleFinished",
+          "type": 1
+        },
+        {
+          "id": "11:5974589951940441828",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "12:774916460266651101",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "13:336121183829563449",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        },
+        {
+          "id": "14:8137768771046957121",
+          "name": "fiveStepsSessionId",
+          "indexId": "2:9207195099272916588",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "FiveStepsSession"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:9027357473983529425",
+      "lastPropertyId": "5:1462611934531050210",
+      "name": "FiveStepsSession",
+      "properties": [
+        {
+          "id": "1:8220004096175113405",
+          "name": "sessionId",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:725555050441362798",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "3:8320604379481906769",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "4:7107010092808857340",
+          "name": "sessionFinished",
+          "type": 1
+        },
+        {
+          "id": "5:1462611934531050210",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:614419691163509419",
+          "name": "stepCycles",
+          "targetId": "4:2182385196827196590"
+        }
+      ]
+    },
+    {
+      "id": "6:2381042038305727316",
+      "lastPropertyId": "6:3383081750649779495",
+      "name": "JournalEntry",
+      "properties": [
+        {
+          "id": "1:3991235490943063081",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4373210078673284144",
+          "name": "topic",
+          "type": 9
+        },
+        {
+          "id": "3:6205113973230318691",
+          "name": "content",
+          "type": 9
+        },
+        {
+          "id": "4:7376074311909303135",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "5:4916720695341604265",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "6:3383081750649779495",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:8430207112602473645",
+      "lastPropertyId": "3:3136124302923593880",
+      "name": "Question",
+      "properties": [
+        {
+          "id": "1:8598362844622165202",
+          "name": "content",
+          "type": 5
+        },
+        {
+          "id": "2:2504502152103947796",
+          "name": "audioPath",
+          "type": 9
+        },
+        {
+          "id": "3:3136124302923593880",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:4783073096224099395",
-  "lastIndexId": "1:4737797641779719543",
-  "lastRelationId": "0:0",
+  "lastEntityId": "7:8430207112602473645",
+  "lastIndexId": "2:9207195099272916588",
+  "lastRelationId": "1:614419691163509419",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,

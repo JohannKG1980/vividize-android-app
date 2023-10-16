@@ -1,27 +1,25 @@
 package com.example.vividize_unleashyourself.data.model
 
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
+import com.example.vividize_unleashyourself.utils.getCurrentDate
+import com.example.vividize_unleashyourself.utils.getCurrentTime
+import io.objectbox.annotation.Entity
+import io.objectbox.annotation.Id
+import io.objectbox.relation.ToMany
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
+@Entity
 data class FiveStepsSession(
-    val sessionId: Long = 0,
-    val stepCycles: MutableList<FiveSteps> = mutableListOf(),
-    val datestamp: LocalDate = LocalDate.now(),
-    val timestamp: LocalTime = LocalTime.now(),
+    @Id var sessionId: Long = 0,
+
+    ) {
+    lateinit var stepCycles: ToMany<FiveSteps>
+    val datestamp: String = getCurrentDate()
+    val timestamp: String = getCurrentTime()
     var sessionFinished: Boolean = false
-) {
-    val formattedDateTimestamp: String = formatDatestamp(datestamp) + "-" + formatTimestamp(timestamp)
+    val formattedDateTimestamp: String = "$datestamp - $timestamp"
 
-    private fun formatDatestamp(time: LocalDate): String {
-        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy ")
-        return time.format(formatter)
-    }
-
-    private fun formatTimestamp(time: LocalTime): String {
-        val formatter = DateTimeFormatter.ofPattern(" HH:mm:ss")
-        return time.format(formatter)
-    }
 }

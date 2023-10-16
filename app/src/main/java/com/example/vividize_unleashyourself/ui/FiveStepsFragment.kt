@@ -191,9 +191,9 @@ class FiveStepsFragment(
 
 
         val stepText = if (currentCycle.repeatAnswer) {
-            getString(currentCycle.stepOneRepeat.content)
+            getString(viewModel.stepOneRepeat.content)
         } else {
-            getString(currentCycle.stepOne.content)
+            getString(viewModel.stepOne.content)
         }
 
         stepOneOverlayBinding.tvStepText.text = stepText
@@ -217,14 +217,14 @@ class FiveStepsFragment(
 
     private fun openStepTwo(currentCycle: FiveSteps) {
 
-
+        viewModel.getStepTwoQuest()
         stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeIn(300)
         stepTwoAndThreeOverlayBinding.btnYes.text = getString(R.string.btn_yes)
         stepTwoAndThreeOverlayBinding.btnNo.text = getString(R.string.btn_no)
 
         stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepTwoTitle)
         stepTwoAndThreeOverlayBinding.tvStepText.text =
-            getString(currentCycle.stepTwoQuestion.content)
+            getString(viewModel.stepTwoQuestion.content)
 
         stepTwoAndThreeOverlayBinding.btnYes.setOnClickListener {
             currentCycle.stepTwoAnswer = true
@@ -240,9 +240,10 @@ class FiveStepsFragment(
 
     private fun openStepThree(currentCycle: FiveSteps) {
 
+        viewModel.getStepThreeQuest()
         stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepThreeTitle)
         stepTwoAndThreeOverlayBinding.tvStepText.text =
-            getString(currentCycle.stepThreeQuestion.content)
+            getString(viewModel.stepThreeQuestion.content)
         stepTwoAndThreeOverlayBinding.btnYes.text = getString(R.string.btn_yes)
         stepTwoAndThreeOverlayBinding.btnNo.text = getString(R.string.btn_no)
 
@@ -263,7 +264,7 @@ class FiveStepsFragment(
 
         stepTwoAndThreeOverlayBinding.tvStep.text = getString(R.string.stepThreeTitle)
         stepTwoAndThreeOverlayBinding.tvStepText.text =
-            getString(currentCycle.stepThreeFollowUp.content)
+            getString(viewModel.stepThreeFollowUp.content)
         stepTwoAndThreeOverlayBinding.btnYes.text = getString(R.string.btn_free)
         stepTwoAndThreeOverlayBinding.btnNo.text = getString(R.string.btn_emotion)
 
@@ -287,7 +288,7 @@ class FiveStepsFragment(
         stepFourOverlayBinding.overlayStepFour.fadeIn(300)
 
         stepFourOverlayBinding.tvStep.text = getString(R.string.stepFourTitle)
-        stepFourOverlayBinding.tvStepText.text = getString(currentCycle.stepFourQuestion.content)
+        stepFourOverlayBinding.tvStepText.text = getString(viewModel.stepFourQuestion.content)
 
 
         stepFourOverlayBinding.btnNext.setOnClickListener {

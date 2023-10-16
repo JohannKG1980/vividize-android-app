@@ -60,4 +60,8 @@ class MainViewModel @Inject constructor(private val repository: AppRepository, a
 
     }
 
+    fun cleanMemory() {
+        repository.closeSubscriptions()
+    }
+
 }
