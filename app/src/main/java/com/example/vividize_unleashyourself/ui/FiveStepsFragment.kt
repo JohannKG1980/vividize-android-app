@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -31,7 +29,6 @@ import com.example.vividize_unleashyourself.extensions.fadeOut
 import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
-import com.google.android.material.internal.ViewUtils
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur

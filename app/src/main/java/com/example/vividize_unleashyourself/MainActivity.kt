@@ -11,6 +11,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
+import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.animation.BounceInterpolator
 import androidx.activity.viewModels
@@ -202,8 +203,21 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.journalEntryFragment -> {
+                    binding.tvPageTitle.text = destination.label
                     binding.bottomAppBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE
+                    binding.ivBackButton.visibility = VISIBLE
+                    binding.ivBackButton.isClickable = true
+
+                    binding.ivBackButton.setOnClickListener {
+                        it.setButtonEffect()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                        navController.navigateUp()
+                        it.visibility = INVISIBLE
+                        it.isClickable = false
+                        },200)
+
+                    }
                 }
 
                 else -> {

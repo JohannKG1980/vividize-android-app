@@ -70,7 +70,7 @@
     <fragment
         android:id="@+id/fiveStepsFragment"
         android:name="com.example.vividize_unleashyourself.ui.FiveStepsFragment"
-        android:label="fragment_five_steps"
+        android:label="@string/fiveSteps"
         tools:layout="@layout/fragment_five_steps" />
     <fragment
         android:id="@+id/knowledgeSectionFragment"
@@ -80,6 +80,6 @@
     <fragment
         android:id="@+id/journalEntryFragment"
         android:name="com.example.vividize_unleashyourself.ui.JournalEntryFragment"
-        android:label="fragment_journal_entry"
+        android:label="@string/journal_entry"
         tools:layout="@layout/fragment_journal_entry" />
 </navigation>
