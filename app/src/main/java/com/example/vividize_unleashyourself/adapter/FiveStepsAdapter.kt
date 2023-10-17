@@ -1,5 +1,6 @@
 package com.example.vividize_unleashyourself.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -30,6 +31,7 @@ class FiveStepsAdapter(
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is FiveStepsViewHolder) {
             val session = dataset[position]
@@ -47,7 +49,7 @@ class FiveStepsAdapter(
                 binding.tvDate.text = session.formattedDateTimestamp
 
 
-            } else if (position > 0) {
+            } else {
                 if (session.datestamp != dataset[position - 1].datestamp) {
                     binding.clTopDate.visibility = VISIBLE
                     binding.tvDate.text = session.formattedDateTimestamp

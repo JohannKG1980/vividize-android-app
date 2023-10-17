@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter
 @Entity
 data class JournalEntry(
     @Id var id: Long = 0,
-    var content: String = "",
     val datestamp: String = getCurrentDate(),
     val timestamp: String = getCurrentTime()
 ) {
+    var content: String = ""
     val formattedDateTimestamp: String = "$datestamp - $timestamp"
 }

@@ -25,6 +25,7 @@ class AppRepository @Inject constructor(
     //Boxes
     private val fiveStepsSessionBox: Box<FiveStepsSession> = boxStore.boxFor()
     private val meditationSessionBox: Box<MeditationSession> = boxStore.boxFor()
+    private val journalEntriesBox: Box<JournalEntry> = boxStore.boxFor()
 
 
     //DailyQuote
@@ -87,16 +88,23 @@ class AppRepository @Inject constructor(
 
     //Journaling Section
     private val _journalEntries =
-        MutableStateFlow<MutableList<MeditationSession>>(mutableListOf())
+        MutableStateFlow<MutableList<JournalEntry>>(mutableListOf())
 
     val journalEntries = _journalEntries.asStateFlow()
 
+    private val journalSubscription =
+       journalEntriesBox.query().build().subscribe().observer { updatedItems ->
+            _journalEntries.value = updatedItems
+        }
+
+
     fun addJournalEntry(entry: JournalEntry) {
-       // JournalEntriesBox.put(entry)
+        journalEntriesBox.put(entry)
+
     }
 
     fun removeJournalEntry(entry: JournalEntry) {
-        // JournalEntriesBox.remove(entry)
+         journalEntriesBox.remove(entry)
     }
 
 
@@ -105,5 +113,6 @@ class AppRepository @Inject constructor(
     fun closeSubscriptions() {
         fiveStepsSubscription.cancel()
         meditationSubscription.cancel()
+
     }
 }

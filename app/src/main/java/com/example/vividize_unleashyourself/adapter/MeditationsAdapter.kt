@@ -1,7 +1,6 @@
 package com.example.vividize_unleashyourself.adapter
 
 import android.content.Context
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

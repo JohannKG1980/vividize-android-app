@@ -43,4 +43,18 @@
     <item name="shapeAppearanceOverlay">@null</item>
 
     </style>
+
+    <!-- Benutzerdefiniertes AlertDialog-Theme -->
+    <style name="CustomAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/alert_dialog_bg</item>
+
+
+        <item name="android:textColorPrimary">@color/white</item>
+
+
+        <item name="android:textColor">@color/color_no</item>
+
+
+        <item name="colorAccent">@color/secondary_app</item>
+    </style>
 </resources>

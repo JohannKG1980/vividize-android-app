@@ -1,6 +1,8 @@
 package com.example.vividize_unleashyourself.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,7 +29,6 @@ import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.feature_vms.MeditationsViewModel
 import com.example.vividize_unleashyourself.feature_vms.CurrentState
 import com.example.vividize_unleashyourself.feature_vms.TimerState
-import com.google.android.material.internal.ViewUtils
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -46,8 +47,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
     private lateinit var timerBinding: OverlayMeditationTimerBinding
     private lateinit var finisherBinding: OverlayMeditationFinisherBinding
     private val viewModel: MeditationsViewModel by activityViewModels()
-//    private var isFragVisible = false
-
+    private lateinit var alertBuilder: AlertDialog.Builder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +68,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
     @SuppressLint("RestrictedApi", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        lifecycle.addObserver(this)
+        alertBuilder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialogTheme)
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
             .setBlurAutoUpdate(true)
@@ -91,15 +91,29 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
         binding.ivCancleButton.setOnClickListener {
             it.setButtonEffect()
-            binding.ivAddSession.isEnabled = false
-            viewModel.cancelSession()
-            lifecycleScope.launch(Dispatchers.Main) {
+            alertBuilder.setTitle(R.string.alert_title)
+            alertBuilder.setMessage(R.string.alert_msg)
 
-                binding.ivAddSession.isEnabled = true
+            alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+                binding.ivAddSession.isEnabled = false
+                viewModel.cancelSession()
+                lifecycleScope.launch(Dispatchers.Main) {
+
+                    binding.ivAddSession.isEnabled = true
 
 
+                }
+                dialog.dismiss()
             }
 
+            alertBuilder.setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            val alertDialog = alertBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
         }
 
 
@@ -152,12 +166,13 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
                 }
         }
-            lifecycleScope.launchWhenStarted {
-                viewModel.allSessions.collectLatest {
-                    binding.rvMeditationSessions.adapter = MeditationsAdapter(requireContext(), it, viewModel)
-                }
-
+        lifecycleScope.launchWhenStarted {
+            viewModel.allSessions.collectLatest {
+                binding.rvMeditationSessions.adapter =
+                    MeditationsAdapter(requireContext(), it, viewModel)
             }
+
+        }
 
 
     }

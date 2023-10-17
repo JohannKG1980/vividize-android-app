@@ -22,11 +22,30 @@ class JournalingViewModel @Inject constructor(
 
     val currentEntry = _currentEntry.asStateFlow()
 
+    private val _currentContent = MutableStateFlow<String>("")
+    val currentContent = _currentContent.asStateFlow()
+
     fun newEntry() {
-        if(_currentEntry.value == null) {
+
             _currentEntry.value = JournalEntry()
+
+
+    }
+
+    fun contentBuffer(input: String) {
+        _currentContent.value = input
+
+    }
+    fun saveEntry() {
+
+        if (_currentEntry.value != null) {
+            _currentEntry.value!!.content = _currentContent.value
+            repository.addJournalEntry(_currentEntry.value!!)
+            _currentEntry.value = null
+
         }
 
     }
+
 
 }

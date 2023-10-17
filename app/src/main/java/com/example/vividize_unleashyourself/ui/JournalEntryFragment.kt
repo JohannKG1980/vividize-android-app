@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +19,10 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.text.toHtml
+import androidx.fragment.app.activityViewModels
 import com.example.vividize_unleashyourself.databinding.FragmentJournalEntryBinding
+import com.example.vividize_unleashyourself.feature_vms.JournalingViewModel
 import com.google.android.material.internal.ViewUtils
 import dagger.hilt.android.AndroidEntryPoint
 import org.wordpress.aztec.Aztec
@@ -32,6 +38,7 @@ class JournalEntryFragment : Fragment() {
 
     private lateinit var binding: FragmentJournalEntryBinding
     private lateinit var inputMethManager: InputMethodManager
+    private val viewModel: JournalingViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,17 +63,6 @@ class JournalEntryFragment : Fragment() {
         val visualEditor = binding.textField
         val toolbar = binding.formattingToolbar
 
-        val gestureDetector =
-            GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-                override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-                    if (isKeyboardOpen()) {
-                        hideKeyboard()
-                    } else {
-                        showKeyboard()
-                    }
-                    return super.onSingleTapUp(e)
-                }
-            })
 
         binding.textField.setOnClickListener {
             if (isKeyboardOpen()) {
@@ -119,8 +115,6 @@ class JournalEntryFragment : Fragment() {
             }
 
             override fun onToolbarHeadingButtonClicked() {
-                // Code für den "Überschrift"-Button
-                Toast.makeText(context, "Überschrift ausgewählt", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -137,7 +131,24 @@ class JournalEntryFragment : Fragment() {
         }
         Aztec.with(visualEditor, toolbar, toolbarClickListener)
 
+        visualEditor.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Nichts zu tun hier
+            }
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Nichts zu tun hier
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.contentBuffer(s!!.toHtml())
+
+            }
+        })
+
+
+        visualEditor.undo()
+        visualEditor.redo()
     }
 
     private fun isKeyboardOpen(): Boolean {
@@ -158,6 +169,7 @@ class JournalEntryFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.saveEntry()
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
     }
