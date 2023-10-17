@@ -1,6 +1,8 @@
 package com.example.vividize_unleashyourself.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.FiveStepsAdapter
 import com.example.vividize_unleashyourself.data.model.FiveSteps
@@ -32,6 +35,9 @@ import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class FiveStepsFragment(
     private val sectionBinding: FragmentMentalSectionBinding
@@ -43,6 +49,7 @@ class FiveStepsFragment(
     private lateinit var stepFiveOverlayBinding: StepFiveOverlayBinding
     private lateinit var fiveStepsDescriptionOverlayBinding: FiveStepsDescriptionOverlayBinding
     val viewModel: FiveStepsViewModel by activityViewModels()
+    private lateinit var alertBuilder: AlertDialog.Builder
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +74,7 @@ class FiveStepsFragment(
     @SuppressLint("ClickableViewAccessibility", "RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        alertBuilder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialogTheme)
 
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
@@ -84,6 +91,7 @@ class FiveStepsFragment(
 
         binding.ivCancleButton.setOnClickListener {
             it.setButtonEffect()
+            alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
             viewModel.closeSession()
             binding.cvOverlay.fadeOut()
             fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeOut()
@@ -91,6 +99,18 @@ class FiveStepsFragment(
             stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut()
             stepFourOverlayBinding.overlayStepFour.fadeOut()
             stepFiveOverlayBinding.overlayStepFive.fadeOut()
+
+                dialog.dismiss()
+            }
+
+            alertBuilder.setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            val alertDialog = alertBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
 
         }
         binding.ivInfoFsm.setOnClickListener {
@@ -204,12 +224,17 @@ class FiveStepsFragment(
         stepOneOverlayBinding.btnNext.setOnClickListener {
 
             val input = stepOneOverlayBinding.teTopic.text.toString()
+            var topic = ""
+            if(input != "") {
+                topic = input
+            } else {
+                topic = getString(R.string.no_topic)
+            }
             val intensity = stepOneOverlayBinding.slStartIntensity.value.toInt()
             stepOneOverlayBinding.teTopic.setText("")
             stepOneOverlayBinding.slStartIntensity.value = 0f
             stepOneOverlayBinding.overlayStepOne.fadeOut(200)
-            Log.e("TestStepOne", "Topic : $input   Intensity: $intensity ")
-            viewModel.finishStepOne(input, intensity)
+            viewModel.finishStepOne(topic, intensity)
 
         }
 

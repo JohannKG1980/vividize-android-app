@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
-        app:cpb_background_progressbar_color="#b6bbd8"
+        app:cpb_background_progressbar_color="@color/secondary_transparent"
         app:cpb_background_progressbar_width="15dp"
         app:cpb_progress_direction="to_left"
-        app:cpb_progressbar_color="#3f51b5"
+        app:cpb_progressbar_color="@color/secondary_app"
         app:cpb_progressbar_width="10dp"
         app:cpb_round_border="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
         app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
         app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
-        app:strokeColor="#94FFFFFF"
+        app:strokeColor="@color/secondary_transparent"
         app:strokeWidth="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -141,6 +141,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/iv_replay"
         app:layout_constraintEnd_toEndOf="@+id/iv_replay"
         app:layout_constraintStart_toStartOf="@+id/iv_replay"
@@ -153,6 +154,7 @@
         android:layout_width="48dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/iv_cancle"
         app:layout_constraintEnd_toEndOf="@+id/iv_cancle"
         app:layout_constraintStart_toStartOf="@+id/iv_cancle"

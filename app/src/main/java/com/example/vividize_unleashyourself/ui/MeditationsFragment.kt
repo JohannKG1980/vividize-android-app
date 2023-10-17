@@ -54,7 +54,6 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-
         binding = FragmentMeditationsBinding.inflate(layoutInflater)
         selectorBinding = binding.overlayMeditationTypes
         initSessionBinding = binding.overlayMeditationInit
@@ -235,14 +234,20 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
         }
         initSessionBinding.btnNext.setOnClickListener {
             val initMood = initSessionBinding.slStartMood.value.toDouble()
-            val intention = initSessionBinding.teIntention.text.toString()
+            val intentionInput = initSessionBinding.teIntention.text.toString()
+            var intention = ""
+            if(intentionInput != "") {
+                intention = intentionInput
+            } else {
+                intention = getString(R.string.no_intention)
+            }
             if (viewState == CurrentState.UNGUIDED_INIT) {
                 val customDuration = initSessionBinding.slTimerSetter.value.toLong() * 1000 * 60
                 viewModel.initSession(customDuration, initMood, intention)
             } else {
                 viewModel.initSession(0, initMood, intention)
             }
-            initSessionBinding.slTimerSetter.value = 0F
+            initSessionBinding.slTimerSetter.value = 5F
             initSessionBinding.slStartMood.value = 0F
             initSessionBinding.teIntention.setText("")
             initSessionBinding.overlayMeditationInit.fadeOut(200)
@@ -268,6 +273,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
         val sessionDuration = viewModel.currentSession.value!!.duration
         viewModel.startTimer(sessionDuration)
+        timerBinding.tvMeditype.text = viewModel.currentSession.value!!.meditation.target.name
         lifecycleScope.launchWhenStarted {
             viewModel.currentTimerState.collectLatest { currentTimerState ->
                 if (currentTimerState == TimerState.RUNNING) {
@@ -298,7 +304,55 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
             it.setButtonEffect()
             viewModel.pauseRestartTimer()
         }
+        timerBinding.ivCancle.setOnClickListener {
+            it.setButtonEffect()
+            viewModel.pauseRestartTimer()
+            alertBuilder.setTitle(R.string.alert_title)
+            alertBuilder.setMessage(R.string.alert_msg)
+
+            alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+                viewModel.cancelSession()
+                dialog.dismiss()
+            }
+
+            alertBuilder.setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.dismiss()
+                viewModel.pauseRestartTimer()
+
+            }
+
+            val alertDialog = alertBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+        }
+
+        timerBinding.ivReplay.setOnClickListener {
+            it.setButtonEffect()
+            viewModel.pauseRestartTimer()
+
+            alertBuilder.setTitle(R.string.alert_title)
+            alertBuilder.setMessage(R.string.alert_msg_replay)
+
+            alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+                viewModel.startTimer(sessionDuration)
+                dialog.dismiss()
+            }
+
+            alertBuilder.setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.dismiss()
+                viewModel.pauseRestartTimer()
+
+            }
+
+            val alertDialog = alertBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+        }
+
     }
+
 
     private fun openSessionFinisher(viewState: CurrentState) {
         when (viewState) {

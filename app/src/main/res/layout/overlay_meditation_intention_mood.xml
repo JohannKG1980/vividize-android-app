@@ -14,14 +14,14 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
-        tools:text="@string/stepOneTitle"
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle=""
         app:layout_constraintBottom_toTopOf="@+id/tv_step_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/stepOneTitle" />
 
 
     <TextView
@@ -169,8 +169,9 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
         android:stepSize="5"
-        android:valueFrom="0.0"
+        android:valueFrom="5.0"
         android:valueTo="60.0"
+        android:value="5.0"
         app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +182,6 @@
         app:trackColorActive="@color/secondary_transparent"
         app:trackColorInactive="#384845"
         app:trackHeight="6dp" />
-
 
 
     <com.google.android.material.button.MaterialButton

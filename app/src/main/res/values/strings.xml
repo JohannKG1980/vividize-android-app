@@ -51,7 +51,7 @@
         <b>5. Überprüfung und Wiederholung:</b><br> Bewerte, wie stark das Gefühl noch vorhanden ist und wiederhole bei Bedarf die Schritte, bis das Gefühl nachlässt.<br><br>
         Diese Methode fördert die Achtsamkeit und Selbstreflexion und ermöglicht es den Nutzern, sich von negativen Emotionen zu befreien und ihr emotionales Wohlbefinden zu steigern.
     ]]>
-</string>
+    </string>
     <string name="start">Starten</string>
     <string name="intensityStart">Stärke der Emotion</string>
     <string name="slider_desc">Intensität</string>
@@ -59,6 +59,7 @@
     <string name="btn_no">Nein</string>
     <string name="btn_free">Frei</string>
     <string name="btn_emotion">Gefühl</string>
+    <string name="no_topic">Kein Thema eingegeben.</string>
 
 
     <!-- Meditiation & Notes -->
@@ -80,7 +81,8 @@
     <string name="item_custom_duration">bis zu 60 min.</string>
     <string name="mood_before">Vor Session: %1s</string>
     <string name="mood_after">Nach Session %1s</string>
-
+    <string name="no_intention">Keine Intention eingegeben.</string>
+    <string name="no_meditation_note">Keine Notiz eingegeben.</string>
 
 
     <!-- Journaling -->
@@ -92,5 +94,6 @@
     <!--Alert Dialog-->
     <string name="alert_title">Achtung!</string>
     <string name="alert_msg">Diese Session wirklich abbrechen?</string>
+    <string name="alert_msg_replay">Die Session wirklich neu starten?</string>
 
 </resources>

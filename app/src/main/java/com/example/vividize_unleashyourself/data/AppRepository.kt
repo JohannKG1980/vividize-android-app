@@ -113,6 +113,6 @@ class AppRepository @Inject constructor(
     fun closeSubscriptions() {
         fiveStepsSubscription.cancel()
         meditationSubscription.cancel()
-
+        journalSubscription.cancel()
     }
 }
