@@ -14,7 +14,11 @@
         android:id="@+id/mentalSectionFragment"
         android:name="com.example.vividize_unleashyourself.ui.MentalSectionFragment"
         android:label="@string/mental_section"
-        tools:layout="@layout/fragment_mental_section" />
+        tools:layout="@layout/fragment_mental_section" >
+        <action
+            android:id="@+id/action_mentalSectionFragment_to_journalEntryFragment"
+            app:destination="@id/journalEntryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/physicalSectionFragment"
         android:name="com.example.vividize_unleashyourself.ui.PhysicalSectionFragment"
@@ -66,7 +70,11 @@
         android:id="@+id/journalsFragment"
         android:name="com.example.vividize_unleashyourself.ui.JournalsFragment"
         android:label="@string/journaling"
-        tools:layout="@layout/fragment_journals" />
+        tools:layout="@layout/fragment_journals" >
+        <action
+            android:id="@+id/action_journalsFragment_to_journalEntryFragment"
+            app:destination="@id/journalEntryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fiveStepsFragment"
         android:name="com.example.vividize_unleashyourself.ui.FiveStepsFragment"

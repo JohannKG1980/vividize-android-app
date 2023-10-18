@@ -131,7 +131,7 @@
     },
     {
       "id": "3:4783073096224099395",
-      "lastPropertyId": "6:2615541080333623211",
+      "lastPropertyId": "7:7914679052857243032",
       "name": "Quote",
       "properties": [
         {
@@ -163,6 +163,11 @@
         {
           "id": "6:2615541080333623211",
           "name": "aut_img_url",
+          "type": 9
+        },
+        {
+          "id": "7:7914679052857243032",
+          "name": "datestamp",
           "type": 9
         }
       ],
@@ -347,9 +352,38 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "8:8610763666589490828",
+      "lastPropertyId": "4:8988329715065260034",
+      "name": "AppSettings",
+      "properties": [
+        {
+          "id": "1:2705795354346839800",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8516291096277787220",
+          "name": "instructionWatched",
+          "type": 1
+        },
+        {
+          "id": "3:8847066459612552941",
+          "name": "audioContentActive",
+          "type": 1
+        },
+        {
+          "id": "4:8988329715065260034",
+          "name": "meditationAudioActive",
+          "type": 1
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "7:8430207112602473645",
+  "lastEntityId": "8:8610763666589490828",
   "lastIndexId": "3:7610308691444806446",
   "lastRelationId": "1:614419691163509419",
   "lastSequenceId": "0:0",

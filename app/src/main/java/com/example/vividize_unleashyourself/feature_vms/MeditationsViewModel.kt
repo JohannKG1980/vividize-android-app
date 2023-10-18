@@ -128,6 +128,11 @@ class MeditationsViewModel @Inject constructor(
 
     }
 
+    fun removeSession(session: MeditationSession) {
+        repository.removeMeditationSession(session)
+
+    }
+
     fun pauseRestartTimer() {
         if (_currentTimerState.value == TimerState.RUNNING) {
             timer?.cancel()

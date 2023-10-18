@@ -67,6 +67,15 @@ class JournalingViewModel @Inject constructor(
         }
 
     }
+    fun removeEntry(entry: JournalEntry) {
+        repository.removeJournalEntry(entry)
+
+    }
+
+    fun setCurrentEntry(entry: JournalEntry) {
+        _currentEntry.value =  entry
+        _currentContent.value = entry.content
+    }
 
 
 }

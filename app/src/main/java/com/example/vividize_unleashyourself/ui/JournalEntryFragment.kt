@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import android.view.GestureDetector
@@ -42,7 +43,7 @@ class JournalEntryFragment : Fragment() {
     private lateinit var binding: FragmentJournalEntryBinding
     private lateinit var inputMethManager: InputMethodManager
     private val viewModel: JournalingViewModel by activityViewModels()
-
+    private lateinit var aztecEditor: Aztec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
@@ -80,11 +81,11 @@ class JournalEntryFragment : Fragment() {
         toolbar.enableTaskList()
         toolbar.setToolbarItems(
             ToolbarItems.BasicLayout(
-                ToolbarAction.HEADING,
+//                ToolbarAction.HEADING, (is not saved)
                 ToolbarAction.BOLD,
                 ToolbarAction.ITALIC,
                 ToolbarAction.UNDERLINE,
-                ToolbarAction.STRIKETHROUGH,
+//                ToolbarAction.STRIKETHROUGH, (can not be properly reloaded into the editor)
                 ToolbarAction.LIST,
                 ToolbarAction.LINK,
                 ToolbarAction.ALIGN_LEFT,
@@ -97,6 +98,8 @@ class JournalEntryFragment : Fragment() {
 
 
         val toolbarClickListener = object : IAztecToolbarClickListener {
+
+
 
 
             override fun onToolbarCollapseButtonClicked() {
@@ -113,6 +116,7 @@ class JournalEntryFragment : Fragment() {
                 format: ITextFormat,
                 isKeyboardShortcut: Boolean,
             ) {
+                viewModel.contentBuffer(visualEditor.toHtml())
 
 
             }
@@ -132,15 +136,16 @@ class JournalEntryFragment : Fragment() {
             }
 
         }
-        Aztec.with(visualEditor, toolbar, toolbarClickListener)
-
+        aztecEditor = Aztec.with(visualEditor, toolbar, toolbarClickListener)
+        val fromText = viewModel.currentContent.value
+        visualEditor.fromHtml(fromText)
         visualEditor.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Nichts zu tun hier
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Nichts zu tun hier
+                viewModel.contentBuffer(s!!.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -196,6 +201,7 @@ class JournalEntryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         if (viewModel.currentContent.value != "") {
+            viewModel.contentBuffer(aztecEditor.visualEditor.editableText.toHtml())
             viewModel.saveEntry()
         }
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)

@@ -3,6 +3,7 @@ package com.example.vividize_unleashyourself.ui
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import android.view.ViewGroup
 import androidx.core.os.postDelayed
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.JournalEntriesAdapter
@@ -29,6 +32,10 @@ class JournalsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val animation = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
+
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
 
     }
 
@@ -43,11 +50,14 @@ class JournalsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = NavHostFragment.findNavController(requireParentFragment())
+
         binding.ivAddEntry.setOnClickListener {
             it.setButtonEffect()
             viewModel.newEntry()
             Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.journalEntryFragment)
+                val extras = FragmentNavigatorExtras(binding.root to "journal_fragment", binding.root to "journal_entry_fragment")
+            navController.navigate(R.id.action_mentalSectionFragment_to_journalEntryFragment, null,null,extras)
             }, 300)
         }
         addObserver()

@@ -37,6 +37,7 @@ class FiveStepsViewModel @Inject constructor(
     val currentStep: LiveData<CurrentStep>
         get() = _currentStep
 
+    private val tempFiveStepsList = mutableListOf<FiveSteps>()
 
     private val _currentSession = MutableLiveData<FiveStepsSession?>()
     val currentSession: LiveData<FiveStepsSession?>
@@ -96,7 +97,7 @@ class FiveStepsViewModel @Inject constructor(
     }
 
     fun openSession() {
-        if (!_instructionWatched.value!!) {
+        if (allSessions.value.isNullOrEmpty()) {
             _currentStep.value = CurrentStep.DESCRIPTION_FIRST
             _currentStep.value = _currentStep.value
         } else {
@@ -106,9 +107,9 @@ class FiveStepsViewModel @Inject constructor(
         if (_currentSession.value == null)
             _currentSession.value = FiveStepsSession()
         if (_currentSession.value != null && _currentSession.value!!.sessionFinished) {
-                _currentSession.value = FiveStepsSession()
+            _currentSession.value = FiveStepsSession()
 
-                _currentSession.value!!.stepCycles.add(FiveSteps())
+            _currentSession.value!!.stepCycles.add(FiveSteps())
 
         } else {
 
@@ -165,21 +166,29 @@ class FiveStepsViewModel @Inject constructor(
         } else if (finishedCycle.repeatAnswer && finishedCycle.cycleFinished) {
             _currentStep.value = CurrentStep.STEP_ONE
             _currentStep.value = _currentStep.value
-            _currentSession.value!!.stepCycles.add(_currentCycle.value!!)
-            _currentCycle.postValue(FiveSteps(_currentSession.value!!.stepCycles.last().cycleId + 1))
+            tempFiveStepsList.add(_currentCycle.value!!)
+            _currentCycle.postValue(FiveSteps(tempFiveStepsList.last().cycleId + 1))
         }
 
     }
 
 
     private fun saveFinishedSession() {
-        if (_currentSession.value != null)
-            repository.addFiveStepSession(_currentSession.value!!)
-        _currentSession.value = null
+        if (_currentSession.value != null) {
+            repository.addFiveStepSession(_currentSession.value!!, tempFiveStepsList)
+            tempFiveStepsList.clear()
+            _currentSession.value = null
+        }
     }
 
     fun removeSession(session: FiveStepsSession) {
-            repository.removeFiveStepSession(session)
+        repository.removeFiveStepSession(session)
+
     }
+
+    fun getSessionCycles(sessionId: Long): List<FiveSteps> {
+        return repository.getFiveStepsForSession(sessionId)
+    }
+
 
 }

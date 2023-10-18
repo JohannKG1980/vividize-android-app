@@ -1,6 +1,8 @@
 package com.example.vividize_unleashyourself.adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +34,7 @@ class MeditationsAdapter (private val context: Context,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is MeditationsViewHolder) {
+            val alertBuilder = AlertDialog.Builder(context, R.style.CustomAlertDialogTheme)
             val binding = holder.binding
             val meditationsSession = dataset[position]
             if (position == 0) {
@@ -50,7 +53,25 @@ class MeditationsAdapter (private val context: Context,
             binding.tvIntentionTitle.text = meditationsSession.intention
             binding.tvMoodStartTitle.text = context.getString(R.string.mood_before, moodToEmoji(meditationsSession.moodStart))
             binding.tvMoodEndTitle.text = context.getString(R.string.mood_after, moodToEmoji(meditationsSession.moodEnd))
+            binding.clDel.setOnClickListener {
+                binding.ivDelete.setButtonEffect()
+                alertBuilder.setTitle(R.string.alert_title)
+                alertBuilder.setMessage(R.string.alert_del_session)
 
+                alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+                    viewModel.removeSession(meditationsSession)
+                    dialog.dismiss()
+                }
+
+                alertBuilder.setNegativeButton(R.string.no) { dialog, _ ->
+                    dialog.dismiss()
+                }
+
+                val alertDialog = alertBuilder.create()
+                alertDialog.show()
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
+            }
 
         }
     }

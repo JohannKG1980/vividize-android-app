@@ -46,14 +46,17 @@ class FiveStepsAdapter(
             val alertBuilder = AlertDialog.Builder(context, R.style.CustomAlertDialogTheme)
             val session = dataset[position]
             val binding = holder.binding
-            val startIntensity = session.stepCycles.first().intensity
-            val endIntensity = session.stepCycles.last().intensityLeft
-            val relief = startIntensity - endIntensity
-            binding.tvTopic.text = session.stepCycles.first().stepOneInput
-            binding.tvCycles.text = session.stepCycles.size.toString()
+            val cycles = viewModel.getSessionCycles(session.sessionId)
+            if (cycles.isNotEmpty()) {
+                val startIntensity = cycles.first().intensity
+                val endIntensity = cycles.last().intensityLeft
+                val relief = startIntensity - endIntensity
+                binding.tvTopic.text = cycles.first().stepOneInput
+                binding.tvCycles.text = cycles.size.toString()
 
-            binding.tvIntensityStart.text = session.stepCycles.first().intensity.toString() + " %"
-            binding.tvIntensityEnd.text = relief.toString() + " %"
+                binding.tvIntensityStart.text = cycles.first().intensity.toString() + " %"
+                binding.tvIntensityEnd.text = relief.toString() + " %"
+            }
             if (position == 0) {
                 binding.clTopDate.visibility = VISIBLE
                 binding.tvDate.text = session.formattedDateTimestamp

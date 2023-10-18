@@ -40,7 +40,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FiveStepsFragment(
-    private val sectionBinding: FragmentMentalSectionBinding
+    private val sectionBinding: FragmentMentalSectionBinding,
 ) : Fragment() {
     private lateinit var binding: FragmentFiveStepsBinding
     private lateinit var stepOneOverlayBinding: StepOneOverlayBinding
@@ -59,7 +59,7 @@ class FiveStepsFragment(
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentFiveStepsBinding.inflate(layoutInflater)
@@ -95,13 +95,13 @@ class FiveStepsFragment(
             alertBuilder.setTitle(R.string.alert_title)
             alertBuilder.setMessage(R.string.alert_msg)
             alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
-            viewModel.closeSession()
-            binding.cvOverlay.fadeOut()
-            fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeOut()
-            stepOneOverlayBinding.overlayStepOne.fadeOut()
-            stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut()
-            stepFourOverlayBinding.overlayStepFour.fadeOut()
-            stepFiveOverlayBinding.overlayStepFive.fadeOut()
+                viewModel.closeSession()
+                binding.cvOverlay.fadeOut()
+                fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeOut()
+                stepOneOverlayBinding.overlayStepOne.fadeOut()
+                stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut()
+                stepFourOverlayBinding.overlayStepFour.fadeOut()
+                stepFiveOverlayBinding.overlayStepFive.fadeOut()
 
                 dialog.dismiss()
             }
@@ -118,7 +118,7 @@ class FiveStepsFragment(
         }
         binding.ivInfoFsm.setOnClickListener {
             it.setButtonEffect()
-           viewModel.openInstructions()
+            viewModel.openInstructions()
         }
 
         binding.clFiveMain.setOnTouchListener { _, _ ->
@@ -135,43 +135,42 @@ class FiveStepsFragment(
             viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
                 viewModel.currentStep.observe(viewLifecycleOwner) { currentStep ->
                     if (currentStep != CurrentStep.NO_CYCLE_NOW) {
-                        showOverlays(currentStep, instructed, currentCycle)
+                        showOverlays(currentStep, currentCycle)
                     }
                 }
             }
         }
 
         viewModel.allSessions.observe(viewLifecycleOwner) { sessions ->
-            binding.rvFsmSessions.adapter = FiveStepsAdapter(requireContext(),sessions, viewModel)
+            binding.rvFsmSessions.adapter = FiveStepsAdapter(requireContext(), sessions, viewModel)
 
         }
     }
 
     private fun showOverlays(
         currentStep: CurrentStep,
-        instructionsDone: Boolean,
-        currentCycle: FiveSteps
+        currentCycle: FiveSteps,
     ) {
 
-            when (currentStep) {
-                CurrentStep.DESCRIPTION_FIRST -> openInstructions()
-                CurrentStep.DESCRIPTION -> openInstructions(false)
-                CurrentStep.STEP_ONE -> openStepOne(currentCycle)
-                CurrentStep.STEP_TWO -> openStepTwo(currentCycle)
-                CurrentStep.STEP_THREE -> openStepThree(currentCycle)
-                CurrentStep.STEP_THREE_ADD -> openStepThreeAdd(currentCycle)
-                CurrentStep.STEP_FOUR -> openStepFour(currentCycle)
-                CurrentStep.STEP_FIVE -> openStepFive(currentCycle, currentStep)
-                CurrentStep.NO_CYCLE_NOW -> binding.cvOverlay.fadeOut()
+        when (currentStep) {
+            CurrentStep.DESCRIPTION_FIRST -> openInstructions()
+            CurrentStep.DESCRIPTION -> openInstructions(false)
+            CurrentStep.STEP_ONE -> openStepOne(currentCycle)
+            CurrentStep.STEP_TWO -> openStepTwo(currentCycle)
+            CurrentStep.STEP_THREE -> openStepThree(currentCycle)
+            CurrentStep.STEP_THREE_ADD -> openStepThreeAdd(currentCycle)
+            CurrentStep.STEP_FOUR -> openStepFour(currentCycle)
+            CurrentStep.STEP_FIVE -> openStepFive(currentCycle, currentStep)
+            CurrentStep.NO_CYCLE_NOW -> binding.cvOverlay.fadeOut()
 
-            }
+        }
 
     }
 
     private fun openInstructions(firstTime: Boolean = true) {
         binding.cvOverlay.fadeIn(300)
         fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeIn(300)
-        if(!firstTime){
+        if (!firstTime) {
             fiveStepsDescriptionOverlayBinding.btnNext.visibility = GONE
         } else {
             fiveStepsDescriptionOverlayBinding.btnNext.visibility = VISIBLE
@@ -191,7 +190,7 @@ class FiveStepsFragment(
 
 
         fiveStepsDescriptionOverlayBinding.btnNext.setOnClickListener {
-            if(firstTime) {
+            if (firstTime) {
                 viewModel.descriptionWatched()
                 fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeOut(200)
                 viewModel.changeToStepOne()
@@ -213,10 +212,14 @@ class FiveStepsFragment(
         stepOneOverlayBinding.overlayStepOne.fadeIn(500)
 
 
-        val stepText = if (currentCycle.repeatAnswer) {
-            getString(viewModel.stepOneRepeat.content)
+        var stepText = ""
+        if (currentCycle.repeatAnswer) {
+            stepText = getString(viewModel.stepOneRepeat.content)
+            stepOneOverlayBinding.tfLayout.visibility = GONE
         } else {
-            getString(viewModel.stepOne.content)
+            stepText = getString(viewModel.stepOne.content)
+            stepOneOverlayBinding.tfLayout.visibility = VISIBLE
+
         }
 
         stepOneOverlayBinding.tvStepText.text = stepText
@@ -228,7 +231,7 @@ class FiveStepsFragment(
 
             val input = stepOneOverlayBinding.teTopic.text.toString()
             var topic = ""
-            if(input != "") {
+            if (input != "") {
                 topic = input
             } else {
                 topic = getString(R.string.no_topic)
@@ -332,7 +335,7 @@ class FiveStepsFragment(
 
     private fun openStepFive(currentCycle: FiveSteps, currentStep: CurrentStep) {
 
-            stepFiveOverlayBinding.overlayStepFive.fadeIn(300)
+        stepFiveOverlayBinding.overlayStepFive.fadeIn(300)
 
         stepFiveOverlayBinding.btnRepeat.setOnClickListener {
             val intensity = stepFiveOverlayBinding.slEndIntensity.value.toInt()

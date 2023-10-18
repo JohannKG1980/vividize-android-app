@@ -1,9 +1,13 @@
 package com.example.vividize_unleashyourself.data
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.vividize_unleashyourself.data.model.FiveSteps
 import com.example.vividize_unleashyourself.data.model.FiveStepsSession
+import com.example.vividize_unleashyourself.data.model.FiveSteps_
 import com.example.vividize_unleashyourself.data.model.JournalEntry
 import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.data.model.Quote
@@ -15,6 +19,7 @@ import io.objectbox.BoxStore
 import io.objectbox.Property
 import io.objectbox.kotlin.boxFor
 import io.objectbox.query.QueryBuilder
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
@@ -28,6 +33,7 @@ class AppRepository @Inject constructor(
 
     //Boxes
     private val fiveStepsSessionBox: Box<FiveStepsSession> = boxStore.boxFor()
+    private val fiveStepCyclesBox: Box<FiveSteps> =boxStore.boxFor()
     private val meditationSessionBox: Box<MeditationSession> = boxStore.boxFor()
     private val journalEntriesBox: Box<JournalEntry> = boxStore.boxFor()
     private val dailyQuoteBox: Box<Quote> = boxStore.boxFor()
@@ -76,14 +82,34 @@ class AppRepository @Inject constructor(
             _fiveStepSessions.postValue(updatedItems)
         }
 
-    fun addFiveStepSession(session: FiveStepsSession) {
+    fun addFiveStepSession(session: FiveStepsSession, cycles: MutableList<FiveSteps> ) {
         fiveStepsSessionBox.put(session)
+        Handler(Looper.getMainLooper()).postDelayed({
+        addFiveStepsToSession(cycles)
+        }, 200)
     }
+
 
     fun removeFiveStepSession(session: FiveStepsSession) {
         fiveStepsSessionBox.remove(session)
     }
 
+   fun addFiveStepsToSession(cycles: MutableList<FiveSteps>) {
+        val session = fiveStepsSessionBox.get(_fiveStepSessions.value?.last()!!.sessionId)
+        for(c in cycles) {
+            c.parentSession.target = session
+        }
+            fiveStepCyclesBox.put(cycles)
+
+    }
+    fun getFiveStepsForSession(sessionId: Long): List<FiveSteps> {
+
+        return fiveStepCyclesBox.query().equal(FiveSteps_.parentSessionId, sessionId).build().find()
+    }
+
+    fun removeFiveSteps(cycles: List<FiveSteps>) {
+        fiveStepCyclesBox.remove(cycles)
+    }
 
     //Medidations section
 

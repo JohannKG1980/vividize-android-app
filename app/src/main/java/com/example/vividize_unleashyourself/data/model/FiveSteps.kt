@@ -9,7 +9,7 @@ import io.objectbox.relation.ToOne
 
 
 @Entity
-data class FiveSteps(@Id var cycleId: Long = 0) {
+data class FiveSteps(@Id(assignable = true) var cycleId: Long = 0) {
 
     lateinit var parentSession: ToOne<FiveStepsSession>
 
