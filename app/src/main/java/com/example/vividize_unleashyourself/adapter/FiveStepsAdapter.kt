@@ -1,19 +1,28 @@
 package com.example.vividize_unleashyourself.adapter
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.databinding.FiveStepItemLayoutBinding
+import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FiveStepsAdapter(
+    private val context: Context,
     private val dataset: MutableList<FiveStepsSession>,
-    private val viewModel: FiveStepsViewModel
+    private val viewModel: FiveStepsViewModel,
 ) : RecyclerView.Adapter<ViewHolder>() {
 
     inner class FiveStepsViewHolder(val binding: FiveStepItemLayoutBinding) :
@@ -34,12 +43,13 @@ class FiveStepsAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is FiveStepsViewHolder) {
+            val alertBuilder = AlertDialog.Builder(context, R.style.CustomAlertDialogTheme)
             val session = dataset[position]
             val binding = holder.binding
             val startIntensity = session.stepCycles.first().intensity
             val endIntensity = session.stepCycles.last().intensityLeft
             val relief = startIntensity - endIntensity
-            binding.tvTopic.text  = session.stepCycles.first().stepOneInput
+            binding.tvTopic.text = session.stepCycles.first().stepOneInput
             binding.tvCycles.text = session.stepCycles.size.toString()
 
             binding.tvIntensityStart.text = session.stepCycles.first().intensity.toString() + " %"
@@ -56,6 +66,26 @@ class FiveStepsAdapter(
                 } else {
                     binding.clTopDate.visibility = GONE
                 }
+            }
+
+            binding.clDel.setOnClickListener {
+                binding.ivDelete.setButtonEffect()
+                alertBuilder.setTitle(R.string.alert_title)
+                alertBuilder.setMessage(R.string.alert_del_session)
+
+                alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+                    viewModel.removeSession(session)
+                    dialog.dismiss()
+                }
+
+                alertBuilder.setNegativeButton(R.string.no) { dialog, _ ->
+                    dialog.dismiss()
+                }
+
+                val alertDialog = alertBuilder.create()
+                alertDialog.show()
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
             }
         }
     }

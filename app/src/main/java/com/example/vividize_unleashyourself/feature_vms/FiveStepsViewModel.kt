@@ -178,9 +178,8 @@ class FiveStepsViewModel @Inject constructor(
         _currentSession.value = null
     }
 
-    fun removeSession() {
-        if (_currentSession.value != null)
-            repository.removeFiveStepSession(_currentSession.value!!)
+    fun removeSession(session: FiveStepsSession) {
+            repository.removeFiveStepSession(session)
     }
 
 }

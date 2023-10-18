@@ -95,5 +95,7 @@
     <string name="alert_title">Achtung!</string>
     <string name="alert_msg">Diese Session wirklich abbrechen?</string>
     <string name="alert_msg_replay">Die Session wirklich neu starten?</string>
+    <string name="alert_del_session">Diese Session wirklich dauerhaft löschen?</string>
+    <string name="alert_del_journal">Diesen Eintrag wirklich dauerhaft löschen?</string>
 
 </resources>

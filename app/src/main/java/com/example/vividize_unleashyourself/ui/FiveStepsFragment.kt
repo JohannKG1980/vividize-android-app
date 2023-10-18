@@ -91,6 +91,9 @@ class FiveStepsFragment(
 
         binding.ivCancleButton.setOnClickListener {
             it.setButtonEffect()
+
+            alertBuilder.setTitle(R.string.alert_title)
+            alertBuilder.setMessage(R.string.alert_msg)
             alertBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
             viewModel.closeSession()
             binding.cvOverlay.fadeOut()
@@ -139,7 +142,7 @@ class FiveStepsFragment(
         }
 
         viewModel.allSessions.observe(viewLifecycleOwner) { sessions ->
-            binding.rvFsmSessions.adapter = FiveStepsAdapter(sessions, viewModel)
+            binding.rvFsmSessions.adapter = FiveStepsAdapter(requireContext(),sessions, viewModel)
 
         }
     }

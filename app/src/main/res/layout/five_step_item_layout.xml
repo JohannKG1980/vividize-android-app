@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_top_date"
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cl_del"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_top_date"
@@ -52,11 +52,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Topic: "
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Topic: " />
 
         <TextView
             android:id="@+id/tv_topic_title"
@@ -66,15 +66,14 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:singleLine="true"
-            tools:text="Angst vor Gespräch mit dem  Chef"
             android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="@+id/tv_topic"
-            app:layout_constraintEnd_toStartOf="@+id/cl_item_delete"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/tv_topic"
             app:layout_constraintTop_toTopOf="@+id/tv_topic"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            tools:text="Angst vor Gespräch mit dem  Chef" />
 
         <TextView
             android:id="@+id/tv_cycles_title"
@@ -82,23 +81,23 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="Cycles: "
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_topic"
-            app:layout_constraintTop_toBottomOf="@+id/tv_topic" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_topic"
+            tools:text="Cycles: " />
 
         <TextView
             android:id="@+id/tv_cycles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="3"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tv_cycles_title"
             app:layout_constraintStart_toEndOf="@+id/tv_cycles_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_cycles_title" />
+            app:layout_constraintTop_toTopOf="@+id/tv_cycles_title"
+            tools:text="3" />
 
         <TextView
             android:id="@+id/tv_intensity_start_title"
@@ -119,12 +118,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            tools:text="70%"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tv_cycles_title"
             app:layout_constraintStart_toEndOf="@+id/tv_intensity_start_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_cycles_title" />
+            app:layout_constraintTop_toTopOf="@+id/tv_cycles_title"
+            tools:text="70%" />
 
         <TextView
             android:id="@+id/tv_intensity_end_title"
@@ -152,32 +151,29 @@
             app:layout_constraintStart_toEndOf="@+id/tv_intensity_end_title"
             app:layout_constraintTop_toTopOf="@+id/tv_cycles_title" />
 
-        <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/cl_item_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/color_no"
-            app:layoutDescription="@xml/five_step_item_layout_xml_cl_item_delete_scene"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_del"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_top_date">
+
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/baseline_delete_outline_24"
+            app:tint="@color/secondary_transparent" />
 
-
-            <TextView
-                android:id="@+id/tv_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:text="Delete"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </androidx.constraintlayout.motion.widget.MotionLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -185,8 +181,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
-        android:backgroundTint="@color/white"
         android:alpha="0.4"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
