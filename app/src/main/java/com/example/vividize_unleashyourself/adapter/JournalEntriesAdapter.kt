@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.vividize_unleashyourself.data.model.JournalEntry
@@ -45,7 +46,7 @@ class JournalEntriesAdapter (private val context: Context,
                     binding.clTopDate.visibility = View.GONE
                 }
             }
-            binding.tvTopicTitle.text = entry.content
+            binding.tvTopicTitle.text = HtmlCompat.fromHtml(entry.content, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
 
 

@@ -7,10 +7,14 @@ import com.example.vividize_unleashyourself.data.model.FiveStepsSession
 import com.example.vividize_unleashyourself.data.model.JournalEntry
 import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.data.model.Quote
+import com.example.vividize_unleashyourself.data.model.Quote_
 import com.example.vividize_unleashyourself.data.remote.QuotesApiService
+import com.example.vividize_unleashyourself.utils.getCurrentDate
 import io.objectbox.Box
 import io.objectbox.BoxStore
+import io.objectbox.Property
 import io.objectbox.kotlin.boxFor
+import io.objectbox.query.QueryBuilder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
@@ -19,13 +23,14 @@ const val TAG = "AppRepository"
 
 class AppRepository @Inject constructor(
     private val apiService: QuotesApiService,
-    private val boxStore: BoxStore,
+   boxStore: BoxStore,
 ) {
 
     //Boxes
     private val fiveStepsSessionBox: Box<FiveStepsSession> = boxStore.boxFor()
     private val meditationSessionBox: Box<MeditationSession> = boxStore.boxFor()
     private val journalEntriesBox: Box<JournalEntry> = boxStore.boxFor()
+    private val dailyQuoteBox: Box<Quote> = boxStore.boxFor()
 
 
     //DailyQuote
@@ -35,14 +40,28 @@ class AppRepository @Inject constructor(
     val dailyQuote: LiveData<Quote>
         get() = _dailyQuote
 
+    private val dailyQuoteSubscription =
+        dailyQuoteBox.query().build().subscribe().observer { updatedItem ->
+            _dailyQuote.postValue(updatedItem[0])
+        }
 
-    suspend fun getQuote(id: String) {
-        try {
-            _dailyQuote.postValue(
-                apiService.getQuote().random()
-            )
-        } catch (e: Exception) {
-            Log.d(TAG, "API Call failed $e")
+    private fun clearQuoteBox() {
+        dailyQuoteBox.removeAll()
+    }
+
+
+    suspend fun getQuote() {
+       val storedQuote = dailyQuoteBox.all.firstOrNull()
+
+        if (_dailyQuote.value == null || storedQuote?.datestamp != getCurrentDate()) {
+            try {
+                val newQuote = apiService.getQuote().random()
+                clearQuoteBox()
+                dailyQuoteBox.put(newQuote)
+            } catch (e: Exception) {
+                Log.d(TAG, "API Call failed $e")
+            }
+
         }
     }
 
@@ -93,7 +112,7 @@ class AppRepository @Inject constructor(
     val journalEntries = _journalEntries.asStateFlow()
 
     private val journalSubscription =
-       journalEntriesBox.query().build().subscribe().observer { updatedItems ->
+        journalEntriesBox.query().build().subscribe().observer { updatedItems ->
             _journalEntries.value = updatedItems
         }
 
@@ -104,9 +123,8 @@ class AppRepository @Inject constructor(
     }
 
     fun removeJournalEntry(entry: JournalEntry) {
-         journalEntriesBox.remove(entry)
+        journalEntriesBox.remove(entry)
     }
-
 
 
     //Cleanup to prevent Memory Leaks
@@ -114,5 +132,8 @@ class AppRepository @Inject constructor(
         fiveStepsSubscription.cancel()
         meditationSubscription.cancel()
         journalSubscription.cancel()
+        dailyQuoteSubscription.cancel()
     }
+
+
 }

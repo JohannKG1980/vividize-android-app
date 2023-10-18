@@ -21,10 +21,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.text.toHtml
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.vividize_unleashyourself.databinding.FragmentJournalEntryBinding
 import com.example.vividize_unleashyourself.feature_vms.JournalingViewModel
+import com.example.vividize_unleashyourself.feature_vms.undoRedoAction
 import com.google.android.material.internal.ViewUtils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import org.wordpress.aztec.Aztec
 import org.wordpress.aztec.AztecTextFormat
 import org.wordpress.aztec.ITextFormat
@@ -141,14 +144,37 @@ class JournalEntryFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                viewModel.contentBuffer(s!!.toHtml())
+                lifecycleScope.launchWhenStarted {
+
+                    viewModel.editAction.collectLatest {
+                        when (it) {
+                            undoRedoAction.UNDO -> {
+                                visualEditor.undo()
+                                viewModel.contentBuffer(s!!.toHtml())
+
+                                viewModel.resetActionTrigger()
+                            }
+                            undoRedoAction.REDO -> {
+                                visualEditor.redo()
+                                viewModel.contentBuffer(s!!.toHtml())
+
+                                viewModel.resetActionTrigger()
+
+                            }
+                            else -> {
+                                viewModel.contentBuffer(s!!.toHtml())
+
+                            }
+                        }
+
+                    }
+
+                }
 
             }
         })
 
 
-        visualEditor.undo()
-        visualEditor.redo()
     }
 
     private fun isKeyboardOpen(): Boolean {
@@ -169,7 +195,9 @@ class JournalEntryFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.saveEntry()
+        if (viewModel.currentContent.value != "") {
+            viewModel.saveEntry()
+        }
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
     }

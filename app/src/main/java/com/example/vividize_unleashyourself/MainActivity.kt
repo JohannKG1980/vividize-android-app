@@ -29,6 +29,7 @@ import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
 import com.example.vividize_unleashyourself.feature_vms.MeditationsViewModel
 import com.example.vividize_unleashyourself.feature_vms.CurrentState
+import com.example.vividize_unleashyourself.feature_vms.JournalingViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     private val fiveStepsViewModel: FiveStepsViewModel by viewModels()
     private val meditationsViewModel: MeditationsViewModel by viewModels()
+    private val journalingViewModel: JournalingViewModel by viewModels()
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -187,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                             motionControl()
                             mainViewModel.controlQuickstart(1)
                             fiveStepsViewModel.openSession()
-                        },300)
+                        }, 300)
 
                     }
                     binding.ibAddMedi.setOnClickListener {
@@ -196,7 +199,7 @@ class MainActivity : AppCompatActivity() {
                             motionControl()
                             mainViewModel.controlQuickstart(0)
                             meditationsViewModel.openSessionSelector()
-                        },300)
+                        }, 300)
                     }
 
 
@@ -208,15 +211,31 @@ class MainActivity : AppCompatActivity() {
                     binding.fab.visibility = View.GONE
                     binding.ivBackButton.visibility = VISIBLE
                     binding.ivBackButton.isClickable = true
+                    binding.ivUndo.visibility = VISIBLE
+                    binding.ivUndo.isClickable = true
+                    binding.ivRedo.visibility = VISIBLE
+                    binding.ivRedo.isClickable = true
 
                     binding.ivBackButton.setOnClickListener {
                         it.setButtonEffect()
                         Handler(Looper.getMainLooper()).postDelayed({
-                        navController.navigateUp()
-                        it.visibility = INVISIBLE
-                        it.isClickable = false
-                        },200)
+                            navController.navigateUp()
+                            it.visibility = INVISIBLE
+                            it.isClickable = false
+                            binding.ivUndo.visibility = INVISIBLE
+                            binding.ivUndo.isClickable = false
+                            binding.ivRedo.visibility = INVISIBLE
+                            binding.ivRedo.isClickable = false
+                        }, 200)
 
+                    }
+                    binding.ivUndo.setOnClickListener {
+                        it.setButtonEffect()
+                        journalingViewModel.triggerUndo()
+                    }
+                    binding.ivRedo.setOnClickListener {
+                        it.setButtonEffect()
+                        journalingViewModel.triggerRedo()
                     }
                 }
 
@@ -232,7 +251,7 @@ class MainActivity : AppCompatActivity() {
                             navController.navigate(R.id.mentalSectionFragment)
                             mainViewModel.controlQuickstart(1)
                             fiveStepsViewModel.openSession()
-                        },300)
+                        }, 300)
 
                     }
                     binding.ibAddMedi.setOnClickListener {
@@ -242,7 +261,7 @@ class MainActivity : AppCompatActivity() {
                             navController.navigate(R.id.mentalSectionFragment)
                             mainViewModel.controlQuickstart(0)
                             meditationsViewModel.openSessionSelector()
-                        },200)
+                        }, 200)
                     }
 
                 }
@@ -314,7 +333,7 @@ class MainActivity : AppCompatActivity() {
                         binding.bottomNavigationView.menu.forEach {
                             it.isEnabled = false
                         }
-                         binding.fab.setFadeEnabled(false)
+                        binding.fab.setFadeEnabled(false)
                     } else {
                         binding.bottomNavigationView.setFadeEnabled(true)
                         binding.bottomNavigationView.menu.forEach {

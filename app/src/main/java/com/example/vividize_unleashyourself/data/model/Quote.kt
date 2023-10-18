@@ -1,5 +1,6 @@
 package com.example.vividize_unleashyourself.data.model
 
+import com.example.vividize_unleashyourself.utils.getCurrentDate
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 
@@ -11,4 +12,8 @@ data class Quote(
     val quote_de: String = "",
     val bg_img_url: String = "",
     val aut_img_url: String = "",
-)
+) {
+
+    val datestamp: String = getCurrentDate()
+
+}

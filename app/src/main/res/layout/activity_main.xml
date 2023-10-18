@@ -49,6 +49,32 @@
                     app:srcCompat="@drawable/baseline_settings_24"
                     app:tint="@color/secondary_app" />
 
+                <ImageView
+                    android:id="@+id/iv_redo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="24dp"
+                    android:visibility="invisible"
+                    android:clickable="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_settings"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/baseline_redo_24"
+                    app:tint="@color/secondary_app" />
+
+                <ImageView
+                    android:id="@+id/iv_undo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="invisible"
+                    android:clickable="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_redo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/outline_undo_24"
+                    app:tint="@color/secondary_app" />
+
                 <TextView
                     android:id="@+id/tv_page_title"
                     android:layout_width="wrap_content"
