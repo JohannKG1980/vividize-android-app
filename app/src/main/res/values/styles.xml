@@ -1,0 +1,60 @@
+<resources>
+    <style name="Widget.Theme.VividizeUnleashYourself.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:layout_marginStart">0dp</item>
+    </style>
+    <style name="Widget.Custom.TextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <item name="materialThemeOverlay">@style/ThemeOverlay.Design.TextInputEditText</item>
+    <item name="enforceMaterialTheme">false</item>
+    <item name="enforceTextAppearance">false</item>
+
+    <item name="boxBackgroundMode">none</item>
+    <item name="boxStrokeColor">@color/on_primary_app</item>
+    <item name="errorIconDrawable">@null</item>
+    <item name="startIconTint">@color/design_icon_tint</item>
+    <item name="endIconTint">@color/design_icon_tint</item>
+    <item name="passwordToggleDrawable">@drawable/design_password_eye</item>
+    <item name="passwordToggleTint">@color/design_icon_tint</item>
+    <item name="passwordToggleContentDescription">@string/password_toggle_content_description</item>
+
+    <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
+    <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
+    <item name="errorTextAppearance">@style/TextAppearance.Design.Error</item>
+    <item name="helperTextTextAppearance">@style/TextAppearance.Design.HelperText</item>
+    <item name="hintTextAppearance">@style/TextAppearance.Design.Hint</item>
+    <item name="placeholderTextAppearance">@style/TextAppearance.Design.Placeholder</item>
+    <item name="prefixTextAppearance">@style/TextAppearance.Design.Prefix</item>
+    <item name="suffixTextAppearance">@style/TextAppearance.Design.Suffix</item>
+
+    <item name="counterTextColor">@null</item>
+    <item name="counterOverflowTextColor">@null</item>
+    <item name="errorTextColor">@null</item>
+    <item name="helperTextTextColor">@null</item>
+    <item name="hintTextColor">@null</item>
+    <item name="placeholderTextColor">@null</item>
+    <item name="prefixTextColor">@null</item>
+    <item name="suffixTextColor">@null</item>
+
+    <item name="shapeAppearance">@null</item>
+    <item name="shapeAppearanceOverlay">@null</item>
+
+    </style>
+
+    <!-- Benutzerdefiniertes AlertDialog-Theme -->
+    <style name="CustomAlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/alert_dialog_bg</item>
+
+
+        <item name="android:textColorPrimary">@color/white</item>
+
+
+        <item name="android:textColor">@android:color/holo_red_light</item>
+
+
+        <item name="colorAccent">@color/secondary_app</item>
+    </style>
+</resources>

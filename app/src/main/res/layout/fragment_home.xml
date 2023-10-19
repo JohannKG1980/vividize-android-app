@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/iv_home_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/taosit_temple"
+        android:transitionName="bg_img_home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_cv_quote"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#72070A0D"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="328dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_quote"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="62dp"
+        android:transitionName="quote_card_home"
+        app:cardBackgroundColor="#23000000"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <eightbitlab.com.blurview.BlurView
+            android:id="@+id/blur_view1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:blurOverlayColor="#45000000">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_author"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    app:cardCornerRadius="150dp"
+                    app:cardElevation="0dp"
+                    android:layout_marginStart="-20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <ImageView
+                        android:id="@+id/iv_author"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/norman_vincent_peale" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/tv_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="12"
+                    android:fontFamily="@font/allan"
+                    android:maxWidth="120dp"
+                    android:rotation="-9"
+                    android:text="@string/no_author"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tv_quote"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    android:maxWidth="350dp"
+                    android:textSize="20sp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cv_author"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    android:text="Du musst es dir in deinem Herzen und deinem Verstand vorstellen, bevor du es empfangen kannst. Wenn du glaubst, dann sind alle Dinge möglich." />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </eightbitlab.com.blurview.BlurView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

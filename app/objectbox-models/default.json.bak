@@ -1,0 +1,402 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5736604712224506443",
+      "lastPropertyId": "9:2702804416627302643",
+      "name": "Meditation",
+      "properties": [
+        {
+          "id": "1:949971117414526378",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:5020016397712189658",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7713070953768142491",
+          "name": "guided",
+          "type": 1
+        },
+        {
+          "id": "4:3208510649565287990",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "5:4268966578715623804",
+          "name": "videoPath",
+          "type": 9
+        },
+        {
+          "id": "6:4293103176537997618",
+          "name": "audioPath",
+          "type": 9
+        },
+        {
+          "id": "7:310762806299378789",
+          "name": "duration",
+          "type": 6
+        },
+        {
+          "id": "8:6701539158915582364",
+          "name": "sessionLenght",
+          "type": 9
+        },
+        {
+          "id": "9:2702804416627302643",
+          "name": "cardBg",
+          "type": 5
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4919755954802371768",
+      "lastPropertyId": "12:5286039265511242432",
+      "name": "MeditationSession",
+      "properties": [
+        {
+          "id": "1:727453976840070081",
+          "name": "sessionId",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8817093179218521339",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "3:7690548111310649886",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "4:1495996509140986650",
+          "name": "setLenght",
+          "type": 6
+        },
+        {
+          "id": "5:1231058489604644727",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        },
+        {
+          "id": "6:3907815100472048741",
+          "name": "intention",
+          "type": 9
+        },
+        {
+          "id": "7:6333735035994585560",
+          "name": "note",
+          "type": 9
+        },
+        {
+          "id": "8:6618555486214999984",
+          "name": "moodStart",
+          "type": 8
+        },
+        {
+          "id": "9:5870590283069266754",
+          "name": "moodEnd",
+          "type": 8
+        },
+        {
+          "id": "10:8347783622801789196",
+          "name": "meditationId",
+          "indexId": "1:4737797641779719543",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Meditation"
+        },
+        {
+          "id": "11:4378853015103004233",
+          "name": "guided",
+          "type": 1
+        },
+        {
+          "id": "12:5286039265511242432",
+          "name": "duration",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4783073096224099395",
+      "lastPropertyId": "7:7914679052857243032",
+      "name": "Quote",
+      "properties": [
+        {
+          "id": "1:1094295268772738267",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:6798834150084831534",
+          "name": "Author",
+          "type": 9
+        },
+        {
+          "id": "3:8648147686491839782",
+          "name": "Quote_en",
+          "type": 9
+        },
+        {
+          "id": "4:7147960884244057052",
+          "name": "quote_de",
+          "type": 9
+        },
+        {
+          "id": "5:151092497393824705",
+          "name": "bg_img_url",
+          "type": 9
+        },
+        {
+          "id": "6:2615541080333623211",
+          "name": "aut_img_url",
+          "type": 9
+        },
+        {
+          "id": "7:7914679052857243032",
+          "name": "datestamp",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:2182385196827196590",
+      "lastPropertyId": "15:7350852168915072478",
+      "name": "FiveSteps",
+      "properties": [
+        {
+          "id": "1:5683219461012220538",
+          "name": "cycleId",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:5289191103895327226",
+          "name": "stepOneInput",
+          "type": 9
+        },
+        {
+          "id": "3:1016061340996705286",
+          "name": "intensity",
+          "type": 5
+        },
+        {
+          "id": "4:9036881949369141377",
+          "name": "stepTwoAnswer",
+          "type": 1
+        },
+        {
+          "id": "5:7175001190239174661",
+          "name": "stepThreeAnswer",
+          "type": 1
+        },
+        {
+          "id": "6:5413257739207364155",
+          "name": "stepThreeBetterBeFree",
+          "type": 1
+        },
+        {
+          "id": "7:7849563039837115788",
+          "name": "stepFourAnswer",
+          "type": 9
+        },
+        {
+          "id": "8:1601150875902862702",
+          "name": "intensityLeft",
+          "type": 5
+        },
+        {
+          "id": "9:814332138980371066",
+          "name": "repeatAnswer",
+          "type": 1
+        },
+        {
+          "id": "10:8926678049606033693",
+          "name": "cycleFinished",
+          "type": 1
+        },
+        {
+          "id": "11:5974589951940441828",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "12:774916460266651101",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "13:336121183829563449",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        },
+        {
+          "id": "15:7350852168915072478",
+          "name": "parentSessionId",
+          "indexId": "3:7610308691444806446",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "FiveStepsSession"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:9027357473983529425",
+      "lastPropertyId": "5:1462611934531050210",
+      "name": "FiveStepsSession",
+      "properties": [
+        {
+          "id": "1:8220004096175113405",
+          "name": "sessionId",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:725555050441362798",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "3:8320604379481906769",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "4:7107010092808857340",
+          "name": "sessionFinished",
+          "type": 1
+        },
+        {
+          "id": "5:1462611934531050210",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:614419691163509419",
+          "name": "stepCycles",
+          "targetId": "4:2182385196827196590"
+        }
+      ]
+    },
+    {
+      "id": "6:2381042038305727316",
+      "lastPropertyId": "6:3383081750649779495",
+      "name": "JournalEntry",
+      "properties": [
+        {
+          "id": "1:3991235490943063081",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "3:6205113973230318691",
+          "name": "content",
+          "type": 9
+        },
+        {
+          "id": "4:7376074311909303135",
+          "name": "datestamp",
+          "type": 9
+        },
+        {
+          "id": "5:4916720695341604265",
+          "name": "timestamp",
+          "type": 9
+        },
+        {
+          "id": "6:3383081750649779495",
+          "name": "formattedDateTimestamp",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:8430207112602473645",
+      "lastPropertyId": "3:3136124302923593880",
+      "name": "Question",
+      "properties": [
+        {
+          "id": "1:8598362844622165202",
+          "name": "content",
+          "type": 5
+        },
+        {
+          "id": "2:2504502152103947796",
+          "name": "audioPath",
+          "type": 9
+        },
+        {
+          "id": "3:3136124302923593880",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:8610763666589490828",
+      "lastPropertyId": "4:8988329715065260034",
+      "name": "AppSettings",
+      "properties": [
+        {
+          "id": "1:2705795354346839800",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8516291096277787220",
+          "name": "instructionWatched",
+          "type": 1
+        },
+        {
+          "id": "3:8847066459612552941",
+          "name": "audioContentActive",
+          "type": 1
+        },
+        {
+          "id": "4:8988329715065260034",
+          "name": "meditationAudioActive",
+          "type": 1
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "8:8610763666589490828",
+  "lastIndexId": "3:7610308691444806446",
+  "lastRelationId": "1:614419691163509419",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [
+    9207195099272916588
+  ],
+  "retiredPropertyUids": [
+    8137768771046957121,
+    4373210078673284144
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

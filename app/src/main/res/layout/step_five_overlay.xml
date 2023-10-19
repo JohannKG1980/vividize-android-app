@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/overlay_step_five"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/stepFiveTitle"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_step_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/stepFive"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step" />
+
+    <TextView
+        android:id="@+id/tv_intensity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:paddingEnd="17dp"
+        android:text="@string/intensityStart"
+        android:textAlignment="viewEnd"
+        android:textSize="16sp"
+        android:textStyle=""
+        app:layout_constraintBottom_toTopOf="@+id/sl_end_intensity"
+        app:layout_constraintEnd_toEndOf="@id/sl_end_intensity"
+        app:layout_constraintStart_toStartOf="@id/sl_end_intensity" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:layout_marginHorizontal="14dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sl_end_intensity"
+        app:layout_constraintEnd_toEndOf="@+id/sl_end_intensity"
+        app:layout_constraintStart_toStartOf="@+id/sl_end_intensity"
+        app:layout_constraintTop_toTopOf="@+id/sl_end_intensity">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.6"
+            app:srcCompat="@drawable/tick_gradient" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sl_end_intensity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:contentDescription="@string/slider_desc"
+        android:stepSize="1"
+        android:valueFrom="0.0"
+        android:valueTo="100.0"
+        app:layout_constraintBottom_toTopOf="@+id/tv_repeat_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step_text"
+        app:thumbColor="@color/secondary_app"
+        app:tickColorActive="#39000000"
+        app:tickColorInactive="#4FFFFFFF"
+        app:trackColorActive="@color/secondary_transparent"
+        app:trackColorInactive="#384845"
+        app:trackHeight="6dp" />
+
+    <TextView
+        android:id="@+id/tv_repeat_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/askForRepeat"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_repeat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_repeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/repeat"
+        android:textColor="@color/white"
+        app:backgroundTint="#515E7B75"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_complete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/finish"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/color_no"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

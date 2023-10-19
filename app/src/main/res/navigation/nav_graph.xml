@@ -3,21 +3,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vividize_unleashyourself.ui.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/mentalSectionFragment"
         android:name="com.example.vividize_unleashyourself.ui.MentalSectionFragment"
-        android:label="fragment_mental_section"
-        tools:layout="@layout/fragment_mental_section" />
+        android:label="@string/mental_section"
+        tools:layout="@layout/fragment_mental_section" >
+        <action
+            android:id="@+id/action_mentalSectionFragment_to_journalEntryFragment"
+            app:destination="@id/journalEntryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/physicalSectionFragment"
         android:name="com.example.vividize_unleashyourself.ui.PhysicalSectionFragment"
-        android:label="fragment_physical_section"
+        android:label="@string/physical_section"
         tools:layout="@layout/fragment_physical_section" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.vividize_unleashyourself.ui.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.vividize_unleashyourself.ui.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" />
+    <fragment
+        android:id="@+id/forgotPassFragment"
+        android:name="com.example.vividize_unleashyourself.ui.ForgotPassFragment"
+        android:label="fragment_forgot_pass"
+        tools:layout="@layout/fragment_forgot_pass" />
+    <fragment
+        android:id="@+id/fullscreenFragment"
+        android:name="com.example.vividize_unleashyourself.ui.FullscreenFragment"
+        android:label="fragment_fullscreen"
+        tools:layout="@layout/fragment_fullscreen" >
+        <action
+            android:id="@+id/action_fullscreenFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/fullscreenFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.vividize_unleashyourself.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashScreenFragment_to_fullscreenFragment"
+            app:destination="@id/fullscreenFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/meditationsFragment"
+        android:name="com.example.vividize_unleashyourself.ui.MeditationsFragment"
+        android:label="@string/meditations"
+        tools:layout="@layout/fragment_meditations" />
+    <fragment
+        android:id="@+id/journalsFragment"
+        android:name="com.example.vividize_unleashyourself.ui.JournalsFragment"
+        android:label="@string/journaling"
+        tools:layout="@layout/fragment_journals" >
+        <action
+            android:id="@+id/action_journalsFragment_to_journalEntryFragment"
+            app:destination="@id/journalEntryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fiveStepsFragment"
+        android:name="com.example.vividize_unleashyourself.ui.FiveStepsFragment"
+        android:label="@string/fiveSteps"
+        tools:layout="@layout/fragment_five_steps" />
+    <fragment
+        android:id="@+id/knowledgeSectionFragment"
+        android:name="com.example.vividize_unleashyourself.ui.KnowledgeSectionFragment"
+        android:label="@string/knowledge_section"
+        tools:layout="@layout/fragment_knowledge_section" />
+    <fragment
+        android:id="@+id/journalEntryFragment"
+        android:name="com.example.vividize_unleashyourself.ui.JournalEntryFragment"
+        android:label="@string/journal_entry"
+        tools:layout="@layout/fragment_journal_entry" />
 </navigation>

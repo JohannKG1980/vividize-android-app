@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:transitionName="journal_entry_fragment"
+    android:id="@+id/cl_entry_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.JournalEntryFragment">
+
+    <org.wordpress.aztec.AztecText
+        android:id="@+id/text_field"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="top"
+        android:scrollbars="vertical"
+        android:inputType="textMultiLine|textCapSentences"
+        app:layout_constraintBottom_toTopOf="@id/formatting_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <org.wordpress.aztec.toolbar.AztecToolbar
+        android:id="@+id/formatting_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/secondary_transparent"
+        app:layout_constraintTop_toBottomOf="@+id/text_field" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

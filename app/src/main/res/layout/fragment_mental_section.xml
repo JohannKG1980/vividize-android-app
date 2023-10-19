@@ -1,14 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_msf_main"
+    android:transitionName="mental_fragment"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MentalSectionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/spirit_lab_bg"
+        android:transitionName="bg_img_quote"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#6B070A0D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_tb_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="68dp"
+            app:cardBackgroundColor="#23000000"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_spirit_tabs">
+
+            <eightbitlab.com.blurview.BlurView
+                android:id="@+id/blur_view2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:blurOverlayColor="#45000000">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
+
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp2_library"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:elevation="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </eightbitlab.com.blurview.BlurView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_spirit_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="58dp"
+            app:cardCornerRadius="0dp"
+            android:backgroundTint="#02294058"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <eightbitlab.com.blurview.BlurView
+                android:id="@+id/blur_view1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:blurOverlayColor="#273F3E3E">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tl_spirit_lab"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="#6D294058"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tabIndicator="@drawable/tab_indicator"
+                        app:tabIndicatorAnimationMode="elastic"
+                        app:tabIndicatorGravity="stretch"
+                        app:tabMode="fixed"
+                        app:tabSelectedTextColor="@color/secondary_app">
+
+                    </com.google.android.material.tabs.TabLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </eightbitlab.com.blurview.BlurView>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<ProgressBar
+style="?android:attr/progressBarStyle"
+android:id="@+id/progressBar"
+android:layout_height="100dp"
+android:layout_marginBottom="8dp"
+android:layout_marginEnd="8dp"
+android:layout_marginStart="8dp"
+android:layout_marginTop="8dp"
+android:layout_width="100dp"
+android:visibility="gone"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+

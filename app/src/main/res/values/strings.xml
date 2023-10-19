@@ -1,5 +1,101 @@
 <resources>
-    <string name="app_name">Vividize - unleash yourself</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Vividize - Personal Development Tools</string>
+    <string name="no_quote">When nothing works, then do no-thing!</string>
+    <string name="no_author">The Universe</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Eingangshalle</string>
+    <string name="meditations">Meditation</string>
+    <string name="fiveSteps">5 Schritte Methode</string>
+    <string name="journaling">Journaling</string>
+    <string name="journal_entry">Journaleintrag</string>
+    <string name="mental_section">Mental Lab</string>
+    <string name="physical_section">Body Gym</string>
+    <string name="knowledge_section">Nützliches Wissen</string>
+
+
+    <!-- Sedona Method Compontent -->
+    <string name="stepOneTitle">Schritt 1</string>
+    <string name="stepTwoTitle">Schritt 2</string>
+    <string name="stepThreeTitle">Schritt 3</string>
+    <string name="stepFourTitle">Schritt 4</string>
+    <string name="stepFiveTitle">Schritt 5</string>
+    <string name="stepOne">Denke an ein Thema, ein Gefühl, dass gerade präsent ist und spühre einmal kurz hinein. Schreibe ein oder zwei Stichworte die dir dazu spontan einfallen und gib über den Schieber die Intensiät des Gefühls an.</string>
+    <string name="stepOneRepeat">Denke nochmal an das Thema, ist es noch das gleiche Gefühl oder hat es sich verändert? Halte es kurz fest, und Schreibe ein Stichwort dazu auf.</string>
+    <string name="stepTwoGeneral">Stelle dir nun die Frage: \n∫</string>
+    <string name="stepTwo1">Könnte ich dieses Gefühl für einen moment loslassen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
+    <string name="stepTwo2">Könnte ich dieses Gefühl für nur einen moment da sein lassen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
+    <string name="stepTwo3">Könnte ich dieses Gefühl für einen kurzen moment willkommen heissen? (Antworte aus dem Bauch heraus ohne nachzudenken.)</string>
+    <string name="stepThree1">Wäre ich bereit dazu das Gefühl loszulassen? Für nur einen Moment? (Antworte auch hier spontan ohne nachzudenken.)</string>
+    <string name="stepThree2">Bin ich willens für einen kurzen Augenblick loszulassen?  (Antworte auch hier spontan ohne nachzudenken.)</string>
+    <string name="stepThreeNo">Würde ich lieber dieses Gefühl haben oder wäre ich lieber frei?</string>
+    <string name="stepFour">Wann wäre ich dazu bereit?</string>
+    <string name="stepFive">Wie intensiv ist dieses Gefühl noch gerade, wenn es zu beginn 100% waren?</string>
+    <string name="askForRepeat">Möchstest du fortfahren?</string>
+    <string name="next">weiter</string>
+    <string name="back">zurück</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="repeat">Wiederholen</string>
+    <string name="finish">Abschließen</string>
+    <string name="audio">Ton an</string>
+    <string name="hintStepOne">Dein Thema…</string>
+    <string name="hintStepFour">Wann…</string>
+    <string name="fiveStepsDescriptionTitle">Die 5 Schritte Methode</string>
+    <string name="fsm_description">
+    <![CDATA[
+        <b>Die 5-Schritte-Methode</b>, die auf der <i>Sedona-Methode von Hale Dwoskin</i> basiert, ist eine vereinfachte Technik zur emotionalen Selbsthilfe. Sie zielt darauf ab, belastende Gefühle und emotionale Blockaden zu identifizieren und loszulassen, um ein Gefühl von Freiheit und innerem Frieden zu erlangen. Hier sind die fünf Schritte:<br><br>
+        <b>1. Emotion Fokussieren und Benennen:</b><br> Spüre in dich hinein und identifiziere das vorherrschende Gefühl. Benenne es und nimm es voll und ganz an.<br><br>
+        <b>2. Zufällige Frage zum Loslassen:</b> <br>Eine der drei Fragen wird zufällig gestellt: "Könnte ich dieses Gefühl für einen Moment loslassen?", "Könnte ich dieses Gefühl für einen Moment da sein lassen?" oder "Könnte ich dieses Gefühl für einen Moment willkommen heißen?" Antworte intuitiv mit Ja oder Nein.<br><br>
+        <b>3. Bereitschaft zum Loslassen:</b> <br>Unabhängig von der vorherigen Antwort wird gefragt: "Wäre ich bereit, das Gefühl loszulassen?" oder "Bin ich willens loszulassen?" Bei einem "Nein" wird zusätzlich gefragt: "Würde ich lieber dieses Gefühl haben oder wäre ich lieber frei?"<br><br>
+        <b>4. Zeitpunkt des Loslassens:</b> <br><br>Frage dich, wann du bereit wärst, das Gefühl loszulassen und gib eine kurze Antwort.<br><br>
+        <b>5. Überprüfung und Wiederholung:</b><br> Bewerte, wie stark das Gefühl noch vorhanden ist und wiederhole bei Bedarf die Schritte, bis das Gefühl nachlässt.<br><br>
+        Diese Methode fördert die Achtsamkeit und Selbstreflexion und ermöglicht es den Nutzern, sich von negativen Emotionen zu befreien und ihr emotionales Wohlbefinden zu steigern.
+    ]]>
+    </string>
+    <string name="start">Starten</string>
+    <string name="intensityStart">Stärke der Emotion</string>
+    <string name="slider_desc">Intensität</string>
+    <string name="btn_yes">Ja</string>
+    <string name="btn_no">Nein</string>
+    <string name="btn_free">Frei</string>
+    <string name="btn_emotion">Gefühl</string>
+    <string name="no_topic">Kein Thema eingegeben.</string>
+
+
+    <!-- Meditiation & Notes -->
+    <string name="mood_start">Wie fühlst du dich gerade?</string>
+    <string name="mood_end">Wie fühlst du dich jetzt?</string>
+    <string name="set_intention">Notiere eine absicht, eine Intention für die Meditation.</string>
+    <string name="meditation_end">Du hast deine Session abgeschlossen. Wenn du möchstest, kannst du eine Notiz zu der Session schreiben.</string>
+    <string name="choose_medi_type">Wähle eine Session aus um die Meditation zu starten.</string>
+    <string name="set_time">Stelle die Dauer ein.</string>
+    <string name="your_intention">Deine Intention…</string>
+    <string name="end_note">Deine Notiz…</string>
+    <string name="title_med_fin">Großartig</string>
+    <string name="title_medi_types">Meditationen</string>
+    <string name="med_duration">Dauer: %1$s</string>
+    <string name="med_type">Typ: %1$s</string>
+    <string name="item_duration">%1$s Min.</string>
+    <string name="item_type_guided">geführt</string>
+    <string name="item_type_unguided">nicht geführt</string>
+    <string name="item_custom_duration">bis zu 60 min.</string>
+    <string name="mood_before">Vor Session: %1s</string>
+    <string name="mood_after">Nach Session %1s</string>
+    <string name="no_intention">Keine Intention eingegeben.</string>
+    <string name="no_meditation_note">Keine Notiz eingegeben.</string>
+
+
+    <!-- Journaling -->
+
+
+    <!--Settings-->
+
+
+    <!--Alert Dialog-->
+    <string name="alert_title">Achtung!</string>
+    <string name="alert_msg">Diese Session wirklich abbrechen?</string>
+    <string name="alert_msg_replay">Die Session wirklich neu starten?</string>
+    <string name="alert_del_session">Diese Session wirklich dauerhaft löschen?</string>
+    <string name="alert_del_journal">Diesen Eintrag wirklich dauerhaft löschen?</string>
+
 </resources>
