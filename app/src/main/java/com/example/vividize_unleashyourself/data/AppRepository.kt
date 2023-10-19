@@ -93,7 +93,15 @@ class AppRepository @Inject constructor(
     fun removeFiveStepSession(session: FiveStepsSession) {
         fiveStepsSessionBox.remove(session)
     }
+    fun saveSessionAndCycles(session: FiveStepsSession, cycles: List<FiveSteps>) {
+        fiveStepsSessionBox.put(session)
 
+        for (cycle in cycles) {
+            cycle.parentSession.target = session
+        }
+
+        fiveStepCyclesBox.put(cycles)
+    }
    fun addFiveStepsToSession(cycles: MutableList<FiveSteps>) {
         val session = fiveStepsSessionBox.get(_fiveStepSessions.value?.last()!!.sessionId)
         for(c in cycles) {
@@ -151,7 +159,13 @@ class AppRepository @Inject constructor(
     fun removeJournalEntry(entry: JournalEntry) {
         journalEntriesBox.remove(entry)
     }
+    fun clearFiveStepsSessionBox() {
+        fiveStepsSessionBox.removeAll()
+    }
 
+    fun clearFiveStepCyclesBox() {
+        fiveStepCyclesBox.removeAll()
+    }
 
     //Cleanup to prevent Memory Leaks
     fun closeSubscriptions() {

@@ -162,6 +162,7 @@ class FiveStepsViewModel @Inject constructor(
         _currentCycle.value = _currentCycle.value
         if (finishedCycle.cycleFinished && !finishedCycle.repeatAnswer) {
             _currentStep.postValue(CurrentStep.NO_CYCLE_NOW)
+            tempFiveStepsList.add(_currentCycle.value!!)
             saveFinishedSession()
         } else if (finishedCycle.repeatAnswer && finishedCycle.cycleFinished) {
             _currentStep.value = CurrentStep.STEP_ONE
@@ -175,7 +176,8 @@ class FiveStepsViewModel @Inject constructor(
 
     private fun saveFinishedSession() {
         if (_currentSession.value != null) {
-            repository.addFiveStepSession(_currentSession.value!!, tempFiveStepsList)
+//            repository.addFiveStepSession(_currentSession.value!!, tempFiveStepsList)
+            repository.saveSessionAndCycles(_currentSession.value!!, tempFiveStepsList)
             tempFiveStepsList.clear()
             _currentSession.value = null
         }

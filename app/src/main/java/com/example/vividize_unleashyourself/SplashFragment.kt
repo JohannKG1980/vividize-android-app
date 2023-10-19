@@ -58,13 +58,10 @@ class SplashFragment : Fragment() {
                 endId: Int,
                 progress: Float
             ) {
-                // Hier können Sie Code hinzufügen, der während der Transition ausgeführt werden soll
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                // Überprüfen Sie, ob die aktuelle ID der Endzustand des äußeren MotionLayouts ist
                 if (currentId == R.id.totalEnd) {
-                    // Starten Sie die innere Animation
                     binding.clAppName.transitionToEnd()
                 }
             }
@@ -75,7 +72,6 @@ class SplashFragment : Fragment() {
                 positive: Boolean,
                 progress: Float
             ) {
-                // Hier können Sie Code hinzufügen, der ausgeführt werden soll, wenn ein Trigger während der Transition ausgelöst wird
             }
         })
 

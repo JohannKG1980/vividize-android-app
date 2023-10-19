@@ -35,29 +35,27 @@ class MainViewModel @Inject constructor(
         get() = _mentalStartTab
 
 
-
     init {
 
-            loadQuote()
+        loadQuote()
 
     }
 
     private fun loadQuote() {
 
 
+        viewModelScope.launch {
+            _loading.value = ApiStatus.LOADING
+            try {
+                repository.getQuote()
 
-            viewModelScope.launch {
-                _loading.value = ApiStatus.LOADING
-                try {
-                    repository.getQuote()
+                _loading.value = ApiStatus.DONE
 
-                    _loading.value = ApiStatus.DONE
-
-                } catch (e: Exception) {
-                    Log.e(TAG, "ERROR LOADING    DATA : $e")
-                    _loading.value = ApiStatus.ERROR
-                }
+            } catch (e: Exception) {
+                Log.e(TAG, "ERROR LOADING    DATA : $e")
+                _loading.value = ApiStatus.ERROR
             }
+        }
 
 
     }

@@ -179,7 +179,7 @@ class FiveStepsFragment(
         val text = getString(R.string.fsm_description)
         descriptionView.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
         val scrollView: ScrollView = fiveStepsDescriptionOverlayBinding.svDescription
-        val speed = 4  // Geschwindigkeit des Scrollens, je kleiner desto langsamer
+        val speed = 4
         val handler = Handler(Looper.getMainLooper())
         handler.post(object : Runnable {
             override fun run() {
