@@ -15,7 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
-enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, DESCRIPTION_FIRST, STEP_ONE, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
+enum class CurrentStep { NO_CYCLE_NOW, DESCRIPTION, DESCRIPTION_FIRST, STEP_ONE,STEP_ONE_REPEAT, STEP_TWO, STEP_THREE, STEP_THREE_ADD, STEP_FOUR, STEP_FIVE }
 
 @HiltViewModel
 class FiveStepsViewModel @Inject constructor(
@@ -93,6 +93,7 @@ class FiveStepsViewModel @Inject constructor(
     fun closeSession() {
         _currentStep.value = CurrentStep.NO_CYCLE_NOW
         _currentStep.value = _currentStep.value
+        tempFiveStepsList.clear()
         _currentSession.value = null
     }
 
@@ -121,7 +122,7 @@ class FiveStepsViewModel @Inject constructor(
     }
 
     fun finishStepOne(topic: String, intensity: Int) {
-        _currentCycle.value!!.stepOneInput = topic
+        _currentSession.value!!.topic = topic
         _currentCycle.value!!.intensity = intensity
         _currentStep.postValue(CurrentStep.STEP_TWO)
 
@@ -165,7 +166,7 @@ class FiveStepsViewModel @Inject constructor(
             tempFiveStepsList.add(_currentCycle.value!!)
             saveFinishedSession()
         } else if (finishedCycle.repeatAnswer && finishedCycle.cycleFinished) {
-            _currentStep.value = CurrentStep.STEP_ONE
+            _currentStep.value = CurrentStep.STEP_ONE_REPEAT
             _currentStep.value = _currentStep.value
             tempFiveStepsList.add(_currentCycle.value!!)
             _currentCycle.postValue(FiveSteps(tempFiveStepsList.last().cycleId + 1))
@@ -177,6 +178,9 @@ class FiveStepsViewModel @Inject constructor(
     private fun saveFinishedSession() {
         if (_currentSession.value != null) {
 //            repository.addFiveStepSession(_currentSession.value!!, tempFiveStepsList)
+            _currentSession.value!!.cyclesDone = tempFiveStepsList.size
+            _currentSession.value!!.startIntensity = tempFiveStepsList.first().intensity
+            _currentSession.value!!.endIntensity = tempFiveStepsList.last().intensityLeft
             repository.saveSessionAndCycles(_currentSession.value!!, tempFiveStepsList)
             tempFiveStepsList.clear()
             _currentSession.value = null

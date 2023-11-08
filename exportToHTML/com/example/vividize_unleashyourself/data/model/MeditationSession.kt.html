@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>MeditationSession.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MeditationSession.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.vividize_unleashyourself.data.model</span>
+
+<span class="s1">import com.example.vividize_unleashyourself.utils.getCurrentDate</span>
+<span class="s1">import com.example.vividize_unleashyourself.utils.getCurrentTime</span>
+<span class="s1">import io.objectbox.annotation.Entity</span>
+<span class="s1">import io.objectbox.annotation.Id</span>
+<span class="s1">import io.objectbox.relation.ToOne</span>
+
+
+<span class="s1">@Entity</span>
+<span class="s1">data </span><span class="s0">class </span><span class="s1">MeditationSession(</span>
+
+    <span class="s1">@Id </span><span class="s0">var </span><span class="s1">sessionId: Long = </span><span class="s2">0</span><span class="s0">,</span>
+    <span class="s0">val </span><span class="s1">datestamp: String = getCurrentDate()</span><span class="s0">,</span>
+    <span class="s0">val </span><span class="s1">timestamp: String = getCurrentTime()</span><span class="s0">,</span>
+    <span class="s0">var </span><span class="s1">setLenght: Long? = </span><span class="s0">null</span>
+<span class="s1">) {</span>
+
+
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">meditation: ToOne&lt;Meditation&gt;</span>
+
+    <span class="s0">var </span><span class="s1">guided: Boolean = </span><span class="s0">true</span>
+        <span class="s1">get() = meditation.target?.guided ?: </span><span class="s0">false</span>
+
+    <span class="s0">var </span><span class="s1">duration: Long = </span><span class="s2">0</span>
+        <span class="s1">get() = </span><span class="s0">if </span><span class="s1">(guided) meditation.target?.duration ?: </span><span class="s2">0 </span><span class="s0">else </span><span class="s1">setLenght?: </span><span class="s2">0</span>
+
+
+
+    <span class="s0">val </span><span class="s1">formattedDateTimestamp: String = </span><span class="s3">&quot;</span><span class="s0">$</span><span class="s1">datestamp </span><span class="s3">- </span><span class="s0">$</span><span class="s1">timestamp</span><span class="s3">&quot;</span>
+    <span class="s0">var </span><span class="s1">intention: String = </span><span class="s3">&quot;&quot;</span>
+    <span class="s0">var </span><span class="s1">note: String = </span><span class="s3">&quot;&quot;</span>
+    <span class="s0">var </span><span class="s1">moodStart: Double = </span><span class="s2">0.0</span>
+    <span class="s0">var </span><span class="s1">moodEnd: Double = </span><span class="s2">0.0</span>
+
+
+
+<span class="s1">}</span></pre>
+</body>
+</html>

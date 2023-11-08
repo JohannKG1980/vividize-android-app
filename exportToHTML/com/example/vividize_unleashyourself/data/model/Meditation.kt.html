@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Meditation.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Meditation.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.vividize_unleashyourself.data.model</span>
+
+<span class="s1">import com.example.vividize_unleashyourself.R</span>
+<span class="s1">import com.example.vividize_unleashyourself.utils.formatedDuration</span>
+<span class="s1">import io.objectbox.annotation.Entity</span>
+<span class="s1">import io.objectbox.annotation.Id</span>
+<span class="s1">import java.time.Duration</span>
+
+<span class="s1">@Entity</span>
+<span class="s1">data </span><span class="s0">class </span><span class="s1">Meditation(</span>
+    <span class="s1">@Id(assignable = </span><span class="s0">true</span><span class="s1">) </span><span class="s0">var </span><span class="s1">id: Long = </span><span class="s2">0</span><span class="s0">,</span>
+    <span class="s0">val </span><span class="s1">name: String = </span><span class="s3">&quot;&quot;</span><span class="s0">,</span>
+    <span class="s0">var </span><span class="s1">guided: Boolean = </span><span class="s0">false,</span>
+    <span class="s0">var </span><span class="s1">title: String = </span><span class="s3">&quot;&quot;</span><span class="s0">,</span>
+    <span class="s0">var </span><span class="s1">videoPath: String = </span><span class="s3">&quot;&quot;</span><span class="s0">,</span>
+    <span class="s0">var </span><span class="s1">audioPath: String = </span><span class="s3">&quot;&quot;</span><span class="s0">,</span>
+    <span class="s0">var </span><span class="s1">duration: Long = </span><span class="s2">0L</span><span class="s0">,</span>
+    <span class="s0">val </span><span class="s1">cardBg: Int = </span><span class="s2">0</span>
+<span class="s1">) {</span>
+    <span class="s0">var </span><span class="s1">sessionLenght = formatedDuration(duration)</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

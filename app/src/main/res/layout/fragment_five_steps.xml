@@ -25,6 +25,7 @@
         android:layout_height="300dp"
         app:layout_constraintBottom_toTopOf="@+id/rv_fsm_sessions"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -40,6 +41,7 @@
             app:tint="@color/secondary_transparent" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="48dp"
@@ -61,24 +63,32 @@
             app:srcCompat="@drawable/plus_circle"
             app:tint="@color/secondary_app" />
 
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart_five_steps"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:animateLayoutChanges="true"
+            app:layout_constraintBottom_toTopOf="@+id/materialDivider"
+            app:layout_constraintEnd_toStartOf="@+id/iv_info_fsm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_overlay"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:transitionName="quote_card_home"
+        android:visibility="gone"
         app:cardBackgroundColor="#23000000"
         app:cardCornerRadius="25dp"
         app:cardElevation="8dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +104,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
 
 
                 <include
