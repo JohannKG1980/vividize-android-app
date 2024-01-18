@@ -113,7 +113,7 @@ class FiveStepsFragment(
                 stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut()
                 stepFourOverlayBinding.overlayStepFour.fadeOut()
                 stepFiveOverlayBinding.overlayStepFive.fadeOut()
-
+                binding.ivAddSession.isEnabled = true
                 dialog.dismiss()
             }
 
@@ -383,7 +383,7 @@ class FiveStepsFragment(
             viewModel.finishStepFive(currentCycle)
             stepFiveOverlayBinding.overlayStepFive.fadeOut(200)
             binding.cvOverlay.fadeOut(200)
-
+            binding.ivAddSession.isEnabled = true
         }
 
     }
