@@ -24,6 +24,12 @@ class MainViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
 
+
+    var meditationSessions = repository.meditationSessions
+
+    var fiveStepSessions = repository.fiveStepsSessions
+
+
     val todaysQuote = repository.dailyQuote
 
     private val _loading = MutableLiveData<ApiStatus>()

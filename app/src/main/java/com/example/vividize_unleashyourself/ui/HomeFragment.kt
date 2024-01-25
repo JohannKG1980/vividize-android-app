@@ -8,21 +8,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.vividize_unleashyourself.feature_vms.ApiStatus
 import com.example.vividize_unleashyourself.feature_vms.MainViewModel
 import com.example.vividize_unleashyourself.R
+import com.example.vividize_unleashyourself.adapter.FiveStepsAdapter
+import com.example.vividize_unleashyourself.adapter.MeditationsAdapter
+import com.example.vividize_unleashyourself.data.model.FiveStepsSession
+import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.databinding.FragmentHomeBinding
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var meditationChart: BarChart
+    private lateinit var fiveStepChart: LineChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +82,17 @@ class HomeFragment : Fragment() {
         binding.blurView3.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
             .setBlurRadius(8f)
+        binding.blurView3.setupWith(binding.root, RenderScriptBlur(requireContext()))
+            .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
+            .setBlurRadius(8f)
+        binding.blurView4.setupWith(binding.root, RenderScriptBlur(requireContext()))
+            .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
+            .setBlurRadius(8f)
+        binding.blurView5.setupWith(binding.root, RenderScriptBlur(requireContext()))
+            .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
+            .setBlurRadius(8f)
+        meditationChart = binding.chartMeditations
+        fiveStepChart = binding.chartFiveSteps
         addObserver()
 
 
@@ -106,5 +133,51 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        lifecycleScope.launchWhenStarted {
+            viewModel.meditationSessions.collectLatest {
+                updateMeditationChart(it)
+                meditationChart.isClickable = false
+            }
+
+        }
+        viewModel.fiveStepSessions.observe(viewLifecycleOwner) { sessions ->
+
+            updateFiveStepChart(sessions)
+
+        }
+
+
+    }
+
+    private fun updateMeditationChart(sessions: List<MeditationSession>) {
+        meditationChart.xAxis.setDrawLabels(false)
+        meditationChart.axisLeft.setDrawLabels(false)
+        meditationChart.axisRight.setDrawLabels(false)
+
+        val entries = mutableListOf<BarEntry>()
+        sessions.forEachIndexed { index, session ->
+            val barEntry = BarEntry(index.toFloat(), session.moodEnd.toFloat())
+            entries.add(barEntry)
+        }
+        val barDataSet = BarDataSet(entries, "Sessions")
+        val barData = BarData(barDataSet)
+        meditationChart.data = barData
+        meditationChart.invalidate()
+    }
+
+    private fun updateFiveStepChart(sessions: List<FiveStepsSession>) {
+        fiveStepChart.xAxis.setDrawLabels(false)
+        fiveStepChart.axisLeft.setDrawLabels(false)
+        fiveStepChart.axisRight.setDrawLabels(false)
+
+        val entries = mutableListOf<Entry>()
+        sessions.forEachIndexed { index, session ->
+            val lineEntry = Entry(index.toFloat(), session.stepCycles.size.toFloat())
+            entries.add(lineEntry)
+        }
+        val lineDataSet = LineDataSet(entries, "Sessions")
+        val lineData = LineData(lineDataSet)
+        fiveStepChart.data = lineData
+        fiveStepChart.invalidate()
     }
 }
