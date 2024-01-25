@@ -269,6 +269,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/tv_sedona"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    android:ellipsize="end"
+                    android:maxWidth="350dp"
+                    android:maxLines="5"
+                    android:text="Die Sedona-Methode ist ein Selbsthilfe-Programm, das von Lester Levenson in den 1970er Jahren entwickelt wurde und später von Hale Dwoskin popularisiert wurde."
+                    android:textSize="18sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_sedona"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
                     android:id="@+id/iv_sedona"
@@ -322,7 +338,22 @@
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/muse_headband" />
 
-
+                <TextView
+                    android:id="@+id/tv_muse"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    android:ellipsize="end"
+                    android:maxWidth="350dp"
+                    android:maxLines="5"
+                    android:text="Das Muse Headband ist ein tragbares EEG-Gerät, das für Neurofeedback und Meditationsunterstützung entwickelt wurde. "
+                    android:textSize="18sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_muse"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </eightbitlab.com.blurview.BlurView>
