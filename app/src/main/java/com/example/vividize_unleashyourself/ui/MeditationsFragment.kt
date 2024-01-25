@@ -17,6 +17,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.MeditationTypeAdapter
 import com.example.vividize_unleashyourself.adapter.MeditationsAdapter
+import com.example.vividize_unleashyourself.data.model.FiveStepsSession
+import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.databinding.FragmentMeditationsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
 import com.example.vividize_unleashyourself.databinding.OverlayMeditationFinisherBinding
@@ -37,6 +39,10 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 
 @AndroidEntryPoint
 class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBinding) : Fragment(),
@@ -48,6 +54,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
     private lateinit var finisherBinding: OverlayMeditationFinisherBinding
     private val viewModel: MeditationsViewModel by activityViewModels()
     private lateinit var alertBuilder: AlertDialog.Builder
+    private lateinit var barChart: BarChart
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,10 +75,11 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         alertBuilder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialogTheme)
+        barChart = binding.chartMeditations
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
             .setBlurAutoUpdate(true)
-            .setBlurRadius(3f)
+            .setBlurRadius(8f)
         addObservers()
         binding.clMeditaionsMain.setOnTouchListener { _, _ ->
             hideKeyboard(binding.root)
@@ -118,6 +126,7 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
 
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun addObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel.currentViewState
@@ -169,6 +178,8 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
             viewModel.allSessions.collectLatest {
                 binding.rvMeditationSessions.adapter =
                     MeditationsAdapter(requireContext(), it, viewModel)
+                    updateChart(it)
+                    barChart.isClickable = false
             }
 
         }
@@ -402,6 +413,22 @@ class MeditationsFragment(private val sectionBinding: FragmentMentalSectionBindi
                 textView.fadeIn(300)
             }, 300)
         }
+    }
+
+    private fun updateChart(sessions: List<MeditationSession>) {
+        barChart.xAxis.setDrawLabels(false)
+        barChart.axisLeft.setDrawLabels(false)
+        barChart.axisRight.setDrawLabels(false)
+
+        val entries = mutableListOf<BarEntry>()
+        sessions.forEachIndexed { index, session ->
+            val barEntry = BarEntry(index.toFloat(), session.moodEnd.toFloat())
+            entries.add(barEntry)
+        }
+        val barDataSet = BarDataSet(entries, "Sessions")
+        val barData = BarData(barDataSet)
+        barChart.data = barData
+        barChart.invalidate()
     }
 
     override fun onDestroy() {

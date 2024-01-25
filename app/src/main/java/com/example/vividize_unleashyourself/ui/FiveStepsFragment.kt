@@ -89,7 +89,7 @@ class FiveStepsFragment(
 
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
-            .setBlurRadius(3f)
+            .setBlurRadius(8f)
 
 
         addObserver()

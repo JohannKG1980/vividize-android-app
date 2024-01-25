@@ -29,7 +29,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
+            <ImageView
+                android:id="@+id/iv_info_fsm"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/outline_info_24"
+                app:tint="@color/secondary_transparent" />
             <ImageView
                 android:id="@+id/iv_info_meditsation"
                 android:layout_width="48dp"
@@ -42,6 +50,7 @@
                 app:tint="@color/secondary_transparent" />
 
             <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/materialDivider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="48dp"
@@ -63,7 +72,16 @@
                 app:srcCompat="@drawable/plus_circle"
                 app:tint="@color/secondary_app" />
 
-
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart_meditations"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="16dp"
+                android:animateLayoutChanges="true"
+                app:layout_constraintBottom_toTopOf="@+id/materialDivider"
+                app:layout_constraintEnd_toStartOf="@+id/iv_info_fsm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

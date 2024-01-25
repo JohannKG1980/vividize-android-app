@@ -59,8 +59,13 @@ class HomeFragment : Fragment() {
 
         binding.blurView1.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
-            .setBlurRadius(3f)
-
+            .setBlurRadius(8f)
+        binding.blurView2.setupWith(binding.root, RenderScriptBlur(requireContext()))
+            .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
+            .setBlurRadius(8f)
+        binding.blurView3.setupWith(binding.root, RenderScriptBlur(requireContext()))
+            .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
+            .setBlurRadius(8f)
         addObserver()
 
 
