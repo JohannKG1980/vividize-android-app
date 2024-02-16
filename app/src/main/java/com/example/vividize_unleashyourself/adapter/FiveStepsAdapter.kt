@@ -51,7 +51,7 @@ class FiveStepsAdapter(
                 val startIntensity = cycles.first().intensity
                 val endIntensity = cycles.last().intensityLeft
                 val relief = startIntensity - endIntensity
-                binding.tvTopic.text = cycles.first().stepOneInput
+                binding.tvTopic.text = session.topic
                 binding.tvCycles.text = cycles.size.toString()
 
                 binding.tvIntensityStart.text = cycles.first().intensity.toString() + " %"

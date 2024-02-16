@@ -62,7 +62,7 @@ class FullscreenFragment : Fragment() {
 
         binding.blurView1.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.ivHomeBg.drawable) // Optional
-            .setBlurRadius(3f)
+            .setBlurRadius(8f)
 
         addObserver()
 

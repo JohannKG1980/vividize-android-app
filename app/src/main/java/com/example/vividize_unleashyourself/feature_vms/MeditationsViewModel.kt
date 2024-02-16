@@ -44,7 +44,7 @@ class MeditationsViewModel @Inject constructor(
         Meditation(3, "Open Session", false, cardBg = R.drawable.free_field_session)
     )
 
-    val allSessions = repository.meditationSession
+    val allSessions = repository.meditationSessions
     private val _currentSession = MutableStateFlow<MeditationSession?>(null)
     val currentSession = _currentSession.asStateFlow()
 

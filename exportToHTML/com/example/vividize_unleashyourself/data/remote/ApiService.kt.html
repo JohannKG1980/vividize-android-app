@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>ApiService.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ApiService.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.vividize_unleashyourself.data.remote</span>
+
+<span class="s1">import com.example.vividize_unleashyourself.data.model.Quote</span>
+<span class="s1">import com.squareup.moshi.KotlinJsonAdapterFactory</span>
+<span class="s1">import com.squareup.moshi.Moshi</span>
+<span class="s1">import retrofit2.Retrofit</span>
+<span class="s1">import retrofit2.converter.moshi.MoshiConverterFactory</span>
+<span class="s1">import retrofit2.http.GET</span>
+
+<span class="s1">const </span><span class="s0">val </span><span class="s1">BASE_URL = </span><span class="s2">&quot;https://retoolapi.dev/rL3BT2/&quot;</span>
+
+<span class="s1">private </span><span class="s0">val </span><span class="s1">moshi = Moshi.Builder()</span>
+    <span class="s1">.add(KotlinJsonAdapterFactory())</span>
+    <span class="s1">.build()</span>
+
+<span class="s1">private </span><span class="s0">val </span><span class="s1">retrofit = Retrofit.Builder()</span>
+    <span class="s1">.addConverterFactory(MoshiConverterFactory.create(moshi))</span>
+    <span class="s1">.baseUrl(BASE_URL)</span>
+    <span class="s1">.build()</span>
+
+<span class="s0">interface </span><span class="s1">QuotesApiService {</span>
+    <span class="s1">@GET(</span><span class="s2">&quot;quote/&quot;</span><span class="s1">)</span>
+    <span class="s1">suspend </span><span class="s0">fun </span><span class="s1">getQuote(</span>
+<span class="s3">//        @Query(&quot;&quot;) id: String</span>
+    <span class="s1">): List&lt;Quote&gt;</span>
+
+
+<span class="s1">}</span>
+
+<span class="s0">object </span><span class="s1">QuotesApi {</span>
+
+    <span class="s0">val </span><span class="s1">retrofitService: QuotesApiService by lazy { retrofit.create(QuotesApiService::</span><span class="s0">class</span><span class="s1">.java) }</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

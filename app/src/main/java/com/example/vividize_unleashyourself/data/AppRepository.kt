@@ -11,15 +11,11 @@ import com.example.vividize_unleashyourself.data.model.FiveSteps_
 import com.example.vividize_unleashyourself.data.model.JournalEntry
 import com.example.vividize_unleashyourself.data.model.MeditationSession
 import com.example.vividize_unleashyourself.data.model.Quote
-import com.example.vividize_unleashyourself.data.model.Quote_
 import com.example.vividize_unleashyourself.data.remote.QuotesApiService
 import com.example.vividize_unleashyourself.utils.getCurrentDate
 import io.objectbox.Box
 import io.objectbox.BoxStore
-import io.objectbox.Property
 import io.objectbox.kotlin.boxFor
-import io.objectbox.query.QueryBuilder
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
@@ -119,12 +115,12 @@ class AppRepository @Inject constructor(
         fiveStepCyclesBox.remove(cycles)
     }
 
-    //Medidations section
+    //Meditations section
 
     private val _meditationSessions =
         MutableStateFlow<MutableList<MeditationSession>>(mutableListOf())
 
-    val meditationSession = _meditationSessions.asStateFlow()
+    val meditationSessions = _meditationSessions.asStateFlow()
 
     private val meditationSubscription =
         meditationSessionBox.query().build().subscribe().observer { updatedItems ->

@@ -19,9 +19,15 @@ data class FiveStepsSession(
     ) {
     @Backlink(to = "parentSession")
     lateinit var stepCycles: ToMany<FiveSteps>
+    var topic: String = ""
+    var cyclesDone: Int = 0
+    var startIntensity = 0
+    var endIntensity = 0
     val datestamp: String = getCurrentDate()
     val timestamp: String = getCurrentTime()
     var sessionFinished: Boolean = false
     val formattedDateTimestamp: String = "$datestamp - $timestamp"
+
+
 
 }

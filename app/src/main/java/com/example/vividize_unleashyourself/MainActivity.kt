@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.blurViewTopBar.setupWith(binding.root, RenderScriptBlur(this))
-            .setBlurRadius(3f)
+            .setBlurRadius(8f)
         binding.blurViewAddDialog.setupWith(binding.root, RenderScriptBlur(this))
-            .setBlurRadius(3f)
+            .setBlurRadius(9f)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
@@ -151,6 +151,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
+
                 R.id.fullscreenFragment -> {
                     binding.bottomAppBar.visibility = View.GONE
                     binding.fab.visibility = View.GONE

@@ -60,6 +60,10 @@
     <string name="btn_free">Frei</string>
     <string name="btn_emotion">Gefühl</string>
     <string name="no_topic">Kein Thema eingegeben.</string>
+    <string name="cycles_done">Zyklen: %1$s</string>
+    <string name="start_intensity">Intensität: %1$s</string>
+    <string name="end_intensity">Noch übrig: %1$s</string>
+
 
 
     <!-- Meditiation & Notes -->

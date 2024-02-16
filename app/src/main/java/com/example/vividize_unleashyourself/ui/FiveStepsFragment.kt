@@ -20,6 +20,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.vividize_unleashyourself.R
 import com.example.vividize_unleashyourself.adapter.FiveStepsAdapter
 import com.example.vividize_unleashyourself.data.model.FiveSteps
+import com.example.vividize_unleashyourself.data.model.FiveStepsSession
+import com.example.vividize_unleashyourself.data.model.FiveSteps_.repeatAnswer
 import com.example.vividize_unleashyourself.databinding.FiveStepsDescriptionOverlayBinding
 import com.example.vividize_unleashyourself.databinding.FragmentFiveStepsBinding
 import com.example.vividize_unleashyourself.databinding.FragmentMentalSectionBinding
@@ -32,6 +34,13 @@ import com.example.vividize_unleashyourself.extensions.fadeOut
 import com.example.vividize_unleashyourself.extensions.setButtonEffect
 import com.example.vividize_unleashyourself.feature_vms.CurrentStep
 import com.example.vividize_unleashyourself.feature_vms.FiveStepsViewModel
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -50,6 +59,7 @@ class FiveStepsFragment(
     private lateinit var fiveStepsDescriptionOverlayBinding: FiveStepsDescriptionOverlayBinding
     val viewModel: FiveStepsViewModel by activityViewModels()
     private lateinit var alertBuilder: AlertDialog.Builder
+    private lateinit var barChart: BarChart
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,10 +85,11 @@ class FiveStepsFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         alertBuilder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialogTheme)
+        barChart = binding.chartFiveSteps
 
         binding.blurViewOne.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(sectionBinding.ivBg.drawable)
-            .setBlurRadius(3f)
+            .setBlurRadius(8f)
 
 
         addObserver()
@@ -102,7 +113,7 @@ class FiveStepsFragment(
                 stepTwoAndThreeOverlayBinding.overlayStepTwoAndThree.fadeOut()
                 stepFourOverlayBinding.overlayStepFour.fadeOut()
                 stepFiveOverlayBinding.overlayStepFive.fadeOut()
-
+                binding.ivAddSession.isEnabled = true
                 dialog.dismiss()
             }
 
@@ -127,6 +138,8 @@ class FiveStepsFragment(
             return@setOnTouchListener true
 
         }
+
+
     }
 
     private fun addObserver() {
@@ -134,34 +147,42 @@ class FiveStepsFragment(
         viewModel.currentCycle.observe(viewLifecycleOwner) { currentCycle ->
             viewModel.instructionWatched.observe(viewLifecycleOwner) { instructed ->
                 viewModel.currentStep.observe(viewLifecycleOwner) { currentStep ->
+
                     if (currentStep != CurrentStep.NO_CYCLE_NOW) {
                         showOverlays(currentStep, currentCycle)
                     }
+
                 }
             }
         }
 
         viewModel.allSessions.observe(viewLifecycleOwner) { sessions ->
             binding.rvFsmSessions.adapter = FiveStepsAdapter(requireContext(), sessions, viewModel)
+            updateChart(sessions)
 
         }
     }
 
     private fun showOverlays(
         currentStep: CurrentStep,
-        currentCycle: FiveSteps,
+        currentCycle: FiveSteps
     ) {
 
         when (currentStep) {
             CurrentStep.DESCRIPTION_FIRST -> openInstructions()
             CurrentStep.DESCRIPTION -> openInstructions(false)
-            CurrentStep.STEP_ONE -> openStepOne(currentCycle)
+            CurrentStep.STEP_ONE -> openStepOne(currentCycle, currentStep)
+            CurrentStep.STEP_ONE_REPEAT -> openStepOne(currentCycle, currentStep)
             CurrentStep.STEP_TWO -> openStepTwo(currentCycle)
             CurrentStep.STEP_THREE -> openStepThree(currentCycle)
             CurrentStep.STEP_THREE_ADD -> openStepThreeAdd(currentCycle)
             CurrentStep.STEP_FOUR -> openStepFour(currentCycle)
             CurrentStep.STEP_FIVE -> openStepFive(currentCycle, currentStep)
-            CurrentStep.NO_CYCLE_NOW -> binding.cvOverlay.fadeOut()
+            CurrentStep.NO_CYCLE_NOW -> {
+                binding.ivAddSession.isEnabled = true
+                barChart.isClickable = true
+                binding.cvOverlay.fadeOut()
+            }
 
         }
 
@@ -169,6 +190,8 @@ class FiveStepsFragment(
 
     private fun openInstructions(firstTime: Boolean = true) {
         binding.cvOverlay.fadeIn(300)
+        binding.ivAddSession.isEnabled = false
+        barChart.isClickable = false
         fiveStepsDescriptionOverlayBinding.overlay5StepsDescription.fadeIn(300)
         if (!firstTime) {
             fiveStepsDescriptionOverlayBinding.btnNext.visibility = GONE
@@ -207,13 +230,15 @@ class FiveStepsFragment(
 
 
     @SuppressLint("ClickableViewAccessibility", "RestrictedApi")
-    private fun openStepOne(currentCycle: FiveSteps) {
+    private fun openStepOne(currentCycle: FiveSteps, currentStep: CurrentStep) {
+        binding.ivAddSession.isEnabled = false
+        barChart.isClickable = false
         binding.cvOverlay.fadeIn(500)
         stepOneOverlayBinding.overlayStepOne.fadeIn(500)
 
 
         var stepText = ""
-        if (currentCycle.repeatAnswer) {
+        if (currentStep == CurrentStep.STEP_ONE_REPEAT) {
             stepText = getString(viewModel.stepOneRepeat.content)
             stepOneOverlayBinding.tfLayout.visibility = GONE
         } else {
@@ -229,20 +254,22 @@ class FiveStepsFragment(
 
         stepOneOverlayBinding.btnNext.setOnClickListener {
 
-            val input = stepOneOverlayBinding.teTopic.text.toString()
             var topic = ""
-            if (input != "") {
-                topic = input
-            } else {
-                topic = getString(R.string.no_topic)
+            if (currentStep == CurrentStep.STEP_ONE) {
+                val input = stepOneOverlayBinding.teTopic.text.toString()
+                topic = if (input != "") {
+                    input
+                } else {
+                    getString(R.string.no_topic)
+                }
             }
             val intensity = stepOneOverlayBinding.slStartIntensity.value.toInt()
             stepOneOverlayBinding.teTopic.setText("")
             stepOneOverlayBinding.slStartIntensity.value = 0f
             stepOneOverlayBinding.overlayStepOne.fadeOut(200)
             viewModel.finishStepOne(topic, intensity)
-
         }
+
 
     }
 
@@ -356,9 +383,25 @@ class FiveStepsFragment(
             viewModel.finishStepFive(currentCycle)
             stepFiveOverlayBinding.overlayStepFive.fadeOut(200)
             binding.cvOverlay.fadeOut(200)
-
+            binding.ivAddSession.isEnabled = true
         }
 
+    }
+
+    private fun updateChart(sessions: List<FiveStepsSession>) {
+        barChart.xAxis.setDrawLabels(false)
+        barChart.axisLeft.setDrawLabels(false)
+        barChart.axisRight.setDrawLabels(false)
+
+        val entries = mutableListOf<BarEntry>()
+        sessions.forEachIndexed { index, session ->
+            val barEntry = BarEntry(index.toFloat(), session.stepCycles.size.toFloat())
+            entries.add(barEntry)
+        }
+        val barDataSet = BarDataSet(entries, "Sessions")
+        val barData = BarData(barDataSet)
+        barChart.data = barData
+        barChart.invalidate()
     }
 
     override fun onPause() {

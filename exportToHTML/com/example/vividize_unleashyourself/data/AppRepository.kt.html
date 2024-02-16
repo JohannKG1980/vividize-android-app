@@ -1,0 +1,199 @@
+<html>
+<head>
+<title>AppRepository.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AppRepository.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.vividize_unleashyourself.data</span>
+
+<span class="s1">import android.os.Handler</span>
+<span class="s1">import android.os.Looper</span>
+<span class="s1">import android.util.Log</span>
+<span class="s1">import androidx.lifecycle.LiveData</span>
+<span class="s1">import androidx.lifecycle.MutableLiveData</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.model.FiveSteps</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.model.FiveStepsSession</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.model.FiveSteps_</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.model.JournalEntry</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.model.MeditationSession</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.model.Quote</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.model.Quote_</span>
+<span class="s1">import com.example.vividize_unleashyourself.data.remote.QuotesApiService</span>
+<span class="s1">import com.example.vividize_unleashyourself.utils.getCurrentDate</span>
+<span class="s1">import io.objectbox.Box</span>
+<span class="s1">import io.objectbox.BoxStore</span>
+<span class="s1">import io.objectbox.Property</span>
+<span class="s1">import io.objectbox.kotlin.boxFor</span>
+<span class="s1">import io.objectbox.query.QueryBuilder</span>
+<span class="s1">import kotlinx.coroutines.coroutineScope</span>
+<span class="s1">import kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="s1">import kotlinx.coroutines.flow.asStateFlow</span>
+<span class="s1">import javax.inject.Inject</span>
+
+<span class="s1">const </span><span class="s0">val </span><span class="s1">TAG = </span><span class="s2">&quot;AppRepository&quot;</span>
+
+<span class="s0">class </span><span class="s1">AppRepository @Inject constructor(</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">apiService: QuotesApiService</span><span class="s0">,</span>
+    <span class="s1">boxStore: BoxStore</span><span class="s0">,</span>
+<span class="s1">) {</span>
+
+    <span class="s3">//Boxes</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">fiveStepsSessionBox: Box&lt;FiveStepsSession&gt; = boxStore.boxFor()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">fiveStepCyclesBox: Box&lt;FiveSteps&gt; = boxStore.boxFor()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">meditationSessionBox: Box&lt;MeditationSession&gt; = boxStore.boxFor()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">journalEntriesBox: Box&lt;JournalEntry&gt; = boxStore.boxFor()</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">dailyQuoteBox: Box&lt;Quote&gt; = boxStore.boxFor()</span>
+
+
+    <span class="s3">//DailyQuote</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">_dailyQuote = MutableLiveData&lt;Quote&gt;()</span>
+
+    <span class="s0">val </span><span class="s1">dailyQuote: LiveData&lt;Quote&gt;</span>
+        <span class="s1">get() = _dailyQuote</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">dailyQuoteSubscription =</span>
+        <span class="s1">dailyQuoteBox.query().build().subscribe().observer { updatedItem -&gt;</span>
+            <span class="s1">_dailyQuote.postValue(updatedItem[</span><span class="s4">0</span><span class="s1">])</span>
+        <span class="s1">}</span>
+
+    <span class="s1">private </span><span class="s0">fun </span><span class="s1">clearQuoteBox() {</span>
+        <span class="s1">dailyQuoteBox.removeAll()</span>
+    <span class="s1">}</span>
+
+
+    <span class="s1">suspend </span><span class="s0">fun </span><span class="s1">getQuote() {</span>
+        <span class="s0">val </span><span class="s1">storedQuote = dailyQuoteBox.all.firstOrNull()</span>
+
+        <span class="s0">if </span><span class="s1">(_dailyQuote.value == </span><span class="s0">null </span><span class="s1">|| storedQuote?.datestamp != getCurrentDate()) {</span>
+            <span class="s0">try </span><span class="s1">{</span>
+                <span class="s0">val </span><span class="s1">newQuote = apiService.getQuote().random()</span>
+                <span class="s1">clearQuoteBox()</span>
+                <span class="s1">dailyQuoteBox.put(newQuote)</span>
+            <span class="s1">} catch (e: Exception) {</span>
+                <span class="s1">Log.d(TAG</span><span class="s0">, </span><span class="s2">&quot;API Call failed </span><span class="s0">$</span><span class="s1">e</span><span class="s2">&quot;</span><span class="s1">)</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s3">//Five Step Method Section</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">_fiveStepSessions = MutableLiveData&lt;MutableList&lt;FiveStepsSession&gt;&gt;(mutableListOf())</span>
+    <span class="s0">val </span><span class="s1">fiveStepsSessions: LiveData&lt;MutableList&lt;FiveStepsSession&gt;&gt;</span>
+        <span class="s1">get() = _fiveStepSessions</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">fiveStepsSubscription =</span>
+        <span class="s1">fiveStepsSessionBox.query().build().subscribe().observer { updatedItems -&gt;</span>
+            <span class="s1">_fiveStepSessions.postValue(updatedItems)</span>
+        <span class="s1">}</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">_fiveStepCycles = MutableLiveData&lt;MutableList&lt;FiveSteps&gt;&gt;(mutableListOf())</span>
+    <span class="s0">val </span><span class="s1">fiveStepCycles: LiveData&lt;MutableList&lt;FiveSteps&gt;&gt;</span>
+        <span class="s1">get() = _fiveStepCycles</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">fiveStepCycleSubscription =</span>
+        <span class="s1">fiveStepCyclesBox.query().build().subscribe().observer { updatedItems -&gt;</span>
+            <span class="s1">_fiveStepCycles.postValue(updatedItems)</span>
+        <span class="s1">}</span>
+
+    <span class="s0">fun </span><span class="s1">addFiveStepSession(session: FiveStepsSession) {</span>
+        <span class="s1">fiveStepsSessionBox.put(session)</span>
+
+    <span class="s1">}</span>
+
+
+    <span class="s0">fun </span><span class="s1">removeFiveStepSession(session: FiveStepsSession) {</span>
+        <span class="s1">fiveStepsSessionBox.remove(session)</span>
+    <span class="s1">}</span>
+
+     <span class="s1">suspend </span><span class="s0">fun </span><span class="s1">addFiveStepsToSession(cycles: MutableList&lt;FiveSteps&gt;) {</span>
+<span class="s3">//        val session = fiveStepsSessionBox.all.last()</span>
+<span class="s3">//         val signedCycles = mutableListOf&lt;FiveSteps&gt;()</span>
+<span class="s3">//        for (c in cycles) {</span>
+<span class="s3">//            c.parentSession.target = session</span>
+<span class="s3">//            c.parentId = session.sessionId</span>
+<span class="s3">//            signedCycles.add(c)</span>
+<span class="s3">//        }</span>
+<span class="s3">//        fiveStepCyclesBox.put(signedCycles)</span>
+         <span class="s0">val </span><span class="s1">session = fiveStepsSessionBox.all.last()</span>
+         <span class="s0">for </span><span class="s1">(c </span><span class="s0">in </span><span class="s1">cycles) {</span>
+             <span class="s1">c.parentSession.target = session</span>
+         <span class="s1">}</span>
+         <span class="s1">fiveStepCyclesBox.put(cycles)</span>
+    <span class="s1">}</span>
+
+    <span class="s0">fun </span><span class="s1">getSessionCycles(session: FiveStepsSession): List&lt;FiveSteps&gt; {</span>
+        <span class="s0">return </span><span class="s1">session.stepCycles</span>
+    <span class="s1">}</span>
+    <span class="s0">fun </span><span class="s1">removeFiveSteps(cycles: List&lt;FiveSteps&gt;) {</span>
+        <span class="s1">fiveStepCyclesBox.remove(cycles)</span>
+    <span class="s1">}</span>
+
+    <span class="s3">//Medidations section</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">_meditationSessions =</span>
+        <span class="s1">MutableStateFlow&lt;MutableList&lt;MeditationSession&gt;&gt;(mutableListOf())</span>
+
+    <span class="s0">val </span><span class="s1">meditationSession = _meditationSessions.asStateFlow()</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">meditationSubscription =</span>
+        <span class="s1">meditationSessionBox.query().build().subscribe().observer { updatedItems -&gt;</span>
+            <span class="s1">_meditationSessions.value = updatedItems</span>
+        <span class="s1">}</span>
+
+    <span class="s0">fun </span><span class="s1">addMeditationSession(session: MeditationSession) {</span>
+        <span class="s1">meditationSessionBox.put(session)</span>
+    <span class="s1">}</span>
+
+    <span class="s0">fun </span><span class="s1">removeMeditationSession(session: MeditationSession) {</span>
+        <span class="s1">meditationSessionBox.remove(session)</span>
+    <span class="s1">}</span>
+
+    <span class="s3">//Journaling Section</span>
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">_journalEntries =</span>
+        <span class="s1">MutableStateFlow&lt;MutableList&lt;JournalEntry&gt;&gt;(mutableListOf())</span>
+
+    <span class="s0">val </span><span class="s1">journalEntries = _journalEntries.asStateFlow()</span>
+
+    <span class="s1">private </span><span class="s0">val </span><span class="s1">journalSubscription =</span>
+        <span class="s1">journalEntriesBox.query().build().subscribe().observer { updatedItems -&gt;</span>
+            <span class="s1">_journalEntries.value = updatedItems</span>
+        <span class="s1">}</span>
+
+
+    <span class="s0">fun </span><span class="s1">addJournalEntry(entry: JournalEntry) {</span>
+        <span class="s1">journalEntriesBox.put(entry)</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">fun </span><span class="s1">removeJournalEntry(entry: JournalEntry) {</span>
+        <span class="s1">journalEntriesBox.remove(entry)</span>
+    <span class="s1">}</span>
+
+
+    <span class="s3">//Cleanup to prevent Memory Leaks</span>
+    <span class="s0">fun </span><span class="s1">closeSubscriptions() {</span>
+        <span class="s1">fiveStepsSubscription.cancel()</span>
+        <span class="s1">meditationSubscription.cancel()</span>
+        <span class="s1">journalSubscription.cancel()</span>
+        <span class="s1">dailyQuoteSubscription.cancel()</span>
+        <span class="s1">fiveStepCycleSubscription.cancel()</span>
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

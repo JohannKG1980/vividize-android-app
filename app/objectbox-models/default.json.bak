@@ -257,7 +257,7 @@
     },
     {
       "id": "5:9027357473983529425",
-      "lastPropertyId": "5:1462611934531050210",
+      "lastPropertyId": "6:4905436329767691734",
       "name": "FiveStepsSession",
       "properties": [
         {
@@ -285,15 +285,14 @@
           "id": "5:1462611934531050210",
           "name": "formattedDateTimestamp",
           "type": 9
+        },
+        {
+          "id": "6:4905436329767691734",
+          "name": "topic",
+          "type": 9
         }
       ],
-      "relations": [
-        {
-          "id": "1:614419691163509419",
-          "name": "stepCycles",
-          "targetId": "4:2182385196827196590"
-        }
-      ]
+      "relations": []
     },
     {
       "id": "6:2381042038305727316",
@@ -397,6 +396,8 @@
     8137768771046957121,
     4373210078673284144
   ],
-  "retiredRelationUids": [],
+  "retiredRelationUids": [
+    614419691163509419
+  ],
   "version": 1
 }

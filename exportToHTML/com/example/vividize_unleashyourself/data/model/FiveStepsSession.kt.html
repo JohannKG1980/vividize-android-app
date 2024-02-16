@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>FiveStepsSession.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+FiveStepsSession.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.vividize_unleashyourself.data.model</span>
+
+<span class="s1">import com.example.vividize_unleashyourself.feature_vms.CurrentStep</span>
+<span class="s1">import com.example.vividize_unleashyourself.utils.getCurrentDate</span>
+<span class="s1">import com.example.vividize_unleashyourself.utils.getCurrentTime</span>
+<span class="s1">import io.objectbox.annotation.Backlink</span>
+<span class="s1">import io.objectbox.annotation.Entity</span>
+<span class="s1">import io.objectbox.annotation.Id</span>
+<span class="s1">import io.objectbox.relation.ToMany</span>
+<span class="s1">import java.time.LocalDate</span>
+<span class="s1">import java.time.LocalDateTime</span>
+<span class="s1">import java.time.LocalTime</span>
+<span class="s1">import java.time.format.DateTimeFormatter</span>
+
+<span class="s1">@Entity</span>
+<span class="s1">data </span><span class="s0">class </span><span class="s1">FiveStepsSession(</span>
+    <span class="s1">@Id </span><span class="s0">var </span><span class="s1">sessionId: Long = </span><span class="s2">0</span><span class="s0">,</span>
+
+    <span class="s1">) {</span>
+    <span class="s1">@Backlink(to = </span><span class="s3">&quot;parentSession&quot;</span><span class="s1">)</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">stepCycles: ToMany&lt;FiveSteps&gt;</span>
+
+    <span class="s0">val </span><span class="s1">datestamp: String = getCurrentDate()</span>
+    <span class="s0">val </span><span class="s1">timestamp: String = getCurrentTime()</span>
+    <span class="s0">var </span><span class="s1">sessionFinished: Boolean = </span><span class="s0">false</span>
+    <span class="s0">val </span><span class="s1">formattedDateTimestamp: String = </span><span class="s3">&quot;</span><span class="s0">$</span><span class="s1">datestamp </span><span class="s3">- </span><span class="s0">$</span><span class="s1">timestamp</span><span class="s3">&quot;</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>
